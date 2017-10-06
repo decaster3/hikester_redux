@@ -1,0 +1,10 @@
+module.exports = {
+  //state
+  SIGNED_IN: "SIGNED_IN",
+  ANONYMOUS: "ANONYMOUS",
+  AWAITING: "AWAITING",
+  //actions
+  ATTEMPTING: "ATTEMPTING",
+	SIGNIN_USER: "SIGNIN_USER",
+	LOGOUT: "LOGOUT"
+}
