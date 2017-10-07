@@ -7,8 +7,9 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Link to = "/profile">Профиль</Link>
-        <Link to = "/auth">Аутенитификация</Link>
+        <Link to = "/profile">Profile</Link>
+        <Link to = "/auth">Authorization</Link>
+        <Link to = "/map">Map</Link>
       </div>
     );
   }
