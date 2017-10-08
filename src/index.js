@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore, { history } from './store/configureStore'
 import * as firebase from 'firebase';
 import { startListeningToAuth } from './actions/auth/authentication_actions';
+import { startListeningEvents } from './actions/search_events/search_events_action';
 
 var config = {
     apiKey: "AIzaSyAliYBadbVCrUv7Y-WMu--BmwmL99Ba42I",
@@ -27,6 +28,9 @@ ReactDOM.render(
 // NOTE: слушает, вошел ли пользователь
 setTimeout(function(){
 	store.dispatch( startListeningToAuth() );
+});
+setTimeout(function(){
+	store.dispatch( startListeningEvents() );
 });
 // NOTE: хот реплейсмент при появлении новых верхних элементов в дереве редаксa
 if (module.hot) {

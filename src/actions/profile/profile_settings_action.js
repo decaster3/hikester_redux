@@ -7,6 +7,49 @@ export function setSettingsCategory(category){
   }
 }
 
+export function updateVerificationProcent(){
+  let authRef = firebase.database().ref().child('users')
+    .child(firebase.auth().currentUser.uid)
+  var user = {}
+  var verificationProcent = 0
+  authRef.once('value')
+    .then(function(snapshot){
+      user = snapshot.val()
+    }).then(() => {
+      var authProviders = []
+      for (var i = 0; i < user.authProviders.length; i++){
+        authProviders.push(user.authProviders[i].providerId)
+      }
+      if (authProviders.includes("facebook.com")){
+        verificationProcent += 15
+      }
+      if (authProviders.includes("password")){
+        verificationProcent += 15
+      }
+      if (authProviders.includes("google.com")){
+        verificationProcent += 15
+      }
+      if (authProviders.includes("phone")){
+        verificationProcent += 15
+      }
+      // NOTE: добавить после создания в бд
+      // if (user.interests.length > 0){
+      //   verificationProcent += 10
+      // }
+      // if (user.events.length > ){
+      //   verificationProcent += 10
+      // }
+      // if (user.references.length > 0){
+      //   verificationProcent += 15
+      // }
+    }).then(() => {
+      authRef.update({
+        verificationProcent: verificationProcent
+      })
+    })
+}
+
+
 export function changeName(name, lastName){
   let authRef = firebase.database().ref().child('users')
   var user = firebase.auth().currentUser

@@ -1,11 +1,13 @@
 import * as firebase from 'firebase';
 let C = require("../../constants/auth/authentication.js")
+import { updateVerificationProcent } from '../profile/profile_settings_action'
 
 	// вызывается при инициализации приложения, затем слушает на изменения
 	export function startListeningToAuth(){
 		return function(dispatch,getState){
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user){
+					updateVerificationProcent()
 					let authRef = firebase.database().ref().child('users').child(user.uid)
 					//подгрузка данных из базы данных профиля пользователя
 					authRef.update({
@@ -24,9 +26,9 @@ let C = require("../../constants/auth/authentication.js")
 							addresses: snapshot.val().addresses,
 							phoneVerified: snapshot.val().phoneVerified,
 							emailVerified: snapshot.val().emailVerified,
-							username: snapshot.val().username
+							username: snapshot.val().username,
+							verificationProcent: snapshot.val().verificationProcent
 						});
-						dispatch(checkUserLocation());
 					})
 				} else {
 					if (getState().user.currently !== C.ANONYMOUS){ // иногда выбрасывал что залогинен, хотя не был, хз почему, это костыль
