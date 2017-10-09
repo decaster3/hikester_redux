@@ -21,6 +21,7 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
   let user = firebase.auth().currentUser
   let allEventsRef = firebase.database().ref().child('events')
   let creatorEventsRef = firebase.database().ref().child('users').child(user.uid).child('my_events')
+  let userAttendsEventsRef = firebase.database().ref().child('users').child(user.uid).child('events')
   //firestore db
   var db = firebase.firestore();
   var fireStoreEventsRef = db.collection("events")
@@ -46,6 +47,8 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
     //location not yet
     push.set(
       event
+    ).then( () =>
+      {userAttendsEventsRef.push(key)}
     ).then( () => {
       fireStoreEventsRef.doc(key).set({
             address: address,

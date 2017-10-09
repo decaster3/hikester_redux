@@ -31,6 +31,8 @@ module.exports = function(currentstate = initialState.auth,action){
         authProviders: action.authProviders,
         emailVerified: action.emailVerified,
         phoneVerified: action.phoneVerified,
+        events: action.events,
+        myEvents: action.myEvents,
         uid: action.uid,
         verificationProcent: action.verificationProcent
       };

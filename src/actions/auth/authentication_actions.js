@@ -27,6 +27,8 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 							phoneVerified: snapshot.val().phoneVerified,
 							emailVerified: snapshot.val().emailVerified,
 							username: snapshot.val().username,
+							events: snapshot.val().events,
+							myEvents: snapshot.val().my_events,
 							verificationProcent: snapshot.val().verificationProcent
 						});
 					})
