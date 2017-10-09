@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import MyFancyComponent from '../../map'
 
 class EventCreationMapContainer extends Component {
 
@@ -9,6 +10,7 @@ class EventCreationMapContainer extends Component {
   render() {
     return(
       <div>
+        <MyFancyComponent/>
         Event Creation MAP!!!
       </div>
     )
