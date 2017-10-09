@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import SearchingTags from '../searching_tags'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { chanageFilters, startListeningEvents } from '../../../../actions/search_events/search_events_action'
+import { chanageFilters, startListeningEvents, clearFilters } from '../../../../actions/search_events/search_events_action'
 import 'react-datepicker/dist/react-datepicker.css';
 
 class EventSearchingFiltersContainer extends Component {
@@ -19,6 +19,8 @@ class EventSearchingFiltersContainer extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
+    this.filterEvents = this.filterEvents.bind(this);
+    this.clearFiltersOnView = this.clearFiltersOnView.bind(this);
   }
   handleChange(event){
     const target = event.target;
@@ -39,6 +41,15 @@ class EventSearchingFiltersContainer extends Component {
     this.setState({
       end_date: date
     });
+  }
+
+  filterEvents(){
+    this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
+    this.props.startListeningEvents()
+  }
+  clearFiltersOnView(){
+    this.props.clearFilters()
+    this.props.startListeningEvents()
   }
 
   render() {
@@ -72,9 +83,8 @@ class EventSearchingFiltersContainer extends Component {
         <br/>
         <SearchingTags />
         <br/>
-        <button onClick = {() => p.chanageFilters(s.cost, s.start_date, s.end_date)}>chanageFilters</button>
-        <button onClick = {() => p.startListeningEvents()}>startListeningEvents</button>
-
+        <button onClick = {() => this.filterEvents()}>filterEvents</button>
+        <button onClick = {() => this.clearFiltersOnView()}>clear filters</button>
       </div>
     )
   }
@@ -90,7 +100,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
       startListeningEvents: startListeningEvents,
-      chanageFilters: chanageFilters
+      chanageFilters: chanageFilters,
+      clearFilters: clearFilters
     },
     dispatch
   )
