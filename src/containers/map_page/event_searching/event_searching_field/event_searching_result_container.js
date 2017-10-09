@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
 class EventSearchingResultContainer extends Component {
 
@@ -7,11 +8,35 @@ class EventSearchingResultContainer extends Component {
   }
 
   render() {
-    return(
-      <div>
-        search result!!!
-      </div>
-    )
+    let p = this.props
+    let s = this.state
+    if(p.search_events.events.length == 0){
+      return (
+        <div>There is no events on this filters</div>
+      )
+    }
+    else {
+      const events = p.search_events.events.map((event, index) => {
+        return (
+          <div key = {index}>
+            Event1
+            <p>name <span>{event.name}</span></p>
+            <p>cost <span>{event.cost}</span></p>
+            <p>address <span>{event.address}</span></p>
+            <p>tag <span>{event.tag}</span></p>
+          </div>)
+      });
+      return (
+        <div>
+          {events}
+        </div>)
+    }
   }
 }
-export default EventSearchingResultContainer
+function mapStateToProps(state){
+    return {
+      search_events: state.search_events
+    }
+}
+
+export default connect(mapStateToProps)(EventSearchingResultContainer)

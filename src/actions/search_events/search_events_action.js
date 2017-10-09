@@ -20,7 +20,16 @@ export function chanageFilters(cost, start_date, end_date){
     end_date: new Date(end_date.toDate().getTime())
   }
   return function(dispatch) {
-    console.log(fields);
+    dispatch({type: C.UPDATE_FIELDS_SEARCH, fields: fields})
+  }
+}
+export function clearFilters(){
+  let fields = {
+    cost: null,
+    start_date: null,
+    end_date: null
+  }
+  return function(dispatch) {
     dispatch({type: C.UPDATE_FIELDS_SEARCH, fields: fields})
   }
 }
@@ -41,10 +50,10 @@ export function startListeningEvents(){
       fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", String(getState().search_events.tag))
     }
     if(getState().search_events.start_date != null){
-      fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">=", getState().search_events.start_date)
+      fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">", getState().search_events.start_date)
     }
     if(getState().search_events.end_date != null){
-      fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<=", getState().search_events.end_date)
+      fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", getState().search_events.end_date)
     }
     fireStoreEventsRef.onSnapshot(function(querySnapshot) {
         events = []
