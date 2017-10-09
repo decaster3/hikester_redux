@@ -1,17 +1,43 @@
-import React, { Component } from 'react'
+import React from "react"
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateEventLocation } from '../../../../actions/events_creation/events_creation';
+import { compose, withProps, withStateHandlers } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-class EventCreationMapContainer extends Component {
+export const EventCreationMapContainer = compose(
 
-  constructor(props) {
-    super(props)
-  }
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div  style={{ height: `100%` }} />,
+    containerElement: <div  style={{ height: `400px` }} />,
+    mapElement: <div  style={{ height: `100%` }} />
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props =>
+  <GoogleMap
+    onClick = {(event) => {props.updateEventLocation(event.latLng)}}
+    defaultZoom={props.map.defaultZoom}
+    defaultCenter = {props.map.defaultCenter}
+  >
+    <Marker position={props.map.location}/>
+  </GoogleMap>
+)
 
-  render() {
-    return(
-      <div>
-        Event Creation MAP!!!
-      </div>
-    )
-  }
+function mapStateToProps(state){
+    return {
+      map: state.new_event
+    }
 }
-export default EventCreationMapContainer
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(
+    {
+      updateEventLocation:updateEventLocation
+    },
+    dispatch
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventCreationMapContainer)
