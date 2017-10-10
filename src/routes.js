@@ -6,7 +6,7 @@ import MainNotificationPageComponent from './components/profile_page/notificatio
 import MainProfileComponent from './components/profile_page/main_profile_component';
 import MainAuthComponent from './components/auth_page/main_auth_component';
 import MainMapComponent from './components/map/main_map_component';
-import ChatContainer from './containers/chat/chat'
+import EventDeteail from './components/event_page/event_detail/main_event_detail_component';
 
 const configureRoutes = () => {
       return (<div>
@@ -15,10 +15,10 @@ const configureRoutes = () => {
                   <Route exact path="/profile" component={MainProfileComponent} />
                   <Route path="/auth" component={MainAuthComponent} />
                   <Route path="/map" component={MainMapComponent} />
-                  <Route path="/event" component={MainMapComponent} />
+                  <Route exact path="/event" component={MainMapComponent} />
+                  <Route exact path="/event/:id" component={EventDeteail} />
                   <Route path="/profile/edit" component={MainSettingsComponent} />
                   <Route path="/profile/notifications" component={MainNotificationPageComponent} />
-                  <Route path="/chat" component={ChatContainer }/>
                 </Switch>
               </div>)
       }

@@ -34,7 +34,7 @@ export function chanageFilters(cost, start_date, end_date){
     end_date: new Date(end_date.toDate().getTime())
   }
   return function(dispatch) {
-    
+
     dispatch({type: C.UPDATE_FIELDS_SEARCH, fields: fields})
   }
 }

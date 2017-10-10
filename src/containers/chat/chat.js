@@ -16,7 +16,7 @@ class ChatContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.loadMessages("-Kw2LJ-3X31FkXOdNO08")
+    this.props.loadMessages(this.props.eventId)
   }
 
 

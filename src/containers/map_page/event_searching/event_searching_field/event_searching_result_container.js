@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { scheduleEvent, startListeningEvents } from '../../../../actions/search_events/search_events_action'
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom'
+
 class EventSearchingResultContainer extends Component {
 
   constructor(props) {
@@ -28,7 +30,7 @@ class EventSearchingResultContainer extends Component {
           if (event.attending == true){
             eventAttanding = (<div>
               You already attend on this event
-              <button>Detail</button>
+              <Link to={"/event/" + event.id}><button>Detail</button></Link>
             </div>)
           }else {
             eventAttanding = (
