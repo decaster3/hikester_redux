@@ -15,7 +15,6 @@ export function loadMessages(eventId) {
         var messages = []
         docMessages.forEach(function(doc) {
           messages.push(doc.data());
-
         });
         console.log(1);
         dispatch({
