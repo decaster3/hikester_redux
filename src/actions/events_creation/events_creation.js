@@ -27,15 +27,14 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
   var fireStoreEventsRef = db.collection("events")
 
   return function(dispatch,getState) {
-    let tag = getState().new_event.tag
     let event = {
       address: address,
       cost: cost,
       end_time: end_time,
       start_time: start_time,
       description: description,
-      lat: lat,
-      lng: lng,
+      lat: getState().new_event.location.lat(),
+      lng: getState().new_event.location.lng(),
       name: name,
       max_people_count: max_people_count,
       start_date: start_datee,
@@ -46,7 +45,7 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
     var key = push.key
     //location not yet
     push.set(
-      event
+      key
     ).then( () =>
       {userAttendsEventsRef.push(key)}
     ).then( () => {
@@ -56,8 +55,8 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
             end_time: end_time,
             start_time: start_time,
             description: description,
-            lat: lat,
-            lng: lng,
+            lat: getState().new_event.location.lat(),
+            lng: getState().new_event.location.lng(),
             name: name,
             max_people_count: max_people_count,
             start_date: start_datee,

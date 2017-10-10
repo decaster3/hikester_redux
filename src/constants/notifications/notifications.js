@@ -1,0 +1,3 @@
+module.exports = {
+  UPDATE_NOTIFICATIONS: "UPDATE_NOTIFICATIONS"
+}

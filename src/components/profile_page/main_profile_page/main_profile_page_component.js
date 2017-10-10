@@ -11,7 +11,7 @@ class MainProfilePageComponent extends Component {
   render(){
     let p = this.props
     if (p.user.currently != "ANONYMOUS"){
-      
+
       var authProviders = []
       for (var i = 0; i < p.user.authProviders.length; i++){
         if (p.user.authProviders[i].providerId != "password" && p.user.authProviders[i].providerId != "phone")
@@ -44,6 +44,7 @@ class MainProfilePageComponent extends Component {
           {phone}<br />
           Also has {anotherAuthProvidersView}<br />
         <Link to = 'profile/edit'> Edit profile </Link>
+        <Link to = 'profile/notifications'> Notifications </Link>
         </div>
       )}
     else {

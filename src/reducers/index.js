@@ -5,6 +5,7 @@ import profileSettingsReducer from './profile/profile_settings_reducer'
 import EventsSettingsReducer from './events_settings/events_settings_reducer'
 import EventsCreationReducer from './events_creation/events_creation_reducer'
 import SearchEventsReducer from './search_events/search_events_reducer'
+import NotificationsReducer from './notifications/notifications_reducer'
 
 const rootReducer = combineReducers({
   user: AuthReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   events_settings: EventsSettingsReducer,
   profile_settings: profileSettingsReducer,
   new_event: EventsCreationReducer,
-  search_events: SearchEventsReducer
+  search_events: SearchEventsReducer,
+  notifications: NotificationsReducer
 });
 
 export default rootReducer;

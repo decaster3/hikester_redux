@@ -9,7 +9,9 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 				if (user){
 					updateVerificationProcent()
 					let authRef = firebase.database().ref().child('users').child(user.uid)
-					//подгрузка данных из базы данных профиля пользователя
+					// let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('new')
+					// let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
+					// //подгрузка данных из базы данных профиля пользователя
 					authRef.update({
 						emailVerified: user.emailVerified
 					})
@@ -29,7 +31,8 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 							username: snapshot.val().username,
 							events: snapshot.val().events,
 							myEvents: snapshot.val().my_events,
-							verificationProcent: snapshot.val().verificationProcent
+							verificationProcent: snapshot.val().verificationProcent,
+							notifications: snapshot.val().notifications
 						});
 					})
 				} else {
