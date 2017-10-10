@@ -1,0 +1,115 @@
+header {
+  background-color: #12b591;
+  color: #fff;
+  height: 44px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  /*border-bottom: 1px solid #ccc;*/
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header .container {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  height: 100%;
+}
+
+/*header .left {
+  float: left;
+}
+
+header .right {
+  float: right;
+}*/
+
+header .menu-item {
+  padding: 0 15px;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  font-weight: 300;
+  font-size: 17px;
+  text-transform: none;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+}
+header .menu-item:hover {
+  background-color: #11a786;
+  cursor: pointer;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+header .logo .logo-image {
+  height: 40px;
+}
+
+header .menu-item.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+header .dropdown-content {
+  padding: 5px 0;
+  background-color: #fff;
+  color: #000;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -40px;
+  min-width: 160px;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 2px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  text-shadow: none;
+}
+header .dropdown-content ul {
+  padding: 0;
+  text-transform: none;
+}
+header .dropdown-content ul li {
+  line-height: 1.4;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+header .dropdown-content ul li.dropdown-item {
+  padding: 10px 20px;
+}
+header .dropdown-content ul li.dropdown-item:hover {
+  background-color: #f5f5f5
+}
+header .dropdown-content ul li.divider {
+  background-color: #e5e5e5;
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+}
+
+header .dropdown-title {
+  padding-right: 5px;
+}
+
+header .dropdown-title:after {
+  position: relative;
+  top: 15px;
+  left: 8px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
+  border-top: 5px solid #fff;
+}
+
+header .dropdown-title .dropdown-photo {
+  width: 30px;
+  height: 30px;
+}
