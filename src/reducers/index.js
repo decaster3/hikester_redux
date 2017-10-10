@@ -14,13 +14,9 @@ const rootReducer = combineReducers({
   events_settings: EventsSettingsReducer,
   profile_settings: profileSettingsReducer,
   new_event: EventsCreationReducer,
-<<<<<<< HEAD
   search_events: SearchEventsReducer,
-  notifications: NotificationsReducer
-=======
-  chat: ChatReducer,
-  search_events: SearchEventsReducer
->>>>>>> chat
+  notifications: NotificationsReducer,
+  chat: ChatReducer
 });
 
 export default rootReducer;
