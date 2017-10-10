@@ -1,0 +1,103 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+*:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+button:focus {outline:0 !important;}
+
+body {
+  min-height: (100% - 44px);
+  /*margin-top: 44px;*/
+  padding-top: 44px;
+  font-family: 'Ubuntu';
+}
+
+#content {
+  display: flex;
+  height: calc(100vh - 44px);
+}
+#content .page-section {
+  max-height: 100%;
+  /*overflow: hidden;
+  overflow-y: scroll;*/
+}
+
+input,
+textarea {
+  border: 1px solid #12b591;
+  background-color: #fff;
+  width: 100%;
+  font-size: 16px;
+  color: #555;
+  padding: 10px 16px;
+}
+textarea {
+  resize-x: none;
+  min-height: 150px;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #15d8ae;
+}
+
+input.input-text {
+
+}
+
+.input-date-group {
+  position: relative;
+}
+
+.input-date-group input.input-date {
+  padding-left: 32px;
+}
+
+.input-date-group .input-date-icon {
+  position: absolute;
+  left: 10px;
+  top: 14px;
+}
+
+.button {
+  text-align: center;
+  padding: 10px 15px;
+  background-color: #12b591;
+  color: #fff;
+  border: 1px solid #109678;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #12bc97;
+}
+.button-fluid {
+  width: 100%;
+  padding: 15px 20px;
+}
+
+.panel .title {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.info {
+  background-color: #fffd96;
+  padding: 15px;
+}
+
+.divider {
+  background-color: #e5e5e5;
+  height: 1px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.checkbox label:hover {
+  cursor: pointer;
+}

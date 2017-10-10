@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   new_event: EventsCreationReducer,
   search_events: SearchEventsReducer,
   notifications: NotificationsReducer,
-  chat: ChatReducer,
+  chat: ChatReducer
 });
 
 export default rootReducer;
