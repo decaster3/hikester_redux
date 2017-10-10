@@ -8,7 +8,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 export const EventCreationMapContainer = compose (
   lifecycle({
     componentDidMount() {
-      props.updateEventLocation(props.map.location)
+      this.props.updateEventLocation(props.map.location)
     },
   }),
   withProps({

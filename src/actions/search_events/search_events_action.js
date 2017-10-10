@@ -47,14 +47,16 @@ export function updateEventLocationSearch(location){
 
 
 export function startListeningEvents(){
+  firebase.auth().onAuthStateChanged(function(user) {
+      return function(dispatch, getState){
   var db = firebase.firestore();
-  let user = firebase.auth().currentUser
   var userEvents = []
 
   var fireStoreEventsRef = db.collection("events")
   var events = []
   //набор событий в которых учавствует юзер в переменную userEvents
   if(user){
+    console.log(1);
     firebase.database().ref().child('users').child(user.uid)
           .child('events').on('value', function(snapshot) {
       var events = snapshot.val()
@@ -65,8 +67,8 @@ export function startListeningEvents(){
       }
     })
   }
+console.log(2);
 
-  return function(dispatch, getState){
 
       if(getState().search_events.tag != null){
         fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", String(getState().search_events.tag))
@@ -97,4 +99,5 @@ export function startListeningEvents(){
         dispatch({type: C.UPDATE_EVENTS, events: events})
       })
   }
+})
 }
