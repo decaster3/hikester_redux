@@ -5,7 +5,5 @@ module.exports = {
   LOADED: "LOADED",
 
   //actions
-  LOAD_CHAT: "LOAD_CHAT",
-  LOADING_CHAT: "LOADING_CHAT"
-
+  LOAD: "LOAD"
 }
