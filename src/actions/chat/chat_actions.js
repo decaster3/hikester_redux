@@ -16,7 +16,6 @@ export function loadMessages() {
     var messagesRef = db.collection("events").doc(eventId).collection("chat").orderBy("date", "desc")
 
     messagesRef.onSnapshot(docMessages => {
-        console.log(123);
         var messages = []
         docMessages.forEach(function(doc) {
           messages.push(doc.data());

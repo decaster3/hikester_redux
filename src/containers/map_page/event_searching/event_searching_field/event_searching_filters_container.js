@@ -1,106 +1,54 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SearchingTags from '../searching_tags'
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import { chanageFilters, startListeningEvents, clearFilters } from '../../../../actions/search_events/search_events_action'
+import { chanageFilters, updateEventTagSearch, clearFilters } from '../../../../actions/search_events/search_events_action'
 import 'react-datepicker/dist/react-datepicker.css';
+import * as firebase from 'firebase'
+import Tag from '../../../../components/map/tag'
+import EventSearchingFiltersComponent from '../../../../components/map/event_searching/event_searching_filters_component'
 
 class EventSearchingFiltersContainer extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      cost: '',
-      start_date: moment(),
-      end_date: moment()
+      tags: null
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
-    this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
-    this.filterEvents = this.filterEvents.bind(this);
-    this.clearFiltersOnView = this.clearFiltersOnView.bind(this);
-  }
-  handleChange(event){
-    const target = event.target;
-    const name = target.name;
-    this.setState({
-      [name]: event.target.value
-    });
   }
 
-  handleChangeStartDate(date){
-    console.log(date.format());
-    this.setState({
-      start_date: date
-    });
-  }
-  handleChangeEndDate(date){
-    console.log(date.format());
-    this.setState({
-      end_date: date
-    });
-  }
-
-  filterEvents(){
-    this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
-    this.props.startListeningEvents()
-  }
-  clearFiltersOnView(){
-    this.props.clearFilters()
-    this.props.startListeningEvents()
+  componentDidMount(){
+    var self = this
+    firebase.database().ref().child('tags').once('value', function(snapshot){
+      self.setState({ tags: snapshot.val() })
+    })
   }
 
   render() {
     let s = this.state
     let p = this.props
+
+    if (!s.tags)
+      return <p>LOADING</p>
+
+    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTagSearch}/>})
+
     return(
-      <div>
-        Form fields
-
-        <label>
-          Cost:
-          <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange}/>
-        </label>
-
-        <label>
-          start_date:
-          <DatePicker
-            selected={s.start_date}
-            onChange={this.handleChangeStartDate}
-          />
-        </label>
-
-        <label>
-          end_date:
-          <DatePicker
-            selected={s.end_date}
-            onChange={this.handleChangeEndDate}
-          />
-        </label>
-
-        <br/>
-        <SearchingTags />
-        <br/>
-        <button onClick = {() => this.filterEvents()}>filterEvents</button>
-        <button onClick = {() => this.clearFiltersOnView()}>clear filters</button>
-      </div>
+      <EventSearchingFiltersComponent tags={tags} chanageFilters={p.chanageFilters} clearFilters={p.clearFilters}/>
     )
   }
 }
 
 function mapStateToProps(state){
     return {
-      new_event: state.new_event
+
     }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
-      startListeningEvents: startListeningEvents,
       chanageFilters: chanageFilters,
+      updateEventTagSearch: updateEventTagSearch,
       clearFilters: clearFilters
     },
     dispatch

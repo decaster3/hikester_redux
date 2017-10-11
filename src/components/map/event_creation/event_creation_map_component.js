@@ -5,7 +5,6 @@ class EventCreationMapComponent extends Component {
 
   constructor(props) {
     super(props)
-
   }
 
   render() {

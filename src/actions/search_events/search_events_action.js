@@ -23,7 +23,7 @@ export function updateEventTagSearch(tag){
     .onSnapshot(function () {});
   unsubscribe();
   return function(dispatch) {
-    dispatch({type: C.UPDATE_TAGS_SEARCH, tag: tag})
+    dispatch({type: C.UPDATE_TAGS_SEARCH, tag})
   }
 }
 
@@ -35,7 +35,8 @@ export function chanageFilters(cost, start_date, end_date){
   }
   return function(dispatch) {
 
-    dispatch({type: C.UPDATE_FIELDS_SEARCH, fields: fields})
+    dispatch({type: C.UPDATE_FIELDS_SEARCH, fields})
+    dispatch(startListeningEvents())
   }
 }
 export function clearFilters(){
@@ -44,15 +45,16 @@ export function clearFilters(){
     start_date: null,
     end_date: null
   }
+  //  dispatch(startListeningEvents())
 }
 
 export function updateEventLocationSearch(location){
   return function(dispatch) {
-    dispatch({type: C.UPDATE_LOCATION_SEARCH, location: location})
+    dispatch({type: C.UPDATE_LOCATION_SEARCH, location})
   }
 }
 
-export function userParticipationistener() {
+export function userParticipationListener() {
   return function(dispatch, getState){
     let user = firebase.auth().currentUser
 
@@ -78,7 +80,8 @@ export function userParticipationistener() {
           return e
         })
 
-        dispatch({type: C.UPDATE_EVENTS, events: events})
+        dispatch({type: C.UPDATE_EVENTS, events})
+
       })
     }
   }
@@ -130,11 +133,11 @@ export function startListeningEvents(){
               return event
             })
 
-            dispatch({type: C.UPDATE_EVENTS, events: events})
+            dispatch({type: C.UPDATE_EVENTS, events})
           })
         } else
           dispatch({type: C.UPDATE_EVENTS, events})
-        dispatch(userParticipationistener())
+        dispatch(userParticipationListener())
       })
 
   }

@@ -9,10 +9,16 @@ class ChatComponent extends Component {
       message: ''
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event) {
    this.setState({message: event.target.value})
+  }
+
+  handleSubmit() {
+    this.props.submit(this.state.message)
+    this.setState({message: ''})
   }
 
   render() {
@@ -34,7 +40,7 @@ class ChatComponent extends Component {
           Message:
           <input type="text" value={this.state.message} onChange={this.handleChange} />
         </label>
-        <input type="submit" onClick={() => this.props.submit(this.state.message)} />
+        <input type="submit" onClick={this.handleSubmit} />
 
         {messages}
       </div>

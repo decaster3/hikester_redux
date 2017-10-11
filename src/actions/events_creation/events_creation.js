@@ -4,22 +4,20 @@ const firebase = require("firebase");
  require("firebase/firestore");
 
 export function updateEventTag(tag){
-  console.log(tag);
   return function(dispatch) {
     dispatch({type: C.UPDATE_TAGS, tag: tag})
   }
 }
 
-export function updateEventLocation(location){
+export function updateEventLocation(event){
   return function(dispatch) {
-    dispatch({type: C.UPDATE_LOCATION, location: location})
+    dispatch({type: C.UPDATE_LOCATION, location: event.latLng})
   }
 }
-export function createNewEvent(address,cost,start_time,end_time,description,lat,lng,name,max_people_count,start_date){
+export function createNewEvent(address, cost, start_time, end_time, description, lat, lng, name, max_people_count, start_date){
   //realtime db
-  let start_datee = new Date(start_date.toDate().getTime())
+  start_date = new Date(start_date.toDate().getTime())
   let user = firebase.auth().currentUser
-  let allEventsRef = firebase.database().ref().child('events')
   let creatorEventsRef = firebase.database().ref().child('users').child(user.uid).child('my_events')
   let userAttendsEventsRef = firebase.database().ref().child('users').child(user.uid).child('events')
   //firestore db
@@ -27,19 +25,6 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
   var fireStoreEventsRef = db.collection("events")
 
   return function(dispatch,getState) {
-    let event = {
-      address: address,
-      cost: cost,
-      end_time: end_time,
-      start_time: start_time,
-      description: description,
-      lat: getState().new_event.location.lat(),
-      lng: getState().new_event.location.lng(),
-      name: name,
-      max_people_count: max_people_count,
-      start_date: start_datee,
-      tag: getState().new_event.tag
-    }
 
     var push = creatorEventsRef.push()
     var key = push.key
@@ -50,16 +35,16 @@ export function createNewEvent(address,cost,start_time,end_time,description,lat,
       {userAttendsEventsRef.push(key)}
     ).then( () => {
       fireStoreEventsRef.doc(key).set({
-            address: address,
-            cost: cost,
-            end_time: end_time,
-            start_time: start_time,
-            description: description,
+            address,
+            cost,
+            end_time,
+            start_time,
+            description,
             lat: getState().new_event.location.lat(),
             lng: getState().new_event.location.lng(),
-            name: name,
-            max_people_count: max_people_count,
-            start_date: start_datee,
+            name,
+            max_people_count,
+            start_date,
             tag: getState().new_event.tag})
         .then(function() {
             console.log("Document successfully written!");
