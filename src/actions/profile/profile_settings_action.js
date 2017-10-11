@@ -87,15 +87,27 @@ export function changeLocation(country, city){
   }
 }
 
-export function addLocation(country,city){
+export function changeSex(sex){
   let authRef = firebase.database().ref().child('users')
   var user = firebase.auth().currentUser
   return function(dispatch){
     authRef.once('value')
       .then(function(snapshot){
           authRef.child(user.uid).update({
-            default_country: country,
-            default_city: city
+            sex: sex,
+          })
+      }).then(() =>
+      {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})
+  }
+}
+export function changeAbout(about){
+  let authRef = firebase.database().ref().child('users')
+  var user = firebase.auth().currentUser
+  return function(dispatch){
+    authRef.once('value')
+      .then(function(snapshot){
+          authRef.child(user.uid).update({
+            about: about,
           })
       }).then(() =>
       {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})

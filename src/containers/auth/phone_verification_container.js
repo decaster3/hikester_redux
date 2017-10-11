@@ -4,6 +4,10 @@ import { sendVerificationCode, afterSendVerifeingCode } from '../../actions/auth
 import { bindActionCreators } from 'redux';
 import * as firebase from 'firebase';
 
+import PhoneExistComponent from '../../components/phone/phone_exist_component'
+import PhoneNotExistComponent from '../../components/phone/phone_not_exist_component'
+import WaitingVerificationCodeComponent from '../../components/phone/waiting_verification_code_component'
+
 let P = require("../../constants/auth/phone.js")
 
 class PhoneVerificationContainer extends Component {
@@ -35,28 +39,13 @@ class PhoneVerificationContainer extends Component {
     let phone = p.phone
     switch(phone.currently) {
         case P.PHONE_EXIST: return (
-          <div><div id="invisible-recaptcha"></div>
-          {phone.phoneNumber}</div>
+          <PhoneExistComponent phoneNumber = {phone.phoneNumber}/>
         )
         case P.WAITING_VERIFICATION_CODE: return (
-          <div><div id="invisible-recaptcha"></div>
-            <br />Enter verification code<br />
-            <label>
-              Verification code:
-              <input name="verificationCode" type = "text" defaultValue = {this.state.verificationCode} onChange = {this.handleChange}/>
-              <button onClick = {() => { p.afterSendVerifeingCode(this.state.verificationCode, this.state.appVerifier) }}> Send verification code</button>
-          </label>
-          </div>
+          <WaitingVerificationCodeComponent afterSendVerifeingCode = {p.afterSendVerifeingCode}/>
         )
         default: return (
-          <div><div id="invisible-recaptcha"></div>
-            <br />Enter phone number<br />
-            <label>
-              Phone number:
-              <input name="phoneNumber" type = "text" defaultValue = {this.state.phoneNumber} onChange = {this.handleChange}/>
-              <button onClick = {() => { p.sendVerificationCode(this.state.phoneNumber, this.state.appVerifier) }}> Send verification code</button>
-          </label>
-          </div>
+          <PhoneNotExistComponent sendVerificationCode = {p.sendVerificationCode}/>
         )
       }
   }
