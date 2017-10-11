@@ -90,7 +90,7 @@ class MainSettingsContainer extends React.Component {
                 About
               </div>
               <div className="profile-description-item-value col-9 text-left">
-                <input name = "about" className="input-text" placeholder="About" value = {s.about} onChange = {this.handleChange}/>
+                <textarea name = "about" className="input-text" placeholder="About" value = {s.about} onChange = {this.handleChange}/>
               </div>
             </div>
             <div className="profile-description-item row d-flex align-items-center">

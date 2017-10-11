@@ -45,7 +45,7 @@ export default class ProfileAboutComponent extends React.Component {
             </div>
           </div>
           <div className="profile-description-about text-center">
-            Theres some 'about me' information. For example I could write here about my interests. I like to play football very much. Also I like traveling.
+            {this.props.user.about}
           </div>
         </div>
       </div>

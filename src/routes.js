@@ -17,8 +17,7 @@ const configureRoutes = () => {
             <Route exact path="/" component={App} />
             <Route exact path="/profile" component={MainProfileComponent} />
             <Route path="/auth" component={AuthContainer} />
-            <Route path="/map" component={MainMapComponent} />
-            <Route exact path="/event" component={MainMapComponent} />
+            <Route path="/map" component={MainMapContainer} />
             <Route exact path="/event/:id" component={EventDetailContainer} />
             <Route path="/profile/edit" component={MainSettingsComponent} />
             <Route path="/profile/notifications" component={MainNotificationPageComponent} />
