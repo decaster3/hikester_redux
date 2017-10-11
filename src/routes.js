@@ -7,9 +7,11 @@ import MainProfileComponent from './components/profile_page/main_profile_compone
 import MainAuthComponent from './components/auth_page/main_auth_component';
 import MainMapComponent from './components/map/main_map_component';
 import EventDeteail from './components/event_page/event_detail/main_event_detail_component';
-
+import MainTopNavigationBarComponent from './containers/layouts/top_navigation_bar/main_top_navigation_bar_container'
+import MainFooterContainer from './containers/layouts/footer/main_footer_container'
 const configureRoutes = () => {
       return (<div>
+              <MainTopNavigationBarComponent />
                 <Switch>
                   <Route exact path="/" component={App} />
                   <Route exact path="/profile" component={MainProfileComponent} />
@@ -17,9 +19,10 @@ const configureRoutes = () => {
                   <Route path="/map" component={MainMapComponent} />
                   <Route exact path="/event" component={MainMapComponent} />
                   <Route exact path="/event/:id" component={EventDeteail} />
-                  <Route path="/profile/edit" component={MainSettingsComponent} />
+                  <Route path="/profile/settings" component={MainSettingsComponent} />
                   <Route path="/profile/notifications" component={MainNotificationPageComponent} />
                 </Switch>
+                <MainFooterContainer />
               </div>)
       }
 export default configureRoutes

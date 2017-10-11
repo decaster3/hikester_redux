@@ -14,11 +14,13 @@ class DetailEventsComponent extends Component {
     switch (p.events_settings.events_settings_category) {
       case C.CREATION_EVENT:
         return(
-          <MainEventCreationComponent />
+
+            <MainEventCreationComponent />
+
         )
       default:
         return(
-          <MainEventSearchingComponent />
+            <MainEventSearchingComponent />
         )
     }
   }

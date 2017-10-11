@@ -11,7 +11,9 @@ class MainEventSearchingComponent extends Component {
   render() {
     return(
       <div>
-        <EventSearchingFieldComponent/>
+        <div className="tab-content" id="myTabContent">
+          <EventSearchingFieldComponent/>
+        </div>
         <EventSearchingMapComponent/>
       </div>
     )

@@ -7,13 +7,15 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 		return function(dispatch,getState){
 			firebase.auth().onAuthStateChanged(function(user) {
 				if (user){
+					console.log(user);
 					updateVerificationProcent()
 					let authRef = firebase.database().ref().child('users').child(user.uid)
 					// let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('new')
 					// let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
 					// //подгрузка данных из базы данных профиля пользователя
 					authRef.update({
-						emailVerified: user.emailVerified
+						emailVerified: user.emailVerified,
+						photoUrl: user.photoURL
 					})
 
 					authRef.on('value', function(snapshot){
@@ -32,7 +34,8 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 							events: snapshot.val().events,
 							myEvents: snapshot.val().my_events,
 							verificationProcent: snapshot.val().verificationProcent,
-							notifications: snapshot.val().notifications
+							notifications: snapshot.val().notifications,
+							photoUrl: snapshot.val().photoUrl
 						});
 					})
 				} else {

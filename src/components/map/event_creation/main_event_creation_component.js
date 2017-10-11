@@ -11,7 +11,9 @@ class MainEventCreationComponent extends Component {
   render() {
     return(
       <div>
-        <EventCreationFormComponent/>
+        <div className="tab-content" id="myTabContent">
+          <EventCreationFormComponent/>
+        </div>
         <EventCreationMapComponent/>
       </div>
     )

@@ -12,23 +12,30 @@ class SearchingTags extends Component {
       tagsView: null
     }
   }
-    componentDidMount(){
-      var tags = []
-      var tagsContainer = {}
-      let tagsRef = firebase.database().ref().child('tags')
-      tagsRef.once('value', function(snapshot){
-      tags = snapshot.val()
-  }).then(() => {
-        tagsContainer = tags.map((tag, index) => {
-        return (
-            <button key = {index} onClick = {() => this.props.updateEventTagSearch(tag)}>{tag}</button>)
-      })
-      console.log(tagsContainer);
-      this.setState({
-        tagsView: tagsContainer
-      })
+  componentDidMount(){
+    var tags = []
+    var tagsContainer = {}
+    let tagsRef = firebase.database().ref().child('tags')
+    tagsRef.once('value', function(snapshot){
+    tags = snapshot.val()
+}).then(() => {
+      tagsContainer = tags.map((tag, index) => {
+      return (
+        <div className="tags row">
+          <div className="col-4">
+            <div key = {index}className="ui toggle checkbox">
+              <input onClick = {() => this.props.updateEventTagSearch(tag)} type="checkbox" name="public" defaultChecked={false} />
+              <label>{tag}</label>
+            </div>
+          </div>
+        </div>
+      )
     })
-    }
+    this.setState({
+      tagsView: tagsContainer
+    })
+  })
+}
 
   render() {
     let p = this.props
