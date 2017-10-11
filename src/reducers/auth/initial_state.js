@@ -2,7 +2,7 @@ var C = require("../../constants/auth/authentication.js");
 
 module.exports = {
   auth: {
-    currently: C.ANONYMOUS,
+    currently: C.NOTHING,
     username: null,
     uid: null
   }
