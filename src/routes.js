@@ -7,10 +7,12 @@ import MainProfileComponent from './components/profile_page/main_profile_compone
 import AuthContainer from './containers/auth/authenticate_container';
 import MainMapComponent from './components/map/main_map_component';
 import EventDetailContainer from './containers/event/event_details_container';
+import MainTopNavigationBarContainer from './containers/layouts/top_nav_bar/main_top_nav_bar_container'
 
 const configureRoutes = () => {
       return (
         <div>
+          <MainTopNavigationBarContainer />
           <Switch>
             <Route exact path="/" component={App} />
             <Route exact path="/profile" component={MainProfileComponent} />
