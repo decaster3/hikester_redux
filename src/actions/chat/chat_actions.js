@@ -3,10 +3,13 @@ require("firebase/firestore")
 let AUTH = require("../../constants/auth/authentication.js")
 let C = require("../../constants/chat/chat.js")
 
-export function loadMessages(eventId) {
+export function loadMessages() {
   return function(dispatch, getState){
+    var eventId = getState().event_details.event.id
     if (!eventId)
       return
+
+    dispatch({type: C.LOADING_CHAT})
 
     var db = firebase.firestore()
     var messagesRef = db.collection("events").doc(eventId).collection("chat").orderBy("date", "desc")
@@ -16,9 +19,8 @@ export function loadMessages(eventId) {
         docMessages.forEach(function(doc) {
           messages.push(doc.data());
         });
-        console.log(1);
         dispatch({
-          type: C.LOAD,
+          type: C.LOAD_CHAT,
           messages,
           eventId
         })

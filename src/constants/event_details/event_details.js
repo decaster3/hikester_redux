@@ -1,0 +1,13 @@
+module.exports = {
+  //state
+  NOT_LOADED: "NOT_LOADED",
+  LOADING: "LOADING",
+  LOADED: "LOADED",
+  ERROR: "ERROR",
+
+  //actions
+  LOAD_EVENT: "LOAD_EVENT",
+  LOADING_EVENT: "LOADING_EVENT",
+  EVENT_ERROR: "EVENT_ERROR"
+
+}
