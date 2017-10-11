@@ -38,7 +38,7 @@ export function loadMessages() {
 export function sendMessage(message) {
   return function(dispatch, getState){
     var user = getState().user
-    var eventId = getState().chat.eventId
+    var eventId = getState().event_details.event.id
 
     if (message.length == 0 || user.currently != AUTH.SIGNED_IN || !eventId)
       return

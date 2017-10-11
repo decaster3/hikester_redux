@@ -8,7 +8,6 @@ export default class App extends Component {
         <Link to = "/profile">Profile</Link>
         <Link to = "/auth">Authorization</Link>
         <Link to = "/map">Map</Link>
-        <Link to = "/chat">Chat</Link>
       </div>
     );
   }
