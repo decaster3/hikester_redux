@@ -34,7 +34,8 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 							myEvents: snapshot.val().my_events,
 							verificationProcent: snapshot.val().verificationProcent,
 							notifications: snapshot.val().notifications,
-							photoUrl: snapshot.val().photoUrl
+							photoUrl: snapshot.val().photoUrl,
+							about: snapshot.val().about
 						});
 					})
 				} else {

@@ -36,7 +36,8 @@ module.exports = function(currentstate = initialState.auth,action){
         uid: action.uid,
         verificationProcent: action.verificationProcent,
         notifications: action.notifications,
-        photoUrl: action.photoUrl
+        photoUrl: action.photoUrl,
+        about: action.about
       };
     default: return currentstate;
   }
