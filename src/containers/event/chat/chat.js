@@ -30,15 +30,15 @@ class ChatContainer extends Component {
         )
       case C.LOADING:
         return(
-          <p>LOADING</p>
+          <p>CHAT is LOADING</p>
         )
       case C.NOT_LOADED:
         return(
-          <p>NOT LOADED YET</p>
+          <p>CHAT NOT LOADED YET</p>
         )
       default:
         return(
-          <p>ERROR!</p>
+          <p>CHAT ERROR!</p>
         )
     }
   }

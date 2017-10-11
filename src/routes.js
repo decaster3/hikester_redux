@@ -6,20 +6,21 @@ import MainNotificationPageComponent from './components/profile_page/notificatio
 import MainProfileComponent from './components/profile_page/main_profile_component';
 import MainAuthComponent from './components/auth_page/main_auth_component';
 import MainMapComponent from './components/map/main_map_component';
-import EventDeteail from './components/event_page/event_detail/main_event_detail_component';
+import EventDetailContainer from './containers/event/event_details_container';
 
 const configureRoutes = () => {
-      return (<div>
-                <Switch>
-                  <Route exact path="/" component={App} />
-                  <Route exact path="/profile" component={MainProfileComponent} />
-                  <Route path="/auth" component={MainAuthComponent} />
-                  <Route path="/map" component={MainMapComponent} />
-                  <Route exact path="/event" component={MainMapComponent} />
-                  <Route exact path="/event/:id" component={EventDeteail} />
-                  <Route path="/profile/edit" component={MainSettingsComponent} />
-                  <Route path="/profile/notifications" component={MainNotificationPageComponent} />
-                </Switch>
-              </div>)
+      return (
+        <div>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route exact path="/profile" component={MainProfileComponent} />
+            <Route path="/auth" component={MainAuthComponent} />
+            <Route path="/map" component={MainMapComponent} />
+            <Route exact path="/event" component={MainMapComponent} />
+            <Route exact path="/event/:id" component={EventDetailContainer} />
+            <Route path="/profile/edit" component={MainSettingsComponent} />
+            <Route path="/profile/notifications" component={MainNotificationPageComponent} />
+          </Switch>
+        </div>)
       }
 export default configureRoutes

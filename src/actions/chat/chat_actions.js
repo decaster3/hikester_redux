@@ -5,6 +5,7 @@ let C = require("../../constants/chat/chat.js")
 
 export function loadMessages() {
   return function(dispatch, getState){
+
     var eventId = getState().event_details.event.id
     if (!eventId)
       return
@@ -15,6 +16,7 @@ export function loadMessages() {
     var messagesRef = db.collection("events").doc(eventId).collection("chat").orderBy("date", "desc")
 
     messagesRef.onSnapshot(docMessages => {
+        console.log(123);
         var messages = []
         docMessages.forEach(function(doc) {
           messages.push(doc.data());

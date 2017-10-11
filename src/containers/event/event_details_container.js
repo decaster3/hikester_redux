@@ -33,11 +33,11 @@ class EventDetailContainer extends Component {
 
       case C.LOADING:
         return(
-          <p>LOADING</p>
+          <p>EVENT is LOADING</p>
         )
       case C.NOT_LOADED:
         return(
-          <p>NOT LOADED YET</p>
+          <p>event NOT LOADED YET</p>
         )
       default:
         return(

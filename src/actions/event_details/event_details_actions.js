@@ -9,7 +9,7 @@ export function loadEvent(id) {
       return
 
     dispatch({type: C.LOADING_EVENT})
-    
+
     firebase.firestore().collection("events").doc(id).get().then(function(doc) {
         if (doc.exists) {
             var event = doc.data()
