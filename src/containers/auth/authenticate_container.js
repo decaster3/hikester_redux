@@ -20,27 +20,22 @@ class AuthContainer extends Component {
     let user = p.user
     let s = this.state
 		switch(user.currently){
-			case C.SIGNED_IN: return (
-				<div className="userpanel">
-          <div id="ivisible_recaptcha"></div>
-					<span>Logged in as {user.email}.</span>
-          <span>Email {String(user.emailVerified)}</span>
-          <span> Phone {String(user.phoneVerified)}</span>
+			case C.SIGNED_IN:
+        return (
           <PhoneVerificationContainer />
-          {' '}<button onClick={p.logoutUser}>Log out</button>
-				</div>
-			);
+			   );
 			case C.AWAITING:
         return (
 				  <AuthAwaitingComponent />
 			  );
-			default: return (
-        <AuthAnonymousComponent
-          facebookSignin = {p.facebookSignin}
-          googleSignin = {p.googleSignin}
-          passwordSignup = {p.passwordSignup}
-          passwordSignin = {p.passwordSignin}/>
-			);
+			default:
+        return (
+          <AuthAnonymousComponent
+            facebookSignin = {p.facebookSignin}
+            googleSignin = {p.googleSignin}
+            passwordSignup = {p.passwordSignup}
+            passwordSignin = {p.passwordSignin}/>
+  			);
 		}
 	}
 }

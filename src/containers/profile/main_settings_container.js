@@ -100,7 +100,7 @@ class MainSettingsContainer extends React.Component {
                   <option value="Female">Female</option>
                 </select>
               </div>
-              <button className="button button-fluid" onClick = {() => this.saveAll()}>Save Settings</button>
+              <button className="button button-fluid mt-3" onClick = {() => this.saveAll()}>Save Settings</button>
               <div className="title mt-3">Change Email and Social Networks</div>
                 <EmailContainer />
                 <FacebookContainer />

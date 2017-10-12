@@ -1,0 +1,58 @@
+.auth-wrapper {
+  width: 500px;
+}
+
+.auth-wrapper .divider {
+  height: 1px;
+}
+
+.auth-field {
+  margin: 5px 0;
+}
+
+.auth-socials-item {
+  height: auto;
+  padding: 10px;
+  display: flex;
+  margin: 10px 0;
+}
+
+.auth-socials-item.facebook {
+  background-color: #3b5998;
+  border-color: #2c467c;
+}
+.auth-socials-item.facebook:hover {
+  background-color: #4869af;
+}
+
+.auth-socials-item.google {
+  background-color: #db3236;
+  border-color: #bc3236;
+}
+.auth-socials-item.google:hover {
+  background-color: #e84347;
+}
+
+.auth-socials-item-icon,
+.auth-socials-item-name {
+
+}
+
+.auth-socials-item-icon {
+  position: relative;
+  top: 4px;
+  width: 10px;
+  margin-left: 10px;
+}
+
+.auth-socials-item-name {
+  margin-left: 20px;
+}
+
+.auth-actions {
+  margin-top: 10px;
+}
+
+.button-auth {
+  margin-right: 15px;
+}
