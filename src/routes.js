@@ -10,18 +10,18 @@ import EventDetailContainer from './containers/event/event_details_container';
 import MainTopNavigationBarContainer from './containers/layouts/top_nav_bar/main_top_nav_bar_container'
 
 const configureRoutes = () => {
-      return (
-        <div>
-          <MainTopNavigationBarContainer />
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route exact path="/profile" component={MainProfileComponent} />
-            <Route path="/auth" component={AuthContainer} />
-            <Route path="/map" component={MainMapContainer} />
-            <Route exact path="/event/:id" component={EventDetailContainer} />
-            <Route path="/profile/edit" component={MainSettingsComponent} />
-            <Route path="/profile/notifications" component={MainNotificationPageComponent} />
-          </Switch>
-        </div>)
-      }
+  return (
+    <div id="content">
+      <MainTopNavigationBarContainer />
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/profile" component={MainProfileComponent} />
+        <Route path="/auth" component={AuthContainer} />
+        <Route path="/map" component={MainMapContainer} />
+        <Route exact path="/event/:id" component={EventDetailContainer} />
+        <Route path="/profile/edit" component={MainSettingsComponent} />
+        <Route path="/profile/notifications" component={MainNotificationPageComponent} />
+      </Switch>
+    </div>)
+  }
 export default configureRoutes

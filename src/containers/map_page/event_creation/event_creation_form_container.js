@@ -18,7 +18,14 @@ class EventCreationFormContainer extends Component {
   componentDidMount(){
     var self = this
     firebase.database().ref().child('tags').once('value', function(snapshot){
-      self.setState({ tags: snapshot.val() })
+      var tags = []
+      snapshot.forEach(data => {
+        var tag = {}
+        tag["name"] = data.val()
+        tag["selected"] = false
+        tags.push(tag)
+      })
+      self.setState({ tags })
     })
   }
 

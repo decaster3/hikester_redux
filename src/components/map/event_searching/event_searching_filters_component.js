@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import FontAwesome from 'react-fontawesome';
 
 class EventSearchingFiltersComponent extends Component {
 
@@ -50,33 +51,49 @@ class EventSearchingFiltersComponent extends Component {
     let s = this.state
     let p = this.props
     return(
-      <div>
-        Form fields
+      <div className="p-3">
+          <input
+            type="text"
+            className="input-text"
+            placeholder="Event Name.."/>
 
-        <label>
-          Cost:
-          <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange}/>
-        </label>
+          <div className="row mt-3">
+            <div className="col">
+              <div className="input-date-group">
+                <DatePicker
+                  selected={s.start_date}
+                  onChange={this.handleChangeStartDate}
+                  className="input-date"
+                />
+                <FontAwesome name="calendar" className="input-date-icon" />
+              </div>
+            </div>
+            <div className="col">
+              <div className="input-date-group">
+                <DatePicker
+                  selected={s.end_date}
+                  onChange={this.handleChangeEndDate}
+                  className="input-date"
+                />
+                <FontAwesome name="calendar" className="input-date-icon" />
+              </div>
+            </div>
+          </div>
 
-        <label>
-          start_date:
-          <DatePicker
-            selected={s.start_date}
-            onChange={this.handleChangeStartDate}
-          />
-        </label>
+          <label>
+            Cost:
+            <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange}/>
+          </label>
 
-        <label>
-          end_date:
-          <DatePicker
-            selected={s.end_date}
-            onChange={this.handleChangeEndDate}
-          />
-        </label>
+          <div className="divider"></div>
+          <div>
+            <div className="title">Tags:</div>
+            <div className="tags row">
+              {p.tags}
+            </div>
+          </div>
 
-        <br/>
-        {p.tags}
-        <br/>
+
         <button onClick = {() => this.filterEvents()}>filterEvents</button>
         <button onClick = {() => this.clearFiltersOnView()}>clear filters</button>
       </div>

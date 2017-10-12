@@ -29,7 +29,7 @@ class EventSearchingResultContainer extends Component {
       return (<EventSearchingResultComponent event={event} key={index} eventButton={eventButton}/>)
     });
 
-    return ( <div> {events} </div>)
+    return ( <div className="event-list row mx-0"> {events} </div>)
 
   }
 }

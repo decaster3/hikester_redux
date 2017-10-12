@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import EventSearchingFiltersContainer from './event_searching_field/event_searching_filters_container'
 import EventSearchingResultContainer from './event_searching_field/event_searching_result_container'
-import EventSearchingMapContainer from './event_searching_map/event_searching_map_container'
 
 class MainEventSearchingContainer extends Component {
 
@@ -11,10 +10,12 @@ class MainEventSearchingContainer extends Component {
 
   render() {
     return(
-      <div>
+      <div className="panel">
         <EventSearchingFiltersContainer/>
+        <div className="divider"></div>
+        <div className="search-result-text text-center">Results</div>
+        <div className="divider"></div>
         <EventSearchingResultContainer/>
-        <EventSearchingMapContainer/>
       </div>
     )
   }
