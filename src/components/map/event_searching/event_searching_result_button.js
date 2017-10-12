@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { scheduleEvent } from '../../../actions/search_events/search_events_action'
 class EventSearchingResultButtonComponent extends Component {
 
   constructor(props) {
@@ -16,10 +15,10 @@ class EventSearchingResultButtonComponent extends Component {
         button = (
           <div>
             You already attend on this event
-            
+
           </div>)
       else
-        button = ( <button onClick = {() => scheduleEvent(eventId)}>Join to event</button> )
+        button = ( <button className="button button-fluid" onClick = {() => p.onclick(eventId)}>Join to event</button> )
     } else
       button = <div>For attending to event, you should sign up!</div>
 

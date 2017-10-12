@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { loadEvent } from '../../actions/event_details/event_details_actions'
+import EventSearchingResultButtonComponent from '../../components/map/event_searching/event_searching_result_button'
+import { scheduleEvent } from '../../actions/search_events/search_events_action'
 
 class EventDetailContainer extends Component {
 
@@ -18,15 +20,20 @@ class EventDetailContainer extends Component {
   }
 
   render() {
+    console.log("containe");
     let C = require("../../constants/event_details/event_details.js")
 
     var result = null;
     var a = this.props.state
     switch (a) {
       case C.LOADED:
+        var event = this.props.event
+
+        var signedIn = this.props.user.currently != "ANONYMOUS";
+        var eventButton = <EventSearchingResultButtonComponent onclick={this.props.scheduleEvent } signedIn={signedIn} joined={event.attending} eventId={event.id}/>
         return (
           <div id="event-section" className="page-section container-fluid d-flex px-0">
-            <EventDeteailComponent event={this.props.event}/>
+            <EventDeteailComponent event={this.props.event} button={eventButton}/>
             <ChatContainer/>
           </div>
         )
@@ -53,6 +60,7 @@ class EventDetailContainer extends Component {
 function mapStateToProps(state){
   return {
     event: state.event_details.event,
+    user: state.user,
     state: state.event_details.state
   }
 }
@@ -60,7 +68,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
-      loadEvent: loadEvent
+      loadEvent: loadEvent,
+      scheduleEvent: scheduleEvent
     },
     dispatch
   )

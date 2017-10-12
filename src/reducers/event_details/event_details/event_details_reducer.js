@@ -18,6 +18,15 @@ module.exports = function(currentstate = initialState, action){
       return {
         state: C.ERROR
       };
+    case C.ADD_USER_TO_EVENT:
+      return {
+        ...currentstate,
+        event: {
+            ...currentstate.event,
+            attending: true,
+            users: [...currentstate.event.users, action.currentUser]
+          }
+      };
     default: return currentstate;
   }
 }

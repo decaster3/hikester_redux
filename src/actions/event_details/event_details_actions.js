@@ -4,7 +4,7 @@ let C = require("../../constants/event_details/event_details.js")
 
 export function loadEvent(id) {
   return function(dispatch, getState){
-
+    
     if (!id)
       return
 
@@ -15,16 +15,26 @@ export function loadEvent(id) {
         if (doc.exists) {
             var eventUsers = []
             var fireStoreEventsUsersRef = db.collection("events").doc(id).collection('users')
-            fireStoreEventsUsersRef.get()
-            .then(function(querySnapshot) {
+            fireStoreEventsUsersRef.get().then(function(querySnapshot) {
               querySnapshot.forEach(function(doc) {
-                eventUsers.push(doc.data())
+                var user = doc.data()
+                  eventUsers.push(user)
                 });
-              }).then( () => {
+
+                var {uid} = firebase.auth().currentUser || {uid: ""}
                 var event = doc.data()
                 event["id"] = id
                 event['users'] = eventUsers
-                console.log(event);
+
+                var attending = false
+                for (var i = 0; i < eventUsers.length; i++) {
+                  if (eventUsers[i].userFromDB.uid == uid){
+                    attending = true
+                    break
+                  }
+                }
+
+                event['attending'] = attending
                 dispatch({
                   type: C.LOAD_EVENT,
                   event

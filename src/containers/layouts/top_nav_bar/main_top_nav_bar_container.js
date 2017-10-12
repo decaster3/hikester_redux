@@ -14,8 +14,8 @@ class MainTopNavigationBarContainer extends React.Component {
     var notCount = 0;
     if (this.props.user.notifications != undefined)
       notCount = Object.keys(this.props.user.notifications.relevant).length;
-      
-    console.log(notCount);
+
+    
     return (
       <header
         id="header">

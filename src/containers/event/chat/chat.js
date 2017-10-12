@@ -20,7 +20,6 @@ class ChatContainer extends Component {
 
   render() {
     let C = require("../../../constants/chat/chat.js")
-    console.log(this.props.photoURL);
     switch (this.props.state) {
       case C.LOADED:
         return(

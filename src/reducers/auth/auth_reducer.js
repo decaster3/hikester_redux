@@ -39,6 +39,12 @@ module.exports = function(currentstate = initialState.auth,action){
         photoUrl: action.photoUrl,
         about: action.about
       };
+    case C.CHANGE_USER_ATTENDS:
+      return {
+        ...currentstate,
+        events: [...currentstate.events, action.newEvent]
+
+      }
     default: return currentstate;
   }
 }
