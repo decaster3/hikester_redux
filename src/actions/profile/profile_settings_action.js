@@ -8,10 +8,15 @@ export function setSettingsCategory(category){
 }
 
 export function updateVerificationProcent(){
+  console.log(1);
   let authRef = firebase.database().ref().child('users')
     .child(firebase.auth().currentUser.uid)
-  var user = {}
-  var verificationProcent = 0
+    let nnRef = firebase.database().ref().child('neural_network')
+    var count = 0
+    var userId = 0
+    var a = false
+    var user = {}
+    var verificationProcent = 0
   authRef.once('value')
     .then(function(snapshot){
       user = snapshot.val()
@@ -20,6 +25,22 @@ export function updateVerificationProcent(){
       for (var i = 0; i < user.authProviders.length; i++){
         authProviders.push(user.authProviders[i].providerId)
       }
+      //for neural networks FIX FIX FIX AFTER MAZZARA
+      if (user.id == undefined){
+        console.log(123123123);
+        nnRef.once('value').then(function(snap){
+          userId = snap.val().count
+        }).then( () => {
+            console.log(userId);
+            authRef.update({
+              id: userId
+            }).then( () => {
+              nnRef.update({
+              count: userId+1
+              })
+            })
+          })
+        }
       if (authProviders.includes("facebook.com")){
         verificationProcent += 15
       }
@@ -32,13 +53,9 @@ export function updateVerificationProcent(){
       if (authProviders.includes("phone")){
         verificationProcent += 15
       }
-      // NOTE: добавить после создания в бд
-      // if (user.interests.length > 0){
-      //   verificationProcent += 10
-      // }
-      // if (user.events.length > ){
-      //   verificationProcent += 10
-      // }
+      if (user.about){
+        verificationProcent += 10
+      }
       // if (user.references.length > 0){
       //   verificationProcent += 15
       // }
@@ -46,6 +63,7 @@ export function updateVerificationProcent(){
       authRef.update({
         verificationProcent: verificationProcent
       })
+
     })
 }
 
