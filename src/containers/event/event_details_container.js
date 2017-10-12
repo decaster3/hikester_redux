@@ -19,7 +19,6 @@ class EventDetailContainer extends Component {
 
   render() {
     let C = require("../../constants/event_details/event_details.js")
-
     var result = null;
     var a = this.props.state
     const Loading = require('react-loading-animation');

@@ -23,7 +23,7 @@ export function createNewEvent(address, cost, start_time, end_time, description,
   //firestore db
   var db = firebase.firestore();
   var fireStoreEventsRef = db.collection("events")
-
+  console.log(123);
   return function(dispatch,getState) {
 
     var push = creatorEventsRef.push()

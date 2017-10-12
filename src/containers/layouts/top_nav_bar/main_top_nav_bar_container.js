@@ -14,8 +14,8 @@ class MainTopNavigationBarContainer extends React.Component {
     var notCount = 0;
     switch (this.props.user.currently) {
       case "SIGNED_IN":
-      if (this.props.user.notifications.relevant != undefined && this.props.user.notifications.relevant != undefined) {
-        notCount = Object.keys(this.props.user.notifications.relevant).length;
+      if (this.props.user.notifications.new != undefined && this.props.user.notifications.new != undefined) {
+        notCount = Object.keys(this.props.user.notifications.new).length;
       }
 
       return (
