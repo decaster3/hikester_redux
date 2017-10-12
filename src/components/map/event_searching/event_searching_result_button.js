@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import { scheduleEvent } from '../../../actions/search_events/search_events_action'
 class EventSearchingResultButtonComponent extends Component {
 
   constructor(props) {
@@ -11,7 +11,6 @@ class EventSearchingResultButtonComponent extends Component {
     var button = null
     let p = this.props
     var eventId = p.eventId;
-
     if (p.signedIn) {
       if (p.joined)
         button = (

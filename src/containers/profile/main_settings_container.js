@@ -34,7 +34,6 @@ class MainSettingsContainer extends React.Component {
   saveAll(){
     let s = this.state
     let p = this.props
-        console.log(s.about);
     p.changeName(s.username)
     p.changeLocation(s.country, s.city)
     p.changeAbout(s.about)
@@ -55,8 +54,6 @@ class MainSettingsContainer extends React.Component {
 
     switch (p.user.currently) {
       case "SIGNED_IN":
-      console.log(s.username);
-      console.log(s.default_city);
       return (
         <div className="profile-settings">
           <div className="profile-description-item-list">

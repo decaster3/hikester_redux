@@ -25,7 +25,7 @@ class EventDetailContainer extends Component {
     switch (a) {
       case C.LOADED:
         return (
-          <div>
+          <div className = "container-fluid">
             <EventDeteailComponent event={this.props.event}/>
             <ChatContainer/>
           </div>
