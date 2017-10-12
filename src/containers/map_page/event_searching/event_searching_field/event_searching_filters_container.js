@@ -14,13 +14,13 @@ class EventSearchingFiltersContainer extends Component {
     this.state = {
       tags: null
     }
-  }
+  }//
 
   componentDidMount(){
     var self = this
     firebase.database().ref().child('tags').once('value', function(snapshot){
       var tags = []
-      
+
       snapshot.forEach(data => {
         var tag = {}
         tag["name"] = data.val()

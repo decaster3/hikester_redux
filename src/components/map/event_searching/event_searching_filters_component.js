@@ -4,47 +4,41 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import FontAwesome from 'react-fontawesome';
 
-class EventSearchingFiltersComponent extends Component {
+export default class EventSearchingFiltersComponent extends Component {
 
   constructor(props){
     super(props)
     this.state = {
       cost: '',
       start_date: moment(),
-      end_date: moment()
+      end_date: moment()//
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
-    this.filterEvents = this.filterEvents.bind(this);
-    this.clearFiltersOnView = this.clearFiltersOnView.bind(this);
   }
 
   handleChange(event){
+
     const target = event.target;
     const name = target.name;
     this.setState({
       [name]: event.target.value
     });
+    this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
   }
 
   handleChangeStartDate(date){
     this.setState({
       start_date: date
-    });
+    })
+    this.props.chanageFilters(this.state.cost, date, this.state.end_date)
   }
   handleChangeEndDate(date){
     this.setState({
       end_date: date
     });
-  }
-
-  filterEvents(){
-    this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
-  }
-
-  clearFiltersOnView(){
-    this.props.clearFilters()
+    this.props.chanageFilters(this.state.cost, this.state.start_date, date)
   }
 
   render() {
@@ -94,11 +88,8 @@ class EventSearchingFiltersComponent extends Component {
           </div>
 
 
-        <button onClick = {() => this.filterEvents()}>filterEvents</button>
-        <button onClick = {() => this.clearFiltersOnView()}>clear filters</button>
+        <button onClick = {() => this.props.clearFilters()}>clear filters</button>
       </div>
     )
   }
 }
-
-export default EventSearchingFiltersComponent
