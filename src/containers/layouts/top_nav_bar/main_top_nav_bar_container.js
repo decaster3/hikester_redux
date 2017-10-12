@@ -1,7 +1,9 @@
 import React from 'react';
 import NavigationBarProfileContainer from './navigation_bar_profile_container'
+import { connect } from 'react-redux';
+import NotificationsMenuItem from './notifications_menu_item';
 
-export default class MainTopNavigationBarContainer extends React.Component {
+class MainTopNavigationBarContainer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -9,6 +11,11 @@ export default class MainTopNavigationBarContainer extends React.Component {
 
 
   render() {
+    var notCount = 0;
+    if (this.props.user.notifications != undefined)
+      notCount = Object.keys(this.props.user.notifications.relevant).length;
+      
+    console.log(notCount);
     return (
       <header
         id="header">
@@ -24,9 +31,19 @@ export default class MainTopNavigationBarContainer extends React.Component {
               About
             </div>
           </div>
+          <NotificationsMenuItem count={notCount} />
           <NavigationBarProfileContainer />
         </div>
       </header>
     );
   }
 }
+
+function mapStateToProps(state){
+    return {
+      user: state.user
+    }
+}
+
+
+export default connect(mapStateToProps)(MainTopNavigationBarContainer)
