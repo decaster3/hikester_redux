@@ -20,6 +20,7 @@ class ChatContainer extends Component {
 
   render() {
     let C = require("../../../constants/chat/chat.js")
+    const Loading = require('react-loading-animation');
     console.log(this.props.photoURL);
     switch (this.props.state) {
       case C.LOADED:
@@ -30,11 +31,11 @@ class ChatContainer extends Component {
         )
       case C.LOADING:
         return(
-          <p>CHAT is LOADING</p>
+          <Loading />
         )
       case C.NOT_LOADED:
         return(
-          <p>CHAT NOT LOADED YET</p>
+          <p>CHAT NOT LOADED!</p>
         )
       default:
         return(

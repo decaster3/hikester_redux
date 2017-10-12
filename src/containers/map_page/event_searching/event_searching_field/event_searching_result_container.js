@@ -18,18 +18,24 @@ class EventSearchingResultContainer extends Component {
   render() {
     let p = this.props
     let s = this.state
+    const Loading = require('react-loading-animation');
+    switch (p.search_events.currently) {
+      case "LOADED":
+      if(p.search_events.events.length == 0)
+        return ( <div>Sorry.There are no events by this filters</div> )
 
-    if(p.search_events.events.length == 0)
-      return ( <div>There are no events by this filters</div> )
+      var signedIn = p.user.currently != "ANONYMOUS";
 
-    var signedIn = p.user.currently != "ANONYMOUS";
+      const events = p.search_events.events.map((event, index) => {
+        var eventButton = <EventSearchingResultButtonComponent signedIn={signedIn} joined={event.attending} eventId={event.id}/>
+        return (<EventSearchingResultComponent event={event} key={index} eventButton={eventButton}/>)
+      });
 
-    const events = p.search_events.events.map((event, index) => {
-      var eventButton = <EventSearchingResultButtonComponent signedIn={signedIn} joined={event.attending} eventId={event.id}/>
-      return (<EventSearchingResultComponent event={event} key={index} eventButton={eventButton}/>)
-    });
+      return ( <div className="event-list row mx-0"> {events} </div>)
+      default:
+      return  (<Loading />)
+    }
 
-    return ( <div className="event-list row mx-0"> {events} </div>)
 
   }
 }

@@ -90,17 +90,17 @@ class EventCreationFormComponent extends Component {
           </label>
 
           <label>
-            max_people_count:
+            Maximum number of people:
             <input name="max_people_count" type = "text" defaultValue = {s.max_people_count} onChange = {this.handleChange}/>
           </label>
 
           <label>
-            start_time:
+            Start time:
             <input name="start_time" type = "text" defaultValue = {s.start_time} onChange = {this.handleChange}/>
           </label>
 
           <label>
-            end_time:
+            End time:
             <input name="end_time" type = "text" defaultValue = {s.end_time} onChange = {this.handleChange}/>
           </label>
 

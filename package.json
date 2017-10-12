@@ -39,6 +39,7 @@
     "react-dom": "15.5.4",
     "react-fontawesome": "^1.6.1",
     "react-google-maps": "^8.3.5",
+    "react-loading-animation": "^1.4.0",
     "react-redux": "5.0.5",
     "react-router": "4.2.0",
     "react-router-dom": "4.0.0",

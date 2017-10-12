@@ -13,6 +13,7 @@ class GoogleContainer extends Component {
     let p = this.props
     let s = this.state
     let user = p.user
+    const Loading = require('react-loading-animation');
     if (user.currently != "ANONYMOUS"){
     var authProviders = []
     for (var i = 0; i < user.authProviders.length; i++){
@@ -22,7 +23,8 @@ class GoogleContainer extends Component {
       case C.LOADING_LINKING:
         return(
           <div>
-            Ждем ответа от cтороннего сервиса
+            We are waiting for a response from the central service
+            <Loading />
           </div>
         )
       default:
@@ -30,7 +32,7 @@ class GoogleContainer extends Component {
         || authProviders.includes("google.com") && authProviders.length == 1){
           return (
             <div>
-              Гуугл ваш единственный способ зайти в приложение, чтобы убрать его, добавьте любой другой
+              Google is your only way to go into the app to remove it, add any other
             </div>
           )
         }
@@ -39,8 +41,8 @@ class GoogleContainer extends Component {
         if (authProviders.includes("google.com")){
           return(
             <div>
-              Вы прикрепили гугл аккаунт.
-              Чтобы удалить его с вашей учетное записи:
+              You have a linked Google Account.
+                             To delete it from your account:
               <button onClick = {() => {p.unlinkGoogle()}}>Unlink</button>
             </div>
           )
@@ -48,7 +50,7 @@ class GoogleContainer extends Component {
         else {
             return(
               <div>
-                Вы можете прикрепить ваш гугл
+                You can attach your Google account
                 <button onClick = {() => {p.linkGoogle()}}>Link</button>
               </div>
             )

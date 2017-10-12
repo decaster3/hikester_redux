@@ -24,6 +24,7 @@ class PasswordContainer extends Component {
     let C = require('../../../constants/profile/profile')
     let p = this.props
     let s = this.state
+    const Loading = require('react-loading-animation');
     let user = p.user
     if (user.currently != "ANONYMOUS"){
     var authProviders = []
@@ -33,11 +34,11 @@ class PasswordContainer extends Component {
     switch (p.profile_settings.changing) {
       case C.LOADING_REAUTHENTICATION:
       // кейс когда пользователь пытается реаутифицироваться с фейса или гугла
-        return(<div>Подтвердите свой аккаунт, чтобы заменить почту</div>)
+        return(<div>Confirm your account to change mail</div>)
       case C.CHANGING_PASSWORD:
         return(
           <div>
-            Новый пароль
+            New password
             <input name = "newPassword" type = "newPassword" defaultValue = {s.newPassword} onChange = {this.handleChange}/>
             <button onClick = {() => p.changePassword(s.newPassword)}>Link</button>
             <button onClick = {() => p.exitEditMode()}>Cancel</button>
@@ -54,7 +55,8 @@ class PasswordContainer extends Component {
       case C.LOADING_LINKING:
         return(
           <div>
-            Ждем ответа
+            Waiting...
+            <Loading />
           </div>
         )
       default:

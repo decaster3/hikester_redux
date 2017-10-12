@@ -21,8 +21,7 @@ class EventDeteailComponent extends Component {
       })
     })
     console.log(participants);
-    var datestring = event.start_date.getDate()  + "-" + (event.start_date.getMonth()+1) + "-" + event.start_date.getFullYear() + " " +
-      event.start_date.getHours() + ":" + event.start_date.getMinutes();
+    var datestring = event.start_date.getDate()  + "-" + (event.start_date.getMonth()+1) + "-" + event.start_date.getFullYear() + event.start_time
     console.log(datestring);
     var location = {lat: event.lat, lng: event.lng}
     var marker = <Marker position={location}/>

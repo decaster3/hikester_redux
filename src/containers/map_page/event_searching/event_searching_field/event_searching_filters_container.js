@@ -33,11 +33,12 @@ class EventSearchingFiltersContainer extends Component {
   }
 
   render() {
+    const Loading = require('react-loading-animation');
     let s = this.state
     let p = this.props
 
     if (!s.tags)
-      return <p>LOADING</p>
+      return <Loading />
 
     const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTagSearch}/>})
 

@@ -23,6 +23,7 @@ class LocationContainer extends Component {
 
   render(){
     let C = require('../../../constants/profile/profile')
+    const Loading = require('react-loading-animation');
     var p = this.props
     var s = this.state
     var user = p.user
@@ -72,7 +73,7 @@ class LocationContainer extends Component {
     }
   }
   else {
-    return (<div>Loading</div>)
+    return (<div><Loading /></div>)
   }
   }
 }

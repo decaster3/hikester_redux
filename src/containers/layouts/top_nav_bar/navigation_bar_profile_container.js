@@ -14,6 +14,7 @@ class NavigationBarProfileContainer extends Component {
   render(){
     let p = this.props
     let user = p.user
+    const Loading = require('react-loading-animation');
     switch (user.currently) {
       case "SIGNED_IN":
         return(
@@ -59,7 +60,7 @@ class NavigationBarProfileContainer extends Component {
       default:
       return (
         <div>
-          Loading...
+          <Loading />
         </div>
       )
     }

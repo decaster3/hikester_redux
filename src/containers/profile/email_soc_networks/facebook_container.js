@@ -12,6 +12,7 @@ class FacebookContainer extends Component {
     let C = require('../../../constants/profile/profile')
     let p = this.props
     let s = this.state
+    const Loading = require('react-loading-animation');
     let user = p.user
     if (user.currently != "ANONYMOUS"){
     var authProviders = []
@@ -22,7 +23,8 @@ class FacebookContainer extends Component {
       case C.LOADING_LINKING:
         return(
           <div>
-            Ждем ответа от стороннего сервиса
+            We are waiting for a response from a third-party service
+            <Loading />
           </div>
         )
       default:
@@ -30,7 +32,7 @@ class FacebookContainer extends Component {
       || authProviders.includes("facebook.com") && authProviders.length == 1){
         return (
           <div>
-            Фейсбук ваш единственный способ зайти в приложение, чтобы убрать его, добавьте любой другой
+            Facebook is your only way to go into the app to remove it, add any other
           </div>
         )
       }
@@ -38,8 +40,8 @@ class FacebookContainer extends Component {
           if (authProviders.includes("facebook.com")){
             return(
               <div>
-                Вы прикрепили фэйсбук аккаунт.
-                Чтобы удалить его с вашей учетное записи:
+                You have linked a Facebook account.
+                                 To delete it from your account:
                 <button onClick = {() => {p.unlinkFacebook()}}>Unlink</button>
               </div>
             )
@@ -47,7 +49,7 @@ class FacebookContainer extends Component {
           else {
             return(
               <div>
-                Вы можете прикрепить ваш фейсбук
+                You can link gacebook to your account:
                 <button onClick = {() => {p.linkFacebook()}}>Link</button>
               </div>
             )

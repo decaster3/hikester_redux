@@ -24,6 +24,7 @@ class UserNamePhotoContainer extends Component {
   render(){
     let C = require('../../../constants/profile/profile')
     let p = this.props
+    const Loading = require('react-loading-animation');
     let s = this.state
     let user = p.user
     if (user.currently != "ANONYMOUS"){
@@ -52,7 +53,7 @@ class UserNamePhotoContainer extends Component {
       }
     }
     else {
-      return( <div>Loading</div>)
+      return( <div><Loading /></div>)
     }
   }
 }

@@ -45,6 +45,7 @@ class MainProfilePageComponent extends Component {
   }
 
   render(){
+    const Loading = require('react-loading-animation');
     let p = this.props
     if (p.user.currently == "SIGNED_IN"){
       var authProviders = []
@@ -138,7 +139,7 @@ class MainProfilePageComponent extends Component {
     else {
       return (
       <div>
-        Loading...
+        <Loading />
       </div>)
     }
   }

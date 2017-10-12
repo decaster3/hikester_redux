@@ -28,7 +28,7 @@ class EmailContainer extends Component {
     switch (p.profile_settings.changing) {
       case C.LOADING_REAUTHENTICATION:
       // кейс когда пользователь пытается реаутифицироваться с фейса или гугла
-        return(<div>Подтвердите свой аккаунт, чтобы заменить почту</div>)
+        return(<div>confirm your account, for change email</div>)
       case C.REAUTHENTICATE_USER_FOR_CHANGE_EMAIL:
       // кейс когда пользователю предложено ввести пароль или фейс, чтобы сменять почту
         return(<ReauthenticationContainerForChangingEmail newEmail = {s.newEmail} />)
@@ -37,7 +37,7 @@ class EmailContainer extends Component {
         return(
           <div>
             <label>
-              newEmail:
+              New email:
               <input name = "newEmail" type = "newEmail" defaultValue = {s.newEmail} onChange = {this.handleChange}/>
             </label>
             <button onClick = {() => p.changeEmail(s.newEmail)}>Save</button>
@@ -56,7 +56,7 @@ class EmailContainer extends Component {
           default:
           return(
             <div>
-              Ваш мэйл не верефицирован
+              Your email is not verified
               {user.email}
               <button onClick = {() => p.verifyEmail()}>Verify</button>
               <button onClick = {() => p.editMode()}>Change email</button>

@@ -51,7 +51,7 @@ class MainSettingsContainer extends React.Component {
     let p = this.props
     let s = this.state
     let user = p.user
-
+    const Loading = require('react-loading-animation');
     switch (p.user.currently) {
       case "SIGNED_IN":
       return (
@@ -114,7 +114,7 @@ class MainSettingsContainer extends React.Component {
       default:
         return (
           <div>
-            LOADING
+            <Loading />
           </div>
         )
     }

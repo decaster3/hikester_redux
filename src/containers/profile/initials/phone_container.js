@@ -10,6 +10,7 @@ class PhoneContainer extends Component {
   render(){
     let p = this.props
     let phone = p.phone
+    const Loading = require('react-loading-animation');
     let user = p.user
     if (user.currently != "ANONYMOUS"){
       switch (user.phoneVerified) {
@@ -22,10 +23,10 @@ class PhoneContainer extends Component {
         case false:
           return(<PhoneVerificationContainer />)
         default:
-          return(<div>Loading</div>)
+          return(<div><Loading /></div>)
       }}
     else {
-      return(<div>Loading</div>)
+      return(<div><Loading /></div>)
     }
   }
 }

@@ -1,6 +1,7 @@
 
 module.exports = {
   new_event: {
+    currently: "NOT_LOADED",
     tag: null,
     location: null,
     events: [],
