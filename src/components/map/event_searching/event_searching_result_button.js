@@ -16,9 +16,7 @@ class EventSearchingResultButtonComponent extends Component {
         button = (
           <div>
             You already attend on this event
-            <Link to={"/event/" + eventId}>
-              <button>Details</button>
-            </Link>
+            
           </div>)
       else
         button = ( <button onClick = {() => scheduleEvent(eventId)}>Join to event</button> )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class EventSearchingResultComponent extends Component {
 
@@ -16,6 +17,7 @@ class EventSearchingResultComponent extends Component {
             </div>
           </div>
         {this.props.eventButton}
+        <Link to={"/event/" + event.id} push>More info</Link>
       </div>)
   }
 }
