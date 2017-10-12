@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router-dom'
+import UIkit from 'uikit';
+
 class NotificationsMenuItem extends Component {
 
   constructor(props){
@@ -10,7 +12,7 @@ class NotificationsMenuItem extends Component {
   render() {
     return (
       <Link to = "/profile/notifications">
-        <div className="menu-item">
+        <div className="menu-item notification-menu-item">
           <FontAwesome name="bell" className="mr-2"/>
           ({this.props.count})
         </div>
