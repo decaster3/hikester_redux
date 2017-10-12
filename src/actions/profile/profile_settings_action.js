@@ -8,7 +8,6 @@ export function setSettingsCategory(category){
 }
 
 export function updateVerificationProcent(){
-  console.log(1);
   let authRef = firebase.database().ref().child('users')
     .child(firebase.auth().currentUser.uid)
     let nnRef = firebase.database().ref().child('neural_network')
@@ -27,7 +26,7 @@ export function updateVerificationProcent(){
       }
       //for neural networks FIX FIX FIX AFTER MAZZARA
       if (user.id == undefined){
-        console.log(123123123);
+
         nnRef.once('value').then(function(snap){
           userId = snap.val().count
         }).then( () => {

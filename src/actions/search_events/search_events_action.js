@@ -1,20 +1,31 @@
 let C = require('../../constants/search_events/search_events')
+let USER = require('../../constants/auth/authentication')
+let EVENT = require('../../constants/event_details/event_details')
 import { startListeningToAuth } from '../auth/authentication_actions'
 import moment from 'moment';
 const firebase = require("firebase");
  require("firebase/firestore");
 
 export function scheduleEvent(id) {
-  let user = firebase.auth().currentUser
-  firebase.database().ref().child('users').child(user.uid).child('events').push(id)
+  console.log("HI!");
 
-  firebase.database().ref().child('users').child(user.uid).once("value", user => {
-    var userFromDB = user.val()
-    firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set({
-      userFromDB
+  return function(dispatch, getState) {
+    let user = firebase.auth().currentUser
+    console.log("HI!");
+    firebase.database().ref().child('users').child(user.uid).child('events').push(id).then(() =>{
+      dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id})
+      //TODO
+      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser: {userFromDB: getState().user}})
     })
-  })
 
+    firebase.database().ref().child('users').child(user.uid).once("value", user => {
+      var userFromDB = user.val()
+      userFromDB["uid"] = user.key
+      firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set({
+        userFromDB
+      })
+    })
+  }
 }
 
 export function updateEventTagSearch(tag){
@@ -111,9 +122,7 @@ export function startListeningEvents(){
 
       if (getState().search_events.end_date)
         fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", getState().search_events.end_date)
-        console.log(111);
-        console.log(getState().search_events.start_date);
-        console.log(getState().search_events.end_date);
+
 
 
       fireStoreEventsRef.onSnapshot(function(querySnapshot) {

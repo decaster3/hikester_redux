@@ -20,9 +20,7 @@ class EventDeteailComponent extends Component {
         photo: user.userFromDB.photoUrl || "/assets/images/default_user_image.png"
       })
     })
-    console.log(participants);
     var datestring = event.start_date.getDate()  + "-" + (event.start_date.getMonth()+1) + "-" + event.start_date.getFullYear() + event.start_time
-    console.log(datestring);
     var location = {lat: event.lat, lng: event.lng}
     var marker = <Marker position={location}/>
     var map = {
@@ -63,12 +61,15 @@ class EventDeteailComponent extends Component {
                   </div>
                 </div>
             </div>
+
+
             <div className="event-parameter-group mt-3">
               <div className="event-parameter-name">Participants:</div>
               <EventParticipants participants={participants}/>
             </div>
           </div>
-
+          <div className="divider"></div>
+          {this.props.button}
       </div>
     )
   }

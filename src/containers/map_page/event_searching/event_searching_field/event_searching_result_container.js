@@ -36,6 +36,20 @@ class EventSearchingResultContainer extends Component {
       return  (<Loading />)
     }
 
+<<<<<<< HEAD
+=======
+    if(p.search_events.events.length == 0)
+      return ( <div>There are no events by this filters</div> )
+
+    var signedIn = p.user.currently != "ANONYMOUS";
+
+    const events = p.search_events.events.map((event, index) => {
+      var eventButton = <EventSearchingResultButtonComponent onclick={this.props.scheduleEvent } signedIn={signedIn} joined={event.attending} eventId={event.id}/>
+      return (<EventSearchingResultComponent event={event} key={index} eventButton={eventButton}/>)
+    });
+
+    return ( <div className="event-list row mx-0"> {events} </div>)
+>>>>>>> add_join_button
 
   }
 }
@@ -49,7 +63,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
-      startListeningEvents: startListeningEvents
+      startListeningEvents: startListeningEvents,
+      scheduleEvent: scheduleEvent
     },
     dispatch
   )

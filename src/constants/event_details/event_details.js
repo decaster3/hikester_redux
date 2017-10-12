@@ -8,6 +8,7 @@ module.exports = {
   //actions
   LOAD_EVENT: "LOAD_EVENT",
   LOADING_EVENT: "LOADING_EVENT",
+  ADD_USER_TO_EVENT: "ADD_USER_TO_EVENT",
   EVENT_ERROR: "EVENT_ERROR"
 
 }
