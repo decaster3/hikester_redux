@@ -9,7 +9,7 @@ export function getNotifications(){
     if (user) {
       console.log(user);
       var a = false
-      let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('new')
+      let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('relevant')
       let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
       newNotificationsRef.once('value', function(snapshot) {
         if (snapshot.val() != null){
