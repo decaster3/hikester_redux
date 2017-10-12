@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import moment from 'moment';
+import Message from './message';
 
 class ChatComponent extends Component {
 
@@ -26,23 +27,21 @@ class ChatComponent extends Component {
 
     const messages = p.messages.map((message, index) => {
       return (
-        <div key = {index}>
-          <p>{message.message}</p>
-          <p>{message.autor}</p>
-          <p> date: {moment(message.date).format("dddd, MMMM Do YYYY, h:mm:ss a")}</p>
-        </div>
+        <Message key={index} photoURL={p.photoURL} autor={message.autor} text={message.message} active={message.autor == p.username}/>
       )
     })
 
     return (
-      <div>
-        <label>
-          Message:
-          <input type="text" value={this.state.message} onChange={this.handleChange} />
-        </label>
-        <input type="submit" onClick={this.handleSubmit} />
-
-        {messages}
+      <div id="chat-section" className="container-fluid d-flex px-0">
+        <div className="message-list">
+          {messages}
+        </div>
+        <div className="chat-form">
+          <input type="text" placeholder="Message.." className="chat-form-input" value={this.state.message} onChange={this.handleChange} />
+          <button className="button chat-form-submit" onClick={this.handleSubmit} >
+            Send
+          </button>
+        </div>
       </div>
     )
   }

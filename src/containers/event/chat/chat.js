@@ -20,12 +20,12 @@ class ChatContainer extends Component {
 
   render() {
     let C = require("../../../constants/chat/chat.js")
-
+    console.log(this.props.photoURL);
     switch (this.props.state) {
       case C.LOADED:
         return(
-          <div>
-            <ChatComponent messages={this.props.messages} submit={this.props.sendMessage}/>
+          <div className="col-8 px-0">
+            <ChatComponent photoURL={this.props.photoURL} username={this.props.username} messages={this.props.messages} submit={this.props.sendMessage}/>
           </div>
         )
       case C.LOADING:
@@ -47,6 +47,8 @@ class ChatContainer extends Component {
 function mapStateToProps(state){
     return {
       messages: state.chat.messages,
+      username: state.user.username,
+      photoURL: state.user.photoUrl || "/assets/images/default_user_image.png",
       state: state.chat.state
     }
 }

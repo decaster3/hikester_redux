@@ -25,7 +25,7 @@ export default class EventParticipants extends React.Component {
       var show = false;
       if (index < t.state.show_only)
         show = true;
-      return <Participant photo = {participant.photo} name={participant.name} show={show || t.state.show_all_clicked} />
+      return <Participant key={index} photo = {participant.photo} name={participant.name} show={show || t.state.show_all_clicked} />
     });
     return (
       <div className="event-parameter-value event-people">
