@@ -24,6 +24,7 @@ export function updateEventTagSearch(tag){
   unsubscribe();
   return function(dispatch) {
     dispatch({type: C.UPDATE_TAGS_SEARCH, tag})
+    dispatch(startListeningEvents())
   }
 }
 
@@ -40,10 +41,16 @@ export function chanageFilters(cost, start_date, end_date){
   }
 }
 export function clearFilters(){
+  let tag = null
   let fields = {
     cost: null,
     start_date: null,
     end_date: null
+  }
+  return function(dispatch) {
+    dispatch({type: C.UPDATE_TAGS_SEARCH, tag})
+    dispatch({type: C.UPDATE_FIELDS_SEARCH, fields})
+    dispatch(startListeningEvents())
   }
   //  dispatch(startListeningEvents())
 }
@@ -104,6 +111,10 @@ export function startListeningEvents(){
 
       if (getState().search_events.end_date)
         fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", getState().search_events.end_date)
+        console.log(111);
+        console.log(getState().search_events.start_date);
+        console.log(getState().search_events.end_date);
+
 
       fireStoreEventsRef.onSnapshot(function(querySnapshot) {
         var events = []
