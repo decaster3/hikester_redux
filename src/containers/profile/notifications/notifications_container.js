@@ -28,12 +28,12 @@ class NotificationsContainer extends Component {
               if(p.notifications.notifications.length > 0){
                 view = p.notifications.notifications.map((not, index) => {
                   return(
-                  <div key = {index}>
-                    <EventNotificationComponent notification = {not}/>
-                  </div>)
-                })
+                    <div key = {index} className="col-3">
+                      <EventNotificationComponent notification = {not}/>
+                    </div>)
+                  })
                 return(
-                  <div>
+                  <div className="row">
                     {view}
                   </div>
                 )

@@ -3,11 +3,45 @@ import { connect } from 'react-redux'
 import MainSettingsComponent from '../settings/main_settings_component'
 import { Link } from 'react-router-dom'
 import ProfileAboutComponent from './profile_about_component'
+import ProfileEventsComponent from './profile_events_component'
 import MainSettingsContainer from '../../../containers/profile/main_settings_container'
 
 class MainProfilePageComponent extends Component {
   constructor(props){
     super(props);
+
+    this.state = {
+      events: [
+        {
+          name: 'Quest Room',
+          description: 'Description',
+          cost: 300,
+          address: 'Russia, Innopolis',
+          date: '01.01.2018'
+        },
+        {
+          name: 'Quest Room',
+          description: 'Description',
+          cost: 300,
+          address: 'Russia, Innopolis',
+          date: '01.01.2018'
+        },
+        {
+          name: 'Quest Room',
+          description: 'Description',
+          cost: 300,
+          address: 'Russia, Innopolis',
+          date: '01.01.2018'
+        },
+        {
+          name: 'Quest Room',
+          description: 'Description',
+          cost: 300,
+          address: 'Russia, Innopolis',
+          date: '01.01.2018'
+        },
+      ]
+    }
   }
 
   render(){
@@ -91,7 +125,7 @@ class MainProfilePageComponent extends Component {
             <ProfileAboutComponent user={p.user} />
           </div>
           <div className="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
-            123
+            <ProfileEventsComponent events={this.state.events}/>
           </div>
           <div className="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
              <MainSettingsContainer />

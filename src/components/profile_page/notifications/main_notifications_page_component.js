@@ -3,8 +3,13 @@ import NotificationsContainer from '../../../containers/profile/notifications/no
 export default class MainNotificationPageComponent extends Component {
   render(){
     return(
-      <div>
-        <NotificationsContainer />
+      <div className="container d-flex flex-column justify-content-center align-items-stretch">
+        <div className="panel">
+          <div className="title">
+            Notifications
+          </div>
+          <NotificationsContainer />
+        </div>
       </div>
     )
   }

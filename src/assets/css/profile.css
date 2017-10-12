@@ -61,3 +61,12 @@
 #profile-tab-content {
   border-top: none;
 }
+
+.profile-event {
+  padding: 10px;
+  border: 1px solid #9f9f9f;
+  margin-top: 10px;
+}
+.profile-event-name {
+  padding: 5px;
+}

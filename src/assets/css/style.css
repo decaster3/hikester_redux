@@ -124,3 +124,20 @@ input.input-text {
 .checkbox label:hover {
   cursor: pointer;
 }
+
+.notification-event {
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #9f9f9f;
+}
+.notification-name {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+.notification-info-name {
+  font-weight: 400;
+  font-size: 14px;
+  margin-right: 5px;
+  margin-top: 2px;
+}
