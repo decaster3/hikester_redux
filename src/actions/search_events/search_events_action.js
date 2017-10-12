@@ -106,11 +106,21 @@ export function startListeningEvents(){
         fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", getState().search_events.end_date)
 
       fireStoreEventsRef.onSnapshot(function(querySnapshot) {
-        events = []
+        var events = []
+        var eventUsers = []
         querySnapshot.forEach(function(doc) {
+          // var fireStoreEventsUsersRef = db.collection("events").doc(doc.id).collection('users')
           var event = doc.data();
           event['id'] = doc.id;
-          events.push(event);
+          // fireStoreEventsUsersRef.get()
+          // .then(function(querySnapshot) {
+            // querySnapshot.forEach(function(doc) {
+              // eventUsers.push(doc.data())
+              // });
+            // }).then( () => {
+              // event['users'] = eventUsers
+              events.push(event);
+            // })
         })
 
         let user = firebase.auth().currentUser
@@ -135,8 +145,10 @@ export function startListeningEvents(){
 
             dispatch({type: C.UPDATE_EVENTS, events})
           })
-        } else
+        } else{
           dispatch({type: C.UPDATE_EVENTS, events})
+        }
+
         dispatch(userParticipationListener())
       })
 

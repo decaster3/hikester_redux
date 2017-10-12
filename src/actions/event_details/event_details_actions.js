@@ -11,13 +11,25 @@ export function loadEvent(id) {
     dispatch({type: C.LOADING_EVENT})
 
     firebase.firestore().collection("events").doc(id).get().then(function(doc) {
+        var db = firebase.firestore();
         if (doc.exists) {
-            var event = doc.data()
-            event["id"] = id
-            dispatch({
-              type: C.LOAD_EVENT,
-              event
-            })
+            var eventUsers = []
+            var fireStoreEventsUsersRef = db.collection("events").doc(id).collection('users')
+            fireStoreEventsUsersRef.get()
+            .then(function(querySnapshot) {
+              querySnapshot.forEach(function(doc) {
+                eventUsers.push(doc.data())
+                });
+              }).then( () => {
+                var event = doc.data()
+                event["id"] = id
+                event['users'] = eventUsers
+                console.log(event);
+                dispatch({
+                  type: C.LOAD_EVENT,
+                  event
+                })
+              })
         } else {
             console.log("No such document!")
             dispatch({ type: C.ERROR })
