@@ -10,7 +10,7 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 					updateVerificationProcent()
 					let authRef = firebase.database().ref().child('users').child(user.uid)
 					// let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('new')
-					// let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
+					//// let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
 					// //подгрузка данных из базы данных профиля пользователя
 					authRef.update({
 						emailVerified: user.emailVerified,
