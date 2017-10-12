@@ -32,10 +32,11 @@ export function updateVerificationProcent(){
         }).then( () => {
             console.log(userId);
             authRef.update({
-              id: userId
+              id: userId + "",
+              notifications: { a:1}
             }).then( () => {
               nnRef.update({
-              count: userId+1
+              count: userId
               })
             })
           })
