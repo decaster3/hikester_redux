@@ -2,7 +2,7 @@ let C = require("../../constants/auth/authentication.js");
 
 module.exports = {
   auth: {
-  currently: C.NOTHING,
+  currently: "NOTHING",
   emailVerified: false,
   phoneVerified: false,
   username: null,

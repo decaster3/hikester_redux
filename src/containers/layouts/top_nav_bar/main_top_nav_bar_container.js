@@ -12,30 +12,51 @@ class MainTopNavigationBarContainer extends React.Component {
 
   render() {
     var notCount = 0;
-    if (this.props.user.notifications != undefined)
-      notCount = Object.keys(this.props.user.notifications.relevant).length;
-      
-    console.log(notCount);
-    return (
-      <header
-        id="header">
-        <div className="container d-flex align-items-stretch justify-content-end">
-          <div className="left mr-auto d-flex align-items-stretch">
-            <a href="/" className="logo">
-              <img src="/assets/images/hikester_logo_white.png" className="logo-image"/>
-            </a>
-            <div className="menu-item">
-              Support
+    switch (this.props.user.currently) {
+      case "SIGNED_IN":
+      if (this.props.user.notifications.relevant != undefined)
+        notCount = Object.keys(this.props.user.notifications.relevant).length;
+
+      return (
+        <header
+          id="header">
+          <div className="container d-flex align-items-stretch justify-content-end">
+            <div className="left mr-auto d-flex align-items-stretch">
+              <a href="/" className="logo">
+                <img src="/assets/images/hikester_logo_white.png" className="logo-image"/>
+              </a>
+              <div className="menu-item">
+                Support
+              </div>
+              <div className="menu-item">
+                About
+              </div>
             </div>
-            <div className="menu-item">
-              About
+            <NotificationsMenuItem count={notCount} />
+            <NavigationBarProfileContainer />
+          </div>
+        </header>
+      );
+      default:
+      return (
+        <header
+          id="header">
+          <div className="container d-flex align-items-stretch justify-content-end">
+            <div className="left mr-auto d-flex align-items-stretch">
+              <a href="/" className="logo">
+                <img src="/assets/images/hikester_logo_white.png" className="logo-image"/>
+              </a>
+              <div className="menu-item">
+                Support
+              </div>
+              <div className="menu-item">
+                About
+              </div>
             </div>
           </div>
-          <NotificationsMenuItem count={notCount} />
-          <NavigationBarProfileContainer />
-        </div>
-      </header>
-    );
+        </header>
+      );
+    }
   }
 }
 
