@@ -54,6 +54,7 @@ class MainTopNavigationBarContainer extends React.Component {
                 About
               </div>
             </div>
+            <NavigationBarProfileContainer />
           </div>
         </header>
       );
