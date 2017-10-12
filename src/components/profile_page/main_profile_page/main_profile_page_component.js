@@ -39,7 +39,7 @@ class MainProfilePageComponent extends Component {
       if (p.user.emailVerified){
         email = ""
       }
-      var emailShort = "Email not confermed"
+      var emailShort = "Email not confirmed"
       if (p.user.emailVerified){
         emailShort = "Email verified"
       }

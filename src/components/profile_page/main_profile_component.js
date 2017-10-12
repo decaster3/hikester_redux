@@ -5,9 +5,7 @@ import MainProfilePageComponent from './main_profile_page/main_profile_page_comp
 export default class MainProfileComponent extends Component {
   render(){
     return(
-      <div>
-        <MainProfilePageComponent />
-      </div>
+      <MainProfilePageComponent />
     )
   }
 }

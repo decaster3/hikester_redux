@@ -30,14 +30,17 @@ export default class PhoneNotExistComponent extends Component {
     let p = this.props
     let s = this.state
     return (
-      <div>
-        <div id="invisible-recaptcha"></div>
-        <br />Enter phone number<br />
-        <label>
-          Phone number:
-          <input name="phoneNumber" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange}/>
-          <button onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}> Send verification code</button>
-        </label>
+      <div className="container-fluid d-flex align-items-center justify-content-center">
+        <div className="panel">
+          <div id="invisible-recaptcha"></div>
+          <div className="title">
+            Phone number verification
+          </div>
+          <input name="phoneNumber" className="input-text mt-3" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
+          <button className="button button-fluid mt-3" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
+            Send verification code
+          </button>
+        </div>
       </div>
     )
 	}

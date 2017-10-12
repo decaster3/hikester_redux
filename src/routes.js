@@ -11,7 +11,7 @@ import MainTopNavigationBarContainer from './containers/layouts/top_nav_bar/main
 
 const configureRoutes = () => {
       return (
-        <div>
+        <div id="content">
           <MainTopNavigationBarContainer />
           <Switch>
             <Route exact path="/" component={App} />
