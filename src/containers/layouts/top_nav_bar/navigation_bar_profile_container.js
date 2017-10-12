@@ -9,11 +9,9 @@ class NavigationBarProfileContainer extends Component {
     super(props);
   }
   componentDidMount(){
-    console.log(1);
   }
 
   render(){
-    console.log(1);
     let p = this.props
     let user = p.user
     switch (user.currently) {
