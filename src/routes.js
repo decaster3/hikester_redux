@@ -14,7 +14,7 @@ const configureRoutes = () => {
     <div id="content">
       <MainTopNavigationBarContainer />
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={MainMapContainer} />
         <Route exact path="/profile" component={MainProfileComponent} />
         <Route path="/auth" component={AuthContainer} />
         <Route path="/map" component={MainMapContainer} />
