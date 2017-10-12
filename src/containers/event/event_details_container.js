@@ -22,6 +22,7 @@ class EventDetailContainer extends Component {
 
     var result = null;
     var a = this.props.state
+    const Loading = require('react-loading-animation');
     switch (a) {
       case C.LOADED:
         return (
@@ -33,7 +34,7 @@ class EventDetailContainer extends Component {
 
       case C.LOADING:
         return(
-          <p>EVENT is LOADING</p>
+          <Loading />
         )
       case C.NOT_LOADED:
         return(
