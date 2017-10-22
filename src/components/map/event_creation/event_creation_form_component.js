@@ -156,7 +156,7 @@ class EventCreationFormComponent extends Component {
                 Before creating an event choose place on the map
               </div>
 
-            </div>
+
             <button onClick = {() => p.createNewEvent(
                   s.address,
                   s.cost,
@@ -171,7 +171,7 @@ class EventCreationFormComponent extends Component {
                   className="button button-fluid">
               Create
             </button>
-
+  </div>
 
             )
             :
