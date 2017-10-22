@@ -25,7 +25,7 @@ class EventCreationFormComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
   }
-
+//
   handleChange(event) {
     const name = event.target.name;
     this.setState({
@@ -45,7 +45,9 @@ class EventCreationFormComponent extends Component {
     let p = this.props
     return(
       <div className="panel">
-        <div className="p-3">
+        {
+          (p.user.emailVerified || p.user.phoneVerified)?
+        (<div className="p-3">
 
           <input
             type="text"
@@ -117,23 +119,33 @@ class EventCreationFormComponent extends Component {
           <div className="mt-3 mb-0 alert alert-warning" role="alert">
             Before creating an event choose place on the map
           </div>
-        </div>
 
-        <button onClick = {() => p.createNewEvent(
-              s.address,
-              s.cost,
-              s.end_time,
-              s.start_time,
-              s.description,
-              s.lat,
-              s.lng,
-              s.name,
-              s.max_people_count,
-              s.start_date)}
-              className="button button-fluid">
-          Create
-        </button>
-
+            <button onClick = {() => p.createNewEvent(
+                  s.address,
+                  s.cost,
+                  s.end_time,
+                  s.start_time,
+                  s.description,
+                  s.lat,
+                  s.lng,
+                  s.name,
+                  s.max_people_count,
+                  s.start_date)}
+                  className="button button-fluid">
+              Create
+            </button>
+          </div>)
+            :
+            (p.user.currently == "ANONYMOUS"?
+              <div>
+                <p>You need to login for creating events</p>
+              </div>
+            :
+              <div>
+                <p>You can't create events! Verify email or phone in settings</p>
+              </div>
+            )
+        }
       </div>
     )
   }

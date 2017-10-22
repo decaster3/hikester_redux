@@ -30,21 +30,21 @@ class EventCreationFormContainer extends Component {
   }
 
   render() {
+    //
     console.log(123);
     let p = this.props
     let s = this.state
     const Loading = require('react-loading-animation');
     if (!s.tags)
       return <Loading />
-
     const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTag}/>})
-    return (<EventCreationFormComponent createNewEvent={p.createNewEvent} tags={tags}/>)
+    return (<EventCreationFormComponent user = {p.user} createNewEvent={p.createNewEvent} tags={tags}/>)
   }
 }
 
 function mapStateToProps(state) {
     return {
-
+      user: state.user
     }
 }
 

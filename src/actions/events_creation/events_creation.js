@@ -1,4 +1,5 @@
 let C = require('../../constants/events_creation/events_creation')
+import { routerMiddleware, push } from 'react-router-redux'
 import moment from 'moment';
 const firebase = require("firebase");
  require("firebase/firestore");
@@ -26,10 +27,10 @@ export function createNewEvent(address, cost, start_time, end_time, description,
   console.log(123);
   return function(dispatch,getState) {
 
-    var push = creatorEventsRef.push()
-    var key = push.key
+    var pushh = creatorEventsRef.push()
+    var key = pushh.key
     //location not yet
-    push.set(
+    pushh.set(
       key
     ).then( () =>
       {userAttendsEventsRef.push(key)}
@@ -46,8 +47,21 @@ export function createNewEvent(address, cost, start_time, end_time, description,
             max_people_count,
             start_date,
             tag: getState().new_event.tag})
+        .then( () => {
+          let user = firebase.auth().currentUser
+          firebase.database().ref().child('users').child(user.uid).once("value", user => {
+            var userFromDB = user.val()
+            userFromDB["uid"] = user.key
+            firebase.firestore().collection("events").doc(key).collection("users").doc(user.uid).set({
+              userFromDB
+            })
+          })
+        })
         .then(function() {
             console.log("Document successfully written!");
+            // return function(dispatch){
+              dispatch(push('/event/' + key))
+            // }
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
