@@ -27,7 +27,7 @@ class MainMapContainer extends Component {
         currentEventComponent =  <MainEventSearchingContainer />
         map = <EventSearchingMapContainer/>
     }
-
+    
     return(
       <div id="home-section" className="page-section container-fluid d-flex px-0">
         <div className="col-4 px-0" id="search-create">

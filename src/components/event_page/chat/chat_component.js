@@ -11,6 +11,7 @@ class ChatComponent extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   handleChange(event) {
@@ -20,6 +21,11 @@ class ChatComponent extends Component {
   handleSubmit() {
     this.props.submit(this.state.message)
     this.setState({message: ''})
+  }
+
+  handleKeyDown(event) {
+    if (event.keyCode == 13)
+      this.handleSubmit()
   }
 
   render() {
@@ -37,7 +43,8 @@ class ChatComponent extends Component {
           {messages}
         </div>
         <div className="chat-form">
-          <input type="text" placeholder="Message.." className="chat-form-input" value={this.state.message} onChange={this.handleChange} />
+          <input type="text" placeholder="Message.." className="chat-form-input" value={this.state.message} onChange={this.handleChange}
+                  onKeyDown={this.handleKeyDown}/>
           <button className="button chat-form-submit" onClick={this.handleSubmit} >
             Send
           </button>

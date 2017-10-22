@@ -17,7 +17,7 @@ class EventSearchingResultComponent extends Component {
             </div>
           </div>
         {this.props.eventButton}
-        <Link to={"/event/" + event.id} push>More info</Link>
+        <Link to={"/event/" + event.id}>More info</Link>
       </div>)
   }
 }

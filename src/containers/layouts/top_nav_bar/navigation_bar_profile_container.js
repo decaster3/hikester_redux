@@ -49,10 +49,10 @@ class NavigationBarProfileContainer extends Component {
         <div>
           <Link to = "/auth">
             <div className="menu-item">
-              Log in
+              Sign in
             </div>
             <div className="menu-item">
-              Sign in
+              Sign up
             </div>
         </Link>
         </div>

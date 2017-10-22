@@ -5,41 +5,26 @@ module.exports = function(currentstate = initialState.new_event, action){
   switch(action.type){
     case C.UPDATE_LOCATION_SEARCH:
       return {
-        tag: currentstate.tag,
+        ...currentstate,
         currently: "NOT_LOADED",
-        location: action.location,
-        events: currentstate.events,
-        start_date: currentstate.start_date,
-        end_date: currentstate.end_date,
-        cost: currentstate.cost
+        location: action.location
       }
     case C.UPDATE_TAGS_SEARCH:
       return {
+        ...currentstate,
         tag: action.tag,
-        currently: "NOT_LOADED",
-        events: currentstate.events,
-        location: currentstate.location,
-        start_date: currentstate.start_date,
-        end_date: currentstate.end_date,
-        cost: currentstate.cost
+        currently: "NOT_LOADED"
       }
     case C.UPDATE_EVENTS:
       return {
-        tag: currentstate.tag,
+        ...currentstate,
         currently: "LOADED",
-        location: currentstate.location,
-        events: action.events,
-        start_date: currentstate.start_date,
-        end_date: currentstate.end_date,
-        cost: currentstate.cost
+        events: action.events
       }
     case C.UPDATE_FIELDS_SEARCH:
-    console.log(action.fields);
       return {
-        tag: currentstate.tag,
+        ...currentstate,
         currently: "NOT_LOADED",
-        location: currentstate.location,
-        events: currentstate.events,
         start_date: action.fields.start_date,
         end_date: action.fields.end_date,
         cost: action.fields.cost

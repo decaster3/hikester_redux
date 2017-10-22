@@ -30,7 +30,7 @@ class EventCreationFormContainer extends Component {
   }
 
   render() {
-    console.log(123);
+
     let p = this.props
     let s = this.state
     const Loading = require('react-loading-animation');

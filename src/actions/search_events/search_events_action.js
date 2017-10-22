@@ -28,12 +28,11 @@ export function scheduleEvent(id) {
   }
 }
 
-export function updateEventTagSearch(tag){
-  var db = firebase.firestore();
-  var unsubscribe = db.collection("events")
-    .onSnapshot(function () {});
-  unsubscribe();
-  return function(dispatch) {
+export function updateEventTagSearch(tag, state){
+  return function(dispatch, getState) {
+    if (state == false)
+      tag = null
+    
     dispatch({type: C.UPDATE_TAGS_SEARCH, tag})
     dispatch(startListeningEvents())
   }
@@ -72,18 +71,11 @@ export function updateEventLocationSearch(location){
   }
 }
 
-export function userParticipationListener() {
+export function userParticipationListener(events, uid) {
   return function(dispatch, getState){
-    let user = firebase.auth().currentUser
 
-    if (user) {
-      firebase.database().ref().child('users').child(user.uid)
-            .child('events').on('value', function(snapshot) {
+      firebase.database().ref().child('users').child(uid).child('events').once('value', function(snapshot) {
         var userEvents = []
-        var events = getState().search_events.events
-        if (events.length == 0)
-          return
-
         var dbUserEvents = snapshot.val()
 
         if(dbUserEvents != undefined) {
@@ -101,76 +93,42 @@ export function userParticipationListener() {
         dispatch({type: C.UPDATE_EVENTS, events})
 
       })
-    }
+
   }
 }
 
 export function startListeningEvents(){
   var db = firebase.firestore();
-
   var fireStoreEventsRef = db.collection("events")
-  var events = []
-  //набор событий в которых учавствует юзер в переменную userEvents
 
   return function(dispatch, getState){
+    var {tag, start_date, end_date} = getState().search_events;
 
-      if (getState().search_events.tag)
-        fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", String(getState().search_events.tag))
+    if (tag)
+      fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", tag);
 
-      if (getState().search_events.start_date)
-        fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">", getState().search_events.start_date)
+    if (start_date)
+      fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">", start_date)
 
-      if (getState().search_events.end_date)
-        fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", getState().search_events.end_date)
+    if (end_date)
+      fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", end_date)
 
+    fireStoreEventsRef.onSnapshot(function(querySnapshot) {
+      var events = [];
 
-
-      fireStoreEventsRef.onSnapshot(function(querySnapshot) {
-        var events = []
-        var eventUsers = []
-        querySnapshot.forEach(function(doc) {
-          // var fireStoreEventsUsersRef = db.collection("events").doc(doc.id).collection('users')
-          var event = doc.data();
-          event['id'] = doc.id;
-          // fireStoreEventsUsersRef.get()
-          // .then(function(querySnapshot) {
-            // querySnapshot.forEach(function(doc) {
-              // eventUsers.push(doc.data())
-              // });
-            // }).then( () => {
-              // event['users'] = eventUsers
-              events.push(event);
-            // })
-        })
-
-        let user = firebase.auth().currentUser
-
-        if (user) {
-          firebase.database().ref().child('users').child(user.uid)
-                .child('events').once('value', function(snapshot) {
-            var userEvents = []
-
-            var dbUserEvents = snapshot.val()
-
-            if(dbUserEvents != undefined) {
-              Object.keys(dbUserEvents).map(key =>{
-                userEvents.push(dbUserEvents[key])
-              })
-            }
-
-            events = events.map(event => {
-              event['attending'] = userEvents.includes(event.id)
-              return event
-            })
-
-            dispatch({type: C.UPDATE_EVENTS, events})
-          })
-        } else{
-          dispatch({type: C.UPDATE_EVENTS, events})
-        }
-
-        dispatch(userParticipationListener())
+      querySnapshot.forEach(function(doc) {
+        var event = doc.data();
+        event['id'] = doc.id;
+        events.push(event);
       })
 
+      let user = firebase.auth().currentUser;
+
+      if (user) {
+        dispatch(userParticipationListener(events, user.uid));
+      } else {
+        dispatch({type: C.UPDATE_EVENTS, events});
+      }
+    })
   }
 }

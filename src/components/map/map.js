@@ -5,7 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 export const Map = compose (
   lifecycle({
     componentDidMount() {
-
+      
     },
   }),
   withProps({
@@ -19,7 +19,7 @@ export const Map = compose (
   withGoogleMap
 )(props =>
   <GoogleMap
-    onClick = {(event) => {props.onclick(event)}}
+    onClick = {(event) => {if (props.onclick) props.onclick(event);}}
     defaultZoom={props.map.defaultZoom}
     defaultCenter = {props.map.defaultCenter}
   >

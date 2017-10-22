@@ -15,10 +15,9 @@ class EventSearchingMapContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
-    var markers = this.props.events.map(event => {
+    var markers = this.props.events.map((event, index) => {
       var location = {lat: event.lat, lng: event.lng}
-      return <Marker position={location} onClick={() => this.props.history.push('/event/' + event.id)}/>
+      return <Marker key = {index} position={location} onClick={() => this.props.history.push('/event/' + event.id)}/>
     })
     var map = {
       defaultCenter: { lat: 55.7529120574368, lng: 48.743462562561035 },
