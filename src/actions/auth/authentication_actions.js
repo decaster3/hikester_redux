@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 let C = require("../../constants/auth/authentication.js")
 import { updateVerificationProcent } from '../profile/profile_settings_action'
-
+import { routerMiddleware, push } from 'react-router-redux'
 	// вызывается при инициализации приложения, затем слушает на изменения
 	export function startListeningToAuth(){
 		return function(dispatch,getState){
@@ -87,6 +87,8 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 					authProviders: user.providerData,
 					phoneNumber: user.phoneNumber || ''
 				})
+			}).then( () => {
+				dispatch(push('/'))
 			}).catch(function(error) {
         console.log(error)
         dispatch({type:C.LOGOUT})
@@ -133,7 +135,9 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 					phoneVerified: isPhoneVerify,
 					authProviders: user.providerData,
 					phoneNumber: user.phoneNumber || ''
-				}).catch(function(error) {
+				}).then( () => {
+					dispatch(push('/'))
+					}).catch(function(error) {
 				console.log(error)
 				dispatch({type:C.LOGOUT})
 				})
@@ -149,7 +153,9 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
 			  console.log(errorMessage);
-			});
+			}).then( () => {
+				dispatch(push('/'))
+			})
 		}
 	}
 
@@ -186,7 +192,9 @@ import { updateVerificationProcent } from '../profile/profile_settings_action'
 								console.log(error)
 								dispatch({type:C.LOGOUT})
 								})
-						}).catch(function(error) {
+						}).then( () => {
+							dispatch(push('/'))
+							}).catch(function(error) {
 					dispatch({type:C.LOGOUT})
 				});
 		}

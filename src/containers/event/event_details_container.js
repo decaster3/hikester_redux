@@ -21,6 +21,7 @@ class EventDetailContainer extends Component {
 
   render() {
     console.log("containe");
+    let p = this.props
     let C = require("../../constants/event_details/event_details.js")
     var result = null;
     var a = this.props.state
@@ -29,12 +30,22 @@ class EventDetailContainer extends Component {
       case C.LOADED:
         var event = this.props.event
 
-        var signedIn = this.props.user.currently != "ANONYMOUS";
+        var signedIn = this.props.user.currently == "SIGNED_IN";
         var eventButton = <EventSearchingResultButtonComponent onclick={this.props.scheduleEvent } signedIn={signedIn} joined={event.attending} eventId={event.id}/>
         return (
           <div id="event-section" className="page-section container-fluid d-flex px-0">
             <EventDeteailComponent event={this.props.event} button={eventButton}/>
-            <ChatContainer/>
+            {
+              signedIn?
+                ( p.event.attending?
+                  <ChatContainer eventId = {this.eventId}/>
+                :
+                  <div>For see chat you need to attend</div>)
+              :
+                <div>For see chat you need to login</div>
+
+            }
+
           </div>
         )
 

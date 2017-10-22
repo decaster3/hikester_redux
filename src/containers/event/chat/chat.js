@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { sendMessage, loadMessages } from '../../../actions/chat/chat_actions'
 import ChatComponent from '../../../components/event_page/chat/chat_component'
+import CantSeeChatComponent from '../../../components/event_page/chat/chat_component'
 
 
 class ChatContainer extends Component {
@@ -15,6 +16,7 @@ class ChatContainer extends Component {
 
   componentDidMount() {
     this.props.loadMessages()
+    // isUserInChat(this.props.eventId)
   }
 
 

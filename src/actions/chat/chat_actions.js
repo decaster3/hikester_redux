@@ -33,6 +33,24 @@ export function loadMessages() {
   }
 }
 
+// export function isUserInChat(eventId){
+//   console.log(eventId);
+//   var userUid = firebase.auth().currentUser.uid
+//   console.log(userUid);
+//   var db = firebase.firestore()
+//   var eventRef = db.collection("events").doc(eventId).collection("users").doc(userUid)
+//   eventRef.get().then(function(doc) {
+//     if (doc.exists) {
+//       console.log("Document data:", doc.data());
+//     } else {
+//       console.log("No such Event!");
+//     }
+//   })
+//   .catch(function(error) {
+//     console.log("Error getting document:", error);
+//   });
+// }
+
 
 export function sendMessage(message) {
   return function(dispatch, getState){
