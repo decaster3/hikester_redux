@@ -38,7 +38,8 @@ module.exports = function(currentstate = initialState.auth,action){
         notifications: action.notifications,
         photoUrl: action.photoUrl,
         about: action.about,
-        sex: action.sex
+        sex: action.sex,
+        id: action.id
       };
     case C.CHANGE_USER_ATTENDS:
       return {

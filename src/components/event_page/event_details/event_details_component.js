@@ -16,8 +16,8 @@ class EventDeteailComponent extends Component {
     var participants = []
     users.map((user) => {
       participants.push({
-        name: user.userFromDB.username,
-        photo: user.userFromDB.photoUrl || "/assets/images/default_user_image.png"
+        name: user.username,
+        photo: user.photoUrl || "/assets/images/default_user_image.png"
       })
     })
     var datestring = event.start_date.getDate()  + "-" + (event.start_date.getMonth()+1) + "-" + event.start_date.getFullYear() + event.start_time

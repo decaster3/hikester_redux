@@ -7,23 +7,23 @@ const firebase = require("firebase");
  require("firebase/firestore");
 
 export function scheduleEvent(id) {
-  console.log("HI!");
+
 
   return function(dispatch, getState) {
     let user = firebase.auth().currentUser
-    console.log("HI!");
+
     firebase.database().ref().child('users').child(user.uid).child('events').push(id).then(() =>{
       dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id})
       //TODO
-      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser: {userFromDB: getState().user}})
+      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser:  getState().user})
     })
 
     firebase.database().ref().child('users').child(user.uid).once("value", user => {
       var userFromDB = user.val()
       userFromDB["uid"] = user.key
-      firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set({
+      firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set(
         userFromDB
-      })
+      )
     })
   }
 }
@@ -125,7 +125,7 @@ export function startListeningEvents(){
       let user = firebase.auth().currentUser;
 
       if (tag)
-        sendLog(events, user, tag, "search");
+        sendLog(events, getState().user, tag, "search");
 
       if (user) {
         dispatch(userParticipationListener(events, user.uid));
@@ -140,17 +140,16 @@ function sendLog(events, user, tag, type) {
   if (!user)
     return;
 
-  var user_id = user.uid;
+  var user_id = user.id;
   var logRef = firebase.database().ref().child("ann_logs");
 
   events.map(event => {
-    console.log(event.end_date.unix());
-    console.log(event.start_date.unix());
-    var duration = event.end_date.unix() - event.start_date.unix();
-    duration = duration / (60 * 60 * 1000);
-    console.log(duration);
-    var time = event.start_time.format("HH:mm");
-    console.log(time);
+
+    var duration = moment(event.end_date).unix() - moment(event.start_date).unix();
+    duration = duration / (60 * 60);
+
+    var time = moment(event.start_time).format("HH:mm");
+
     var log = {
       duration,
       time,

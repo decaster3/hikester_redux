@@ -76,7 +76,6 @@ class EventCreationFormComponent extends Component {
 
   render() {
     var end = moment(this.state.end_date);
-    console.log(end);
 
     const timeFormat = 'HH:mm';
     let s = this.state

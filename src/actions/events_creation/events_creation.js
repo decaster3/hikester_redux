@@ -12,7 +12,12 @@ export function updateEventTag(tag){
 
 export function updateEventLocation(event){
   return function(dispatch) {
-    dispatch({type: C.UPDATE_LOCATION, location: event.latLng})
+    var location = null;
+    if (typeof event.latLng.lat === "function")
+      location = { lat: event.latLng.lat(), lng: event.latLng.lng()}
+    else
+      location = { lat: event.latLng.lat, lng: event.latLng.lng}
+    dispatch({type: C.UPDATE_LOCATION, location})
   }
 }
 export function createNewEvent(address, cost, start_date, end_date, description, lat, lng, name, max_people_count){
@@ -43,8 +48,8 @@ export function createNewEvent(address, cost, start_date, end_date, description,
             end_date,
             start_date,
             description,
-            lat: getState().new_event.location.lat(),
-            lng: getState().new_event.location.lng(),
+            lat: getState().new_event.location.lat,
+            lng: getState().new_event.location.lng,
             name,
             max_people_count,
             tag: getState().new_event.tag})
@@ -53,9 +58,9 @@ export function createNewEvent(address, cost, start_date, end_date, description,
           firebase.database().ref().child('users').child(user.uid).once("value", user => {
             var userFromDB = user.val()
             userFromDB["uid"] = user.key
-            firebase.firestore().collection("events").doc(key).collection("users").doc(user.uid).set({
+            firebase.firestore().collection("events").doc(key).collection("users").doc(user.uid).set(
               userFromDB
-            })
+            )
           })
         })
         .then(function() {

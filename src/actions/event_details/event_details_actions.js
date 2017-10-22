@@ -4,7 +4,7 @@ let C = require("../../constants/event_details/event_details.js")
 
 export function loadEvent(id) {
   return function(dispatch, getState){
-    
+
     if (!id)
       return
 
@@ -28,7 +28,7 @@ export function loadEvent(id) {
 
                 var attending = false
                 for (var i = 0; i < eventUsers.length; i++) {
-                  if (eventUsers[i].userFromDB.uid == uid){
+                  if (eventUsers[i].uid == uid){
                     attending = true
                     break
                   }

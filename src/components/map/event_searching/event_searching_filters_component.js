@@ -11,11 +11,15 @@ export default class EventSearchingFiltersComponent extends Component {
     this.state = {
       cost: '',
       start_date: moment(),
-      end_date: moment().add(1, 'day')
+      end_date: moment().add(1, 'day'),
+      costFrom: 0,
+      costTo: 1000,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
+    this.handleCostFromChange = this.handleCostFromChange.bind(this);
+    this.handleCostToChange = this.handleCostToChange.bind(this);
   }
 
   handleChange(event){
@@ -26,6 +30,39 @@ export default class EventSearchingFiltersComponent extends Component {
       [name]: event.target.value
     });
     this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
+  }
+
+  handleCostFromChange(event) {
+    const costFrom = parseInt(event.target.value);
+    var costTo = parseInt(this.state.costTo);
+
+    if (costTo <= costFrom) {
+      costTo = costFrom + 1000;
+    }
+    console.log(costFrom);
+    console.log(costTo);
+    console.log(costTo <= costFrom);
+    this.setState({
+      costTo,
+      costFrom
+    });
+  }
+
+  handleCostToChange(event) {
+    const costTo = parseInt(event.target.value);
+    var costFrom = parseInt(this.state.costFrom);
+
+    if (costTo <= costFrom) {
+      costFrom = costTo - 1000;
+      if (costFrom < 0)
+        costFrom = 0;
+    }
+    console.log(costFrom);
+    console.log(costTo);
+    this.setState({
+      costTo,
+      costFrom
+    });
   }
 
   handleChangeStartDate(date){
@@ -43,7 +80,7 @@ export default class EventSearchingFiltersComponent extends Component {
 
   render() {
     var end = moment(this.state.end_date);
-    console.log(end);
+
     let s = this.state
     let p = this.props
     return(
@@ -79,8 +116,11 @@ export default class EventSearchingFiltersComponent extends Component {
           </div>
 
           <label>
-            Cost:
-            <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange}/>
+            <p>Cost range:</p>
+            <p>From</p>
+            <input name="cost" type = "number" value = {s.costFrom} onChange = {this.handleCostFromChange}/>
+            <p>To</p>
+            <input name="cost" type = "number" value = {s.costTo} onChange = {this.handleCostToChange}/>
           </label>
 
           <div className="divider"></div>

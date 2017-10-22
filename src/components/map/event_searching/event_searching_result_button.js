@@ -15,7 +15,6 @@ class EventSearchingResultButtonComponent extends Component {
         button = (
           <div>
             You already attend on this event
-
           </div>)
       else
         button = ( <button className="button button-fluid" onClick = {() => p.onclick(eventId)}>Join to event</button> )
