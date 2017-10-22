@@ -23,6 +23,7 @@
   "license": "Innopolis in corparated",
   "dependencies": {
     "@google/maps": "0.4.3",
+    "antd": "^2.13.7",
     "axios": "0.16.2",
     "firebase": "^4.5.0",
     "jquery": "^3.2.1",
