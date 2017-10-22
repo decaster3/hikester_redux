@@ -14,16 +14,18 @@ export function updateEventLocation(event){
     dispatch({type: C.UPDATE_LOCATION, location: event.latLng})
   }
 }
-export function createNewEvent(address, cost, start_time, end_time, description, lat, lng, name, max_people_count, start_date){
+export function createNewEvent(address, cost, start_date, end_date, description, lat, lng, name, max_people_count){
   //realtime db
-  start_date = new Date(start_date.toDate().getTime())
-  let user = firebase.auth().currentUser
+  start_date = new Date(start_date.toDate().getTime());
+  end_date = new Date(end_date.toDate().getTime());
+  let user = firebase.auth().currentUser;
+
   let creatorEventsRef = firebase.database().ref().child('users').child(user.uid).child('my_events')
   let userAttendsEventsRef = firebase.database().ref().child('users').child(user.uid).child('events')
   //firestore db
   var db = firebase.firestore();
   var fireStoreEventsRef = db.collection("events")
-  console.log(123);
+
   return function(dispatch,getState) {
 
     var push = creatorEventsRef.push()
@@ -37,14 +39,13 @@ export function createNewEvent(address, cost, start_time, end_time, description,
       fireStoreEventsRef.doc(key).set({
             address,
             cost,
-            end_time,
-            start_time,
+            end_date,
+            start_date,
             description,
             lat: getState().new_event.location.lat(),
             lng: getState().new_event.location.lng(),
             name,
             max_people_count,
-            start_date,
             tag: getState().new_event.tag})
         .then(function() {
             console.log("Document successfully written!");

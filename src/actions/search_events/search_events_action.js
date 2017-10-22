@@ -32,7 +32,7 @@ export function updateEventTagSearch(tag, state){
   return function(dispatch, getState) {
     if (state == false)
       tag = null
-    
+
     dispatch({type: C.UPDATE_TAGS_SEARCH, tag})
     dispatch(startListeningEvents())
   }
@@ -101,8 +101,8 @@ export function startListeningEvents(){
   var db = firebase.firestore();
   var fireStoreEventsRef = db.collection("events")
 
-  return function(dispatch, getState){
-    var {tag, start_date, end_date} = getState().search_events;
+  return function(dispatch, getState) {
+    var { tag, start_date, end_date } = getState().search_events;
 
     if (tag)
       fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", tag);
@@ -120,9 +120,12 @@ export function startListeningEvents(){
         var event = doc.data();
         event['id'] = doc.id;
         events.push(event);
-      })
+      });
 
       let user = firebase.auth().currentUser;
+
+      if (tag)
+        sendLog(events, user, tag, "search");
 
       if (user) {
         dispatch(userParticipationListener(events, user.uid));
@@ -131,4 +134,30 @@ export function startListeningEvents(){
       }
     })
   }
+}
+
+function sendLog(events, user, tag, type) {
+  if (!user)
+    return;
+
+  var user_id = user.uid;
+  var logRef = firebase.database().ref().child("ann_logs");
+
+  events.map(event => {
+    console.log(event.end_date.unix());
+    console.log(event.start_date.unix());
+    var duration = event.end_date.unix() - event.start_date.unix();
+    duration = duration / (60 * 60 * 1000);
+    console.log(duration);
+    var time = event.start_time.format("HH:mm");
+    console.log(time);
+    var log = {
+      duration,
+      time,
+      tag,
+      type,
+      user_id
+    }
+    logRef.push(log);
+  });
 }

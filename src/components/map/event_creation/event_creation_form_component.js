@@ -3,27 +3,31 @@ import FontAwesome from 'react-fontawesome';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import TimePicker from 'antd/lib/time-picker';  // for js
+import 'antd/lib/time-picker/style/index.css';
 class EventCreationFormComponent extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
+      isOpen: false,
       address: '',
       cost: '',
-      start_time: '',
-      end_date: '',
       description: '',
       lat: '',
       lng: '',
       name: '',
       max_people_count: '',
-      start_date: moment(),
-      finish_date: moment(),
+      start_date: moment().set({'hour': 12, 'minute': 0}),
+      end_date: moment().add(1, 'day').set({'hour': 12, 'minute': 0}),
       type: ''
     }
+
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
+    this.handleStartDateChanges = this.handleStartDateChanges.bind(this);
+    this.handleEndDateChanges = this.handleEndDateChanges.bind(this);
+    this.handleStartTimeChanges = this.handleStartTimeChanges.bind(this);
+    this.handleEndTimeChanges = this.handleEndTimeChanges.bind(this);
   }
 
   handleChange(event) {
@@ -33,17 +37,51 @@ class EventCreationFormComponent extends Component {
     });
   }
 
-  handleChangeStartDate(date){
+  handleStartTimeChanges(date) {
+    var start_date = this.state.start_date.set({
+      hour: date.get("hour"),
+      minute: date.get("minute")
+    });
+
+    this.setState({
+      start_date
+    });
+  }
+
+  handleEndTimeChanges(date) {
+    var end_date = this.state.start_date.set({
+      hour: date.get("hour"),
+      minute: date.get("minute")
+    });
+
+    this.setState({
+      end_date
+    });
+  }
+
+  handleStartDateChanges(date) {
+
     this.setState({
       start_date: date
     });
   }
 
-  render() {
+  handleEndDateChanges(date) {
 
+    this.setState({
+      end_date:date
+    });
+  }
+
+
+  render() {
+    var end = moment(this.state.end_date);
+    console.log(end);
+
+    const timeFormat = 'HH:mm';
     let s = this.state
     let p = this.props
-    return(
+    return (
       <div className="panel">
         <div className="p-3">
 
@@ -61,19 +99,29 @@ class EventCreationFormComponent extends Component {
               <div className="input-date-group">
                 <DatePicker
                   selected={s.start_date}
-                  onChange={this.handleChangeStartDate}
+                  onChange={this.handleStartDateChanges}
                   className="input-date"
+                  minDate={moment()}
+                  maxDate={end}
                 />
                 <FontAwesome name="calendar" className="input-date-icon" />
+              </div>
+              <div className="mt-3">
+                <TimePicker defaultValue={moment(s.start_date, timeFormat)} format={timeFormat} onChange={this.handleStartTimeChanges} />
               </div>
             </div>
             <div className="col">
               <div className="input-date-group">
                 <DatePicker
-                  selected={s.finish_date}
+                  selected={s.end_date}
+                  onChange={this.handleEndDateChanges}
                   className="input-date"
+                  minDate={s.start_date}
                 />
                 <FontAwesome name="calendar" className="input-date-icon" />
+              </div>
+              <div className="mt-3">
+                <TimePicker defaultValue={moment(s.end_date, timeFormat)} format={timeFormat} onChange={this.handleEndTimeChanges} />
               </div>
             </div>
           </div>
@@ -81,8 +129,6 @@ class EventCreationFormComponent extends Component {
           <div className="mt-3">
             <textarea className="input-text" placeholder="Description" name="description" type = "text" defaultValue = {s.description} onChange = {this.handleChange}/>
           </div>
-
-
 
           <label>
             Cost:
@@ -92,16 +138,6 @@ class EventCreationFormComponent extends Component {
           <label>
             Maximum number of people:
             <input name="max_people_count" type = "text" defaultValue = {s.max_people_count} onChange = {this.handleChange}/>
-          </label>
-
-          <label>
-            Start time:
-            <input name="start_time" type = "text" defaultValue = {s.start_time} onChange = {this.handleChange}/>
-          </label>
-
-          <label>
-            End time:
-            <input name="end_time" type = "text" defaultValue = {s.end_time} onChange = {this.handleChange}/>
           </label>
 
           <div className="divider"></div>
@@ -122,19 +158,20 @@ class EventCreationFormComponent extends Component {
         <button onClick = {() => p.createNewEvent(
               s.address,
               s.cost,
-              s.end_time,
-              s.start_time,
+              s.start_date,
+              s.end_date,
               s.description,
               s.lat,
               s.lng,
               s.name,
-              s.max_people_count,
-              s.start_date)}
+              s.max_people_count
+              )}
               className="button button-fluid">
           Create
         </button>
 
       </div>
+
     )
   }
 }
