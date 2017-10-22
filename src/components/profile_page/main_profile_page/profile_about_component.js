@@ -16,9 +16,16 @@ export default class ProfileAboutComponent extends React.Component {
             <div className="profile-description-item-name col-3 text-right">
               Location
             </div>
-            <div className="profile-description-item-value col-9 text-left">
-              {this.props.user.default_country} {this.props.user.default_city}
-            </div>
+            {this.props.user.default_country?
+              <div className="profile-description-item-value col-9 text-left">
+                {this.props.user.default_country} {this.props.user.default_city}
+              </div>
+              :
+              <div className="profile-description-item-value col-9 text-left">
+                You can add this information in settings
+              </div>
+            }
+
           </div>
           <div className="profile-description-item row">
             <div className="profile-description-item-name col-3 text-right">
@@ -33,7 +40,11 @@ export default class ProfileAboutComponent extends React.Component {
               Sex
             </div>
             <div className="profile-description-item-value col-9 text-left">
-              Man
+              {this.props.user.sex?
+                <div>{this.props.user.sex}</div>
+              :
+                <div>You can add in in settings!</div>
+              }
             </div>
           </div>
           <div className="profile-description-item row">
@@ -41,7 +52,11 @@ export default class ProfileAboutComponent extends React.Component {
               Attended Events
             </div>
             <div className="profile-description-item-value col-9 text-left">
-              13
+              {this.props.user.events?
+                <div>{Object.keys(this.props.user.events).length}</div>
+              :
+                <div>You are not in any event!</div>
+              }
             </div>
           </div>
           <div className="profile-description-about text-center">

@@ -11,13 +11,17 @@ class NotificationsContainer extends Component {
 
   componentDidMount(){
     this.props.getNotifications()
-  }
+  }//
   render(){
       let p = this.props
       var view = {}
       switch (p.user.currently) {
         case "SIGNED_IN":
         switch (p.notifications.currently) {
+          case "NO_NOTIFICATIONS_STATE":
+            return (
+              <div>Yout havent got notifications yet!</div>
+            )
           case "LOADING":
           return(
             <div>

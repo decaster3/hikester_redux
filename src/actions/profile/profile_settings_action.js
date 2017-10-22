@@ -1,9 +1,15 @@
 let C = require('../../constants/profile/profile')
 import * as firebase from 'firebase';
+import { routerMiddleware, push } from 'react-router-redux'
 
 export function setSettingsCategory(category){
   return function(dispatch) {
     dispatch({type: C.SETTINGS_CATEGORY_SELECTED, category: category})
+  }
+}
+export function afterSave(){
+  return function(dispatch){
+    dispatch(push('/profile'))
   }
 }
 
@@ -33,10 +39,9 @@ export function updateVerificationProcent(){
             console.log(userId);
             authRef.update({
               id: userId + "",
-              notifications: { a:1}
             }).then( () => {
               nnRef.update({
-              count: userId
+              count: userId + 1
               })
             })
           })
@@ -56,9 +61,9 @@ export function updateVerificationProcent(){
       if (user.about){
         verificationProcent += 10
       }
-      // if (user.references.length > 0){
-      //   verificationProcent += 15
-      // }
+      if (user.events){
+        verificationProcent += 15
+      }
     }).then(() => {
       authRef.update({
         verificationProcent: verificationProcent
@@ -67,21 +72,71 @@ export function updateVerificationProcent(){
     })
 }
 
+export function setMyEvents(){
+  return function(dispatch, getState){
+    if(getState().user.events){
+      dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADING})
+      var eventsAttending = []
+      var db = firebase.firestore();
+      var eventObj = {}
+      var eventKeys = Object.keys(getState().user.events).map((key) => {
+          var fireStoreEventRef = db.collection("events").doc(getState().user.events[key])
+          fireStoreEventRef.get().then(function(doc) {
+            if (doc.exists){
+              eventObj = {
+                name: doc.data().name,
+                description: doc.data().description,
+                cost: doc.data().cost,
+                address: doc.data().address,
+                date: doc.data().start_datee,
+                id: doc.id
+              }
+              eventsAttending.push(eventObj)
+              console.log(eventsAttending);
+            }
+            else{
+              console.log(2);
+              console.log("SOMETHING WRONG");
+              dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_NOT_LOADED, myEvents: []})
+            }
+          }).then( () => {
+            console.log(1);
+            dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADED, myEvents: eventsAttending})
+          })
+      })
+    }
+    else {
+      console.log(3);
+      dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADED, myEvents: []})
+    }
+  }
+}
 
-export function changeName(name, lastName){
+export function changeName(name){
   let authRef = firebase.database().ref().child('users')
   var user = firebase.auth().currentUser
   return function(dispatch){
     authRef.once('value')
       .then(function(snapshot){
           authRef.child(user.uid).update({
-            username: name + " " + lastName,
+            username: name,
           })
       }).then(() =>
       {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})
 }
-////
 }
+
+export function changeSex(sex){
+  let authRef = firebase.database().ref().child('users')
+  var user = firebase.auth().currentUser
+  return function(dispatch){
+      authRef.child(user.uid).update({
+        sex: sex
+      }).then(() =>
+      {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})
+  }
+}
+
 export function addAvatar(){
 
 }
@@ -105,19 +160,6 @@ export function changeLocation(country, city){
   }
 }
 
-export function changeSex(sex){
-  let authRef = firebase.database().ref().child('users')
-  var user = firebase.auth().currentUser
-  return function(dispatch){
-    authRef.once('value')
-      .then(function(snapshot){
-          authRef.child(user.uid).update({
-            sex: sex,
-          })
-      }).then(() =>
-      {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})
-  }
-}
 export function changeAbout(about){
   let authRef = firebase.database().ref().child('users')
   var user = firebase.auth().currentUser

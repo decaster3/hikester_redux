@@ -2,7 +2,7 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { changeName , changeLocation, changeAbout, changeSex} from '../../actions/profile/profile_settings_action'
+import { afterSave, changeSex, changeName , changeLocation, changeAbout} from '../../actions/profile/profile_settings_action'
 import EmailContainer from './email_soc_networks/email_container'
 import FacebookContainer from './email_soc_networks/facebook_container'
 import GoogleContainer from './email_soc_networks/google_container'
@@ -18,10 +18,11 @@ class MainSettingsContainer extends React.Component {
       country: '',
       city: '',
       about: '',
-      sex: ''
+      sex: 'Male'
     }
     this.handleChange = this.handleChange.bind(this);
     this.saveAll = this.saveAll.bind(this);
+    this.sexOnChange = this.sexOnChange.bind(this);
   }
   componentDidMount(){
     this.setState({
@@ -37,6 +38,8 @@ class MainSettingsContainer extends React.Component {
     p.changeName(s.username)
     p.changeLocation(s.country, s.city)
     p.changeAbout(s.about)
+    p.changeSex(s.sex)
+    p.afterSave()
   }
 
   handleChange(event){
@@ -45,6 +48,9 @@ class MainSettingsContainer extends React.Component {
     this.setState({
       [name]: event.target.value
     });
+  }
+  sexOnChange(event){
+    this.setState({sex: event.target.value});
   }
 
   render() {
@@ -95,7 +101,7 @@ class MainSettingsContainer extends React.Component {
                 Sex
               </div>
               <div className="profile-description-item-value col-9 text-left">
-                <select>
+                <select onChange={this.sexOnChange} value={this.state.sex}>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
@@ -130,6 +136,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
+      afterSave: afterSave,
       changeName: changeName,
       changeLocation: changeLocation,
       changeAbout: changeAbout,

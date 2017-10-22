@@ -1,53 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import MainSettingsComponent from '../settings/main_settings_component'
 import { Link } from 'react-router-dom'
 import ProfileAboutComponent from './profile_about_component'
 import ProfileEventsComponent from './profile_events_component'
 import MainSettingsContainer from '../../../containers/profile/main_settings_container'
-
+import { verifyEmail, setMyEvents } from '../../../actions/profile/profile_settings_action'
+const firebase = require("firebase");
 class MainProfilePageComponent extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      events: [
-        {
-          name: 'Quest Room',
-          description: 'Description',
-          cost: 300,
-          address: 'Russia, Innopolis',
-          date: '01.01.2018'
-        },
-        {
-          name: 'Quest Room',
-          description: 'Description',
-          cost: 300,
-          address: 'Russia, Innopolis',
-          date: '01.01.2018'
-        },
-        {
-          name: 'Quest Room',
-          description: 'Description',
-          cost: 300,
-          address: 'Russia, Innopolis',
-          date: '01.01.2018'
-        },
-        {
-          name: 'Quest Room',
-          description: 'Description',
-          cost: 300,
-          address: 'Russia, Innopolis',
-          date: '01.01.2018'
-        },
-      ]
+      emailVerificationView: true,
+      events: []
     }
+    this.changeEmailVerificationView = this.changeEmailVerificationView.bind(this)
+  }
+  changeEmailVerificationView(){
+    var a = !this.state.emailVerificationView
+    this.setState({
+      emailVerificationView: a
+    })
   }
 
   render(){
     const Loading = require('react-loading-animation');
     let p = this.props
+    let s = this.state
     if (p.user.currently == "SIGNED_IN"){
+
       var authProviders = []
       for (var i = 0; i < p.user.authProviders.length; i++){
         if (p.user.authProviders[i].providerId != "password" && p.user.authProviders[i].providerId != "phone")
@@ -61,16 +44,26 @@ class MainProfilePageComponent extends Component {
         )
       })
 
-      var email = (
-        <div className="profile-notification text-center mt-3">
-          Please, confirm your email to open the opportunity of creating events.
-          <div className="profile-confirm-link-block mt-3">
-            <a href="#" className="profile-confirm-link">
-              Confirm Email
-            </a>
-          </div>
-        </div>
-      )
+      var email =
+      (<div>
+        {
+          s.emailVerificationView?
+            ( <div className="profile-notification text-center mt-3">
+              Please, confirm your email to open the opportunity of creating events.
+              <div className="profile-confirm-link-block mt-3">
+                <button onClick = {() => {this.props.verifyEmail();this.changeEmailVerificationView()}}>
+                <a href="#" className="profile-confirm-link">
+                  Confirm Email
+                </a>
+              </button>
+              </div>
+            </div>)
+          :
+          (<div className="profile-notification text-center mt-3">
+            Email was sent, check your mail!
+          </div>)
+        }
+      </div>)
       if (p.user.emailVerified){
         email = ""
       }
@@ -95,6 +88,8 @@ class MainProfilePageComponent extends Component {
           <div className="profile-info-name">
             {p.user.username}
             <div className="divider"></div>
+            Verification procent: {p.user.verificationProcent}
+            <div className="divider"></div>
             {emailShort}
             <div className="divider"></div>
             {phone}
@@ -105,7 +100,12 @@ class MainProfilePageComponent extends Component {
           </div>
           <div className="divider"></div>
           <div className="profile-info-user-from">
-            Also has verified {anotherAuthProvidersView}
+            {anotherAuthProvidersView != ''?
+              <div>Also has verified {anotherAuthProvidersView}</div>
+              :
+              <div>Social networks not verified!</div>
+            }
+
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@ class MainProfilePageComponent extends Component {
             <ProfileAboutComponent user={p.user} />
           </div>
           <div className="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
-            <ProfileEventsComponent events={this.state.events}/>
+            <ProfileEventsComponent/>
           </div>
           <div className="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
              <MainSettingsContainer />
@@ -149,4 +149,13 @@ function mapStateToProps(state){
       user: state.user
     }
 }
-export default connect(mapStateToProps)(MainProfilePageComponent);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(
+    {
+      setMyEvents: setMyEvents,
+      verifyEmail: verifyEmail
+    },
+    dispatch
+  )
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MainProfilePageComponent);

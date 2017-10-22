@@ -3,6 +3,11 @@ var initialState = require("./initial_state.js");
 
 module.exports = function(currentstate = initialState.notifications, action){
   switch(action.type){
+    case C.NO_NOTIFICATIONS:
+      return {
+        ...currentstate,
+        currently: C.NO_NOTIFICATIONS_STATE
+      }
     case C.LOADING_NOTIFICATIONS:
       return {
         notifications: currentstate.notifications,

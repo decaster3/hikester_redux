@@ -35,7 +35,8 @@ import { routerMiddleware, push } from 'react-router-redux'
 							verificationProcent: snapshot.val().verificationProcent,
 							notifications: snapshot.val().notifications,
 							photoUrl: snapshot.val().photoUrl,
-							about: snapshot.val().about
+							about: snapshot.val().about,
+							sex: snapshot.val().sex
 						});
 					})
 				} else {

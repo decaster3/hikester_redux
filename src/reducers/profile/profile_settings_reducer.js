@@ -3,6 +3,12 @@ var initialState = require("./initial_state.js");
 
 module.exports = function(currentstate = initialState.profile_settings, action){
   switch(action.type){
+    case C.MY_EVENTS_CHANGING_STATE:
+      return {
+        ...currentstate,
+        myEventsCurrently: action.myEventsCurrently,
+        myEvents: action.myEvents
+      }
     case C.SETTINGS_CATEGORY_SELECTED:
       return {
         profile_settings_category: action.category,

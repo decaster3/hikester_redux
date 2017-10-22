@@ -9,6 +9,13 @@ export function getNotifications(){
     if (user) {
       console.log(user);
       var a = false
+      // console.log(firebase.database().ref().child('users').child(user.uid).child('notifications'));
+      firebase.database().ref().child('users').child(user.uid).child('notifications').once('value', function(snapshot){
+        if (snapshot.val() == null){
+          console.log(123);
+          dispatch({type: C.NO_NOTIFICATIONS})
+          return
+        }else{
       let newNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('new')
       let oldNotificationsRef = firebase.database().ref().child('users').child(user.uid).child('notifications').child('old')
       newNotificationsRef.once('value', function(snapshot) {
@@ -64,5 +71,6 @@ export function getNotifications(){
       })
     }
   })
+  }})
   }
 }
