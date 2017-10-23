@@ -41,9 +41,8 @@ export function updateEventTagSearch(tag, state){
   }
 }
 
-export function chanageFilters(cost, start_date, end_date){
+export function chanageFilters(start_date, end_date){
   let fields = {
-    cost: cost,
     start_date: new Date(start_date.toDate().getTime()),
     end_date: new Date(end_date.toDate().getTime())
   }
@@ -56,7 +55,9 @@ export function chanageFilters(cost, start_date, end_date){
 export function clearFilters(){
   let tag = null
   let fields = {
-    cost: null,
+    from: null,
+    to: null,
+    name: null,
     start_date: null,
     end_date: null
   }
@@ -73,7 +74,18 @@ export function updateEventLocationSearch(location){
     dispatch({type: C.UPDATE_LOCATION_SEARCH, location})
   }
 }
-
+export function updateCostFilters(from, to){
+  return function(dispatch){
+    dispatch({type: C.UPDATE_COST, from: from, to: to})
+    dispatch(startListeningEvents())
+  }
+}
+export function updateNameFilters(name){
+  return function(dispatch){
+    dispatch({type: C.UPDATE_NAME, name: name})
+    dispatch(startListeningEvents())
+  }
+}
 export function userParticipationListener(events, uid) {
   return function(dispatch, getState){
 
@@ -105,10 +117,13 @@ export function startListeningEvents(){
   var fireStoreEventsRef = db.collection("events")
 
   return function(dispatch, getState) {
-    var { tag, start_date, end_date } = getState().search_events;
+    var { tag, start_date, end_date, name } = getState().search_events;
 
     if (tag)
       fireStoreEventsRef = fireStoreEventsRef.where("tag", "==", tag);
+
+    if (name)
+      fireStoreEventsRef = fireStoreEventsRef.where("name", "==", name)
 
     if (start_date)
       fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">", start_date)
@@ -116,15 +131,26 @@ export function startListeningEvents(){
     if (end_date)
       fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", end_date)
 
+
+
     fireStoreEventsRef.onSnapshot(function(querySnapshot) {
       var events = [];
-
-      querySnapshot.forEach(function(doc) {
-        var event = doc.data();
-        event['id'] = doc.id;
-        events.push(event);
-      });
-
+      //cost filter
+      if(getState().search_events.costFrom != null && getState().search_events.costTo != null) {
+        querySnapshot.forEach(function(doc){
+          var event = doc.data();
+          if(parseInt(event.cost) > getState().search_events.costFrom && parseInt(event.cost) < getState().search_events.costTo){
+            event['id'] = doc.id;
+            events.push(event);
+          }
+        })
+      }else {
+        querySnapshot.forEach(function(doc) {
+          var event = doc.data();
+          event['id'] = doc.id;
+          events.push(event);
+        });
+      }
       let user = firebase.auth().currentUser;
 
       if (tag)

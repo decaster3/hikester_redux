@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { chanageFilters, updateEventTagSearch, clearFilters } from '../../../../actions/search_events/search_events_action'
+import { updateNameFilters, updateCostFilters, chanageFilters, updateEventTagSearch, clearFilters } from '../../../../actions/search_events/search_events_action'
 import 'react-datepicker/dist/react-datepicker.css';
 import * as firebase from 'firebase'
 import Tag from '../../../../components/map/tag'
@@ -43,7 +43,12 @@ class EventSearchingFiltersContainer extends Component {
     const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTagSearch}/>})
 
     return(
-      <EventSearchingFiltersComponent tags={tags} chanageFilters={p.chanageFilters} clearFilters={p.clearFilters}/>
+      <EventSearchingFiltersComponent
+        updateNameFilters = {p.updateNameFilters}
+        updateCostFilters = {p.updateCostFilters}
+        tags={tags}
+        chanageFilters={p.chanageFilters}
+        clearFilters={p.clearFilters}/>
     )
   }
 }
@@ -57,6 +62,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
+      updateNameFilters: updateNameFilters,
+      updateCostFilters: updateCostFilters,
       chanageFilters: chanageFilters,
       updateEventTagSearch: updateEventTagSearch,
       clearFilters: clearFilters
