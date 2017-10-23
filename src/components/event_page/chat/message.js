@@ -9,7 +9,7 @@ export default class Message extends React.Component {
 
   render() {
 
-    let active_message = this.props.active ? ' active' : '';
+    let active_message = this.props.active ? ' active flex-row-reverse text-right' : '';
     return (
       <div className={"message-item d-flex justify-content-center" + active_message}>
         <div className="message-person-photo-wrapper">

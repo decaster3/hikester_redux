@@ -1,8 +1,39 @@
 #search-create {
+  width: 450px;
   background-color: #f9f9f9;
   overflow: scroll;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+#event-info {
+  width: 450px;
+}
+#chat-section {
+  width: calc(100% - 450px);
+}
+.ant-time-picker {
+  width: 100% !important;
+}
+.ant-time-picker-input {
+  border: 1px solid #12b591 !important;
+  border-radius: 0 !important;
+  background-color: #fff !important;
+  width: 100% !important;
+  font-size: 16px !important;
+  color: #555 !important;
+  padding: 10px 16px !important;
+  line-height: 1 !important;
+  height: auto !important;
+}
+.ant-time-picker-icon {
+  display: none !important;
+}
+.ant-time-picker-panel-clear-btn {
+  display: none !important;
+}
+
+#map-block {
+  width: calc(100% - 450px);
 }
 
 .tabs.nav {

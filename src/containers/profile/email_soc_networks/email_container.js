@@ -35,13 +35,12 @@ class EmailContainer extends Component {
       case C.CHANGING_EMAIL:
       //после нажатию на кнопку сменить почту
         return(
-          <div>
-            <label>
-              New email:
-              <input name = "newEmail" type = "newEmail" defaultValue = {s.newEmail} onChange = {this.handleChange}/>
-            </label>
-            <button onClick = {() => p.changeEmail(s.newEmail)}>Save</button>
-            <button onClick = {() => p.exitEditMode()}>Cancel</button>
+          <div className="input-group">
+            <input className="input-text form-control" name = "newEmail" type = "newEmail" defaultValue = {s.newEmail} onChange = {this.handleChange} placeholder="New Email"/>
+            <span className="input-group-btn">
+              <button className="btn button" onClick = {() => p.changeEmail(s.newEmail)}>Save</button>
+              <button className="btn button" onClick = {() => p.exitEditMode()}>Cancel</button>
+            </span>
           </div>
         )
       default:

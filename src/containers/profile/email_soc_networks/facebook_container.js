@@ -40,17 +40,14 @@ class FacebookContainer extends Component {
           if (authProviders.includes("facebook.com")){
             return(
               <div>
-                You have linked a Facebook account.
-                                 To delete it from your account:
-                <button onClick = {() => {p.unlinkFacebook()}}>Unlink</button>
+                <button className="button facebook" onClick = {() => {p.unlinkFacebook()}}>Unlink Facevook</button>
               </div>
             )
           }
           else {
             return(
               <div>
-                You can link gacebook to your account:
-                <button onClick = {() => {p.linkFacebook()}}>Link</button>
+                <button className="button facebook" onClick = {() => {p.linkFacebook()}}>Link Facebook</button>
               </div>
             )
           }

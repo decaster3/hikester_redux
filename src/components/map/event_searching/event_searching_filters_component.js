@@ -119,26 +119,32 @@ export default class EventSearchingFiltersComponent extends Component {
             </div>
           </div>
 
-          <label>
-
-            <p>Cost range:</p>
-            <p>From</p>
-            <input name="cost" type = "number"  value = {s.costFrom} onChange = {this.handleCostFromChange}/>
-            <p>To</p>
-            <input name="cost" type = "number"  value = {s.costTo} onChange = {this.handleCostToChange}/>
-            *The minimum limit is 1000
-        </label>
+          <div className="mt-3">Cost range:</div>
+          <div className="row mt-1">
+            <div className="col">
+              <div className="input-date-group">
+                From:
+                <input name="cost" type = "number"  value = {s.costFrom} onChange = {this.handleCostFromChange}/>
+              </div>
+            </div>
+            <div className="col">
+              <div className="input-date-group">
+                To:
+                <input name="cost" type = "number"  value = {s.costTo} onChange = {this.handleCostToChange}/>
+              </div>
+            </div>
+          </div>
 
           <div className="divider"></div>
           <div>
-            <div className="title">Tags:</div>
+            <div className="title">Tag:</div>
             <div className="tags row">
               {p.tags}
             </div>
           </div>
 
 
-        <button onClick = {() => this.props.clearFilters()}>clear filters</button>
+        <button className="button mt-3" onClick = {() => this.props.clearFilters()}>Clear filters</button>
       </div>
     )
   }

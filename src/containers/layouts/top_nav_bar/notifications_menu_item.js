@@ -11,12 +11,28 @@ class NotificationsMenuItem extends Component {
 
   render() {
     return (
-      <Link to = "/profile/notifications">
-        <div className="menu-item notification-menu-item">
+      <div className="menu-item dropdown dropdown-notifications">
+        <div className="dropdown-title">
           <FontAwesome name="bell" className="mr-2"/>
           ({this.props.count})
         </div>
-      </Link>
+        <div className="dropdown-content">
+          <ul>
+            <li className="notification-event-item">
+              Event name
+            </li>
+            <li className="notification-event-item">
+              Event name
+            </li>
+            <li className="notification-event-item">
+              Event name
+            </li>
+            <li className="notification-event-item">
+              Event name
+            </li>
+          </ul>
+        </div>
+      </div>
     );
   }
 }

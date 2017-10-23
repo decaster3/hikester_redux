@@ -22,7 +22,7 @@ class Tag extends Component {
     return (
       <div className="col-4">
         <div className="ui toggle checkbox">
-          <input onClick = {this.clickHandler} type="checkbox" id={"tag_selector_id" + '_' + this.props.tag.name} name="public" defaultChecked={this.props.tag.selected} />
+          <input onClick = {this.clickHandler} type="radio" id={"tag_selector_id" + '_' + this.props.tag.name} name="public" defaultChecked={this.props.tag.selected} />
           <label htmlFor={"tag_selector_id" + '_' + this.props.tag.name}>{this.props.tag.name}</label>
         </div>
       </div>

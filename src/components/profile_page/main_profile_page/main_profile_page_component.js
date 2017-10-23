@@ -7,6 +7,7 @@ import ProfileAboutComponent from './profile_about_component'
 import ProfileEventsComponent from './profile_events_component'
 import MainSettingsContainer from '../../../containers/profile/main_settings_container'
 import { verifyEmail, setMyEvents } from '../../../actions/profile/profile_settings_action'
+import FontAwesome from 'react-fontawesome';
 const firebase = require("firebase");
 class MainProfilePageComponent extends Component {
   constructor(props){
@@ -67,13 +68,15 @@ class MainProfilePageComponent extends Component {
       if (p.user.emailVerified){
         email = ""
       }
-      var emailShort = "Email not confirmed"
+      // var emailShort = "Email not confirmed"
+      var emailShort = '';
       if (p.user.emailVerified){
-        emailShort = "Email verified"
+        emailShort = <FontAwesome name="envelope" size="2x"/>
       }
-      var phone = 'phone not verified'
+      // var phone = 'phone not verified'
+      var phone = '';
       if (p.user.phoneVerified){
-        phone = "Phone verified"
+        phone = <FontAwesome name="phone-square" size="2x"/>
       }
 
       return (
@@ -87,23 +90,29 @@ class MainProfilePageComponent extends Component {
           <div className="divider"></div>
           <div className="profile-info-name">
             {p.user.username}
-            <div className="divider"></div>
-            Verification procent: {p.user.verificationProcent}
-            <div className="divider"></div>
-            {emailShort}
-            <div className="divider"></div>
-            {phone}
           </div>
           <div className="divider"></div>
           <div className="profile-info-user-from">
             Hikester from 20.09.2017
           </div>
-          <div className="divider"></div>
-          <div className="profile-info-user-from">
+        </div>
+
+        <div className="profile-info panel">
+          <div className="title">
+            Verification
+            <span style={{float: 'right'}}>{p.user.verificationProcent}%</span>
+          </div>
+          <div className="mt-3 verified-items">
+            {emailShort}
+            {phone}
+          </div>
+          <div className="mt-2 profile-info-user-from">
             {anotherAuthProvidersView != ''?
-              <div>Also has verified {anotherAuthProvidersView}</div>
+              <div>Social networks: {anotherAuthProvidersView}</div>
               :
-              <div>Social networks not verified!</div>
+              <div className="mt-3 mb-0 alert alert-warning" role="alert">
+                Social networks not verified!
+              </div>
             }
 
           </div>

@@ -17,19 +17,18 @@
   margin: 10px 0;
 }
 
-.auth-socials-item.facebook {
+.facebook {
   background-color: #3b5998;
   border-color: #2c467c;
 }
-.auth-socials-item.facebook:hover {
+.facebook:hover {
   background-color: #4869af;
 }
-
-.auth-socials-item.google {
+.google {
   background-color: #db3236;
   border-color: #bc3236;
 }
-.auth-socials-item.google:hover {
+.google:hover {
   background-color: #e84347;
 }
 

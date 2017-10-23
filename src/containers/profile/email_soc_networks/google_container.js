@@ -41,17 +41,14 @@ class GoogleContainer extends Component {
         if (authProviders.includes("google.com")){
           return(
             <div>
-              You have a linked Google Account.
-                             To delete it from your account:
-              <button onClick = {() => {p.unlinkGoogle()}}>Unlink</button>
+              <button className="button google" onClick = {() => {p.unlinkGoogle()}}>Unlink Google</button>
             </div>
           )
         }
         else {
             return(
               <div>
-                You can attach your Google account
-                <button onClick = {() => {p.linkGoogle()}}>Link</button>
+                <button className="button google" onClick = {() => {p.linkGoogle()}}>Link Google</button>
               </div>
             )
           }

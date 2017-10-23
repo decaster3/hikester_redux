@@ -27,9 +27,7 @@ class ChatContainer extends Component {
     switch (this.props.state) {
       case C.LOADED:
         return(
-          <div className="col-8 px-0">
-            <ChatComponent photoURL={this.props.photoURL} username={this.props.username} messages={this.props.messages} submit={this.props.sendMessage}/>
-          </div>
+          <ChatComponent photoURL={this.props.photoURL} username={this.props.username} messages={this.props.messages} submit={this.props.sendMessage}/>
         )
       case C.LOADING:
         return(

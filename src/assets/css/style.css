@@ -1,6 +1,7 @@
 html {
   min-height: 100%;
   position: relative;
+  background-color: #f9f9f9;
 }
 
 *:focus {
@@ -49,7 +50,8 @@ textarea:focus {
 }
 
 input.input-text {
-
+  border-color: #12b591 !important;
+  border-radius: 0 !important;
 }
 
 .input-date-group {
@@ -72,6 +74,10 @@ input.input-text {
   background-color: #12b591;
   color: #fff;
   border: 1px solid #109678;
+  border-radius: 0 !important;
+}
+.button.button-info {
+  /*background-color: #fffd96;*/
 }
 .button:hover {
   cursor: pointer;
@@ -80,6 +86,15 @@ input.input-text {
 .button-fluid {
   width: 100%;
   padding: 15px 20px;
+}
+.button.disabled {
+  background-color: #868e96;
+  border-color: #868e96;
+}
+.button.disabled:hover {
+  cursor: crosshair;
+  background-color: #868e96;
+  border-color: #868e96;
 }
 
 .panel {

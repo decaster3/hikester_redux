@@ -10,10 +10,13 @@ class EventSearchingResultComponent extends Component {
   render() {
       var event = this.props.event
       return (
-        <div className="col-4 event-item">
-          <div className="event-item-description">
-            <div className="event-item-name text-center">
+        <div className="col-12 event-item">
+          <div className="event-item-description col-12">
+            <div className="event-item-name">
               {event.name}
+            </div>
+            <div className="event-item-description">
+              {event.description}
             </div>
           </div>
         {this.props.eventButton}

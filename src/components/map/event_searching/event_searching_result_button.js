@@ -12,14 +12,15 @@ class EventSearchingResultButtonComponent extends Component {
     var eventId = p.eventId;
     if (p.signedIn) {
       if (p.joined)
-        button = (
-          <div>
-            You already attend on this event
-          </div>)
+        // button = (
+        //   <div>
+        //     You already attend on this event
+        //   </div>)
+        button = ( <button className="button button-fluid disabled">You have joined this event</button> )
       else
-        button = ( <button className="button button-fluid" onClick = {() => p.onclick(eventId)}>Join to event</button> )
+        button = ( <button className="button button-fluid" onClick = {() => p.onclick(eventId)}>Join event</button> )
     } else
-      button = <div>For attending to event, you should sign up!</div>
+      button = <div className="mt-3 mb-0 alert alert-warning" role="alert">You need to sign in to join the event</div>
 
     return ( <div>{button}</div>)
   }

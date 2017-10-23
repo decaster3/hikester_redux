@@ -27,10 +27,10 @@ class MainMapContainer extends Component {
         currentEventComponent =  <MainEventSearchingContainer />
         map = <EventSearchingMapContainer/>
     }
-    
+
     return(
       <div id="home-section" className="page-section container-fluid d-flex px-0">
-        <div className="col-4 px-0" id="search-create">
+        <div className="px-0" id="search-create">
 
           <ul className="tabs nav nav-tabs" role="tablist">
 
@@ -49,7 +49,7 @@ class MainMapContainer extends Component {
           </div>
 
         </div>
-        <div className="col-8 px-0">
+        <div className="px-0" id="map-block">
           {map}
         </div>
       </div>

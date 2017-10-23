@@ -29,19 +29,32 @@ export default class PhoneNotExistComponent extends Component {
   render(){
     let p = this.props
     let s = this.state
-    return (
-      <div className="container-fluid d-flex align-items-center justify-content-center">
-        <div className="panel">
-          <div id="invisible-recaptcha"></div>
-          <div className="title">
-            Phone number verification
-          </div>
-          <input name="phoneNumber" className="input-text mt-3" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
-          <button className="button button-fluid mt-3" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
-            Send verification code
-          </button>
+    if (p.forSettings == true) {
+      return (
+        <div className="input-group">
+          <input name="phoneNumber" className="input-text form-control" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
+          <span className="input-group-btn">
+            <button className="btn button" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
+              Send verification code
+            </button>
+          </span>
         </div>
-      </div>
-    )
+      );
+    } else {
+      return (
+        <div className="container-fluid d-flex align-items-center justify-content-center">
+          <div className="panel">
+            <div id="invisible-recaptcha"></div>
+            <div className="title">
+              Phone number verification
+            </div>
+            <input name="phoneNumber" className="input-text mt-3" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
+            <button className="button button-fluid mt-3" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
+              Send verification code
+            </button>
+          </div>
+        </div>
+      );
+    }
 	}
 }

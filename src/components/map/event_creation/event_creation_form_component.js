@@ -5,6 +5,8 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'antd/lib/time-picker';  // for js
 import 'antd/lib/time-picker/style/index.css';
+import { Link } from 'react-router-dom'
+
 class EventCreationFormComponent extends Component {
 
   constructor(props) {
@@ -108,7 +110,7 @@ class EventCreationFormComponent extends Component {
                     <FontAwesome name="calendar" className="input-date-icon" />
                   </div>
                   <div className="mt-3">
-                    <TimePicker defaultValue={moment(s.start_date, timeFormat)} format={timeFormat} onChange={this.handleStartTimeChanges} />
+                    <TimePicker className="" defaultValue={moment(s.start_date, timeFormat)} format={timeFormat} onChange={this.handleStartTimeChanges} />
                   </div>
                 </div>
                 <div className="col">
@@ -131,20 +133,19 @@ class EventCreationFormComponent extends Component {
                 <textarea className="input-text" placeholder="Description" name="description" type = "text" defaultValue = {s.description} onChange = {this.handleChange}/>
               </div>
 
-              <label>
-                Cost:
-                <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange}/>
-              </label>
-
-              <label>
-                Maximum number of people:
-                <input name="max_people_count" type = "text" defaultValue = {s.max_people_count} onChange = {this.handleChange}/>
-              </label>
+              <div className="row mt-3">
+                <div className="col">
+                  <input name="cost" type = "text" defaultValue = {s.cost} onChange = {this.handleChange} placeholder="Cost"/>
+                </div>
+                <div className="col">
+                  <input name="max_people_count" type = "text" defaultValue = {s.max_people_count} onChange = {this.handleChange} placeholder="Max. people count"/>
+                </div>
+              </div>
 
               <div className="divider"></div>
 
               <div>
-                <div className="title">Tags:</div>
+                <div className="title">Tag:</div>
                 <div className="tags row">
                   {p.tags}
                 </div>
@@ -175,12 +176,19 @@ class EventCreationFormComponent extends Component {
             )
             :
             (p.user.currently == "ANONYMOUS"?
-              <div>
-                <p>You need to login for creating events</p>
+              <div className="mt-3 mb-0 alert alert-warning" role="alert">
+                You need to
+                <Link to = "/auth" className="mx-1">
+                  Sign in
+                </Link>
+                to create an event
               </div>
             :
-              <div>
-                <p>You can't create events! Verify email or phone in settings</p>
+              <div className="mt-3 mb-0 alert alert-warning" role="alert">
+                <Link to = "/profile" className="mr-1">
+                  Verify
+                </Link>
+                 your email or phone to create an event
               </div>
             )
         }

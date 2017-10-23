@@ -106,13 +106,48 @@ class MainSettingsContainer extends React.Component {
                   <option value="Female">Female</option>
                 </select>
               </div>
-              <button className="button button-fluid mt-3" onClick = {() => this.saveAll()}>Save Settings</button>
-              <div className="title mt-3">Change Email and Social Networks</div>
+            </div>
+            <button className="button button-fluid mt-3" onClick = {() => this.saveAll()}>Save Settings</button>
+            <div className="title mt-3">Change Email and Social Networks</div>
+            <div className="profile-description-item row d-flex align-items-center">
+              <div className="profile-description-item-name col-3 text-right">
+                Email
+              </div>
+              <div className="profile-description-item-value col-9 text-left">
                 <EmailContainer />
+              </div>
+            </div>
+            <div className="profile-description-item row d-flex align-items-center">
+              <div className="profile-description-item-name col-3 text-right">
+                Facebook
+              </div>
+              <div className="profile-description-item-value col-9 text-left">
                 <FacebookContainer />
+              </div>
+            </div>
+            <div className="profile-description-item row d-flex align-items-center">
+              <div className="profile-description-item-name col-3 text-right">
+                Google
+              </div>
+              <div className="profile-description-item-value col-9 text-left">
                 <GoogleContainer />
-                <PhoneContainer />
+              </div>
+            </div>
+            <div className="profile-description-item row d-flex align-items-center">
+              <div className="profile-description-item-name col-3 text-right">
+                Phone
+              </div>
+              <div className="profile-description-item-value col-9 text-left">
+                <PhoneContainer forSettings={true}/>
+              </div>
+            </div>
+            <div className="profile-description-item row d-flex align-items-center">
+              <div className="profile-description-item-name col-3 text-right">
+                Password
+              </div>
+              <div className="profile-description-item-value col-9 text-left">
                 <PasswordContainer />
+              </div>
             </div>
           </div>
         </div>

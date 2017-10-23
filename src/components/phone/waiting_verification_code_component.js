@@ -29,19 +29,32 @@ export default class WaitingVerificationCodeComponent extends Component {
   render(){
     let p = this.props
     let s = this.state
-    return (
-      <div className="container-fluid d-flex align-items-center justify-content-center">
-        <div className="panel">
-          <div id="invisible-recaptcha"></div>
-          <div className="title">
-            Enter verification code
-          </div>
-          <input name="verificationCode" className="input-text mt-3" type = "text" defaultValue = {s.verificationCode} onChange = {this.handleChange} placeholder="Verification Code"/>
-          <button className="button button-fluid mt-3" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, s.appVerifier) }}>
-            Confirm verification code
-          </button>
+    if (p.forSettings == true) {
+      return (
+        <div className="input-group">
+          <input name="verificationCode" className="input-text form-control" type = "text" defaultValue = {s.verificationCode} onChange = {this.handleChange} placeholder="Verification Code"/>
+          <span className="input-group-btn">
+            <button className="btn button" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, s.appVerifier) }}>
+              Confirm verification code
+            </button>
+          </span>
         </div>
-      </div>
-    )
+      );
+    } else {
+      return (
+        <div className="container-fluid d-flex align-items-center justify-content-center">
+          <div className="panel">
+            <div id="invisible-recaptcha"></div>
+            <div className="title">
+              Enter verification code
+            </div>
+            <input name="verificationCode" className="input-text mt-3" type = "text" defaultValue = {s.verificationCode} onChange = {this.handleChange} placeholder="Verification Code"/>
+            <button className="button button-fluid mt-3" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, s.appVerifier) }}>
+              Confirm verification code
+            </button>
+          </div>
+        </div>
+      );
+    }
 	}
 }

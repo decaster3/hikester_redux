@@ -42,10 +42,10 @@ class PhoneVerificationContainer extends Component {
           <PhoneExistComponent phoneNumber = {phone.phoneNumber}/>
         )
         case P.WAITING_VERIFICATION_CODE: return (
-          <WaitingVerificationCodeComponent afterSendVerifeingCode = {p.afterSendVerifeingCode}/>
+          <WaitingVerificationCodeComponent forSettings={p.forSettings} afterSendVerifeingCode = {p.afterSendVerifeingCode}/>
         )
         default: return (
-          <PhoneNotExistComponent sendVerificationCode = {p.sendVerificationCode}/>
+          <PhoneNotExistComponent forSettings={p.forSettings} sendVerificationCode = {p.sendVerificationCode}/>
         )
       }
   }

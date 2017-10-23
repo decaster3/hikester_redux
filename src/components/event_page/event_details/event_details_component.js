@@ -28,7 +28,7 @@ class EventDeteailComponent extends Component {
       defaultZoom: 12
     }
     return (
-      <div className="col-4 px-0" id="event-info">
+      <div className="px-0" id="event-info">
 
           <div className="event-name">{event.name}</div>
           <div className="event-image-wrapper">

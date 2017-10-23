@@ -36,7 +36,7 @@ class NavigationBarProfileContainer extends Component {
                 <li className="dropdown-item">My Events</li>
                 <li className="dropdown-item">Event History</li>
                 <li className="divider"></li>
-                <Link to = "/profile/settings">
+                <Link to = "/profile">
                   <li className="dropdown-item">Settings</li>
                 </Link>
                 <li className="dropdown-item" onClick = {() => p.logoutUser()}>Sign Out</li>
@@ -46,15 +46,13 @@ class NavigationBarProfileContainer extends Component {
         )
       case "ANONYMOUS":
       return (
-        <div>
-          <Link to = "/auth">
-            <div className="menu-item">
-              Sign in
-            </div>
-            <div className="menu-item">
-              Sign up
-            </div>
-        </Link>
+        <div className="d-flex">
+          <Link to = "/auth" className="menu-item">
+            Sign in
+          </Link>
+          <Link to = "/auth" className="menu-item">
+            Sign up
+          </Link>
         </div>
       )
       default:

@@ -40,10 +40,30 @@ class EventDetailContainer extends Component {
                 ( p.event.attending?
                   <ChatContainer eventId = {this.eventId}/>
                 :
-                  <div>For see chat you need to attend</div>)
+                  <div id="chat-section" className="d-flex px-0">
+                    <div id="chat-section-cant-see-overlay">
+                      <div className="overlay-text mb-3">Join the event to see the chat</div>
+                    </div>
+                    <div className="chat-form">
+                      <input type="text" placeholder="Message.." className="chat-form-input"/>
+                      <button className="button chat-form-submit">
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                )
               :
-                <div>For see chat you need to login</div>
-
+                <div id="chat-section" className="d-flex px-0">
+                  <div id="chat-section-cant-see-overlay">
+                    <div className="overlay-text mb-3">Sign In to see the chat</div>
+                  </div>
+                  <div className="chat-form">
+                    <input type="text" placeholder="Message.." className="chat-form-input"/>
+                    <button className="button chat-form-submit">
+                      Send
+                    </button>
+                  </div>
+                </div>
             }
 
           </div>

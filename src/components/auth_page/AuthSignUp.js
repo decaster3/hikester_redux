@@ -57,7 +57,7 @@ export default class AuthSignUp extends React.Component {
             Sign Up
           </button>
           <a href="#" onClick={this.props.change_state}>
-            Sign In
+            Already have account
           </a>
         </div>
       </div>

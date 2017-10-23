@@ -21,7 +21,7 @@ class PhoneContainer extends Component {
             </div>
           )
         case false:
-          return(<PhoneVerificationContainer />)
+          return(<PhoneVerificationContainer forSettings={p.forSettings}/>)
         default:
           return(<div><Loading /></div>)
       }}
