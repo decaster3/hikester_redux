@@ -42,9 +42,13 @@ module.exports = function(currentstate = initialState.auth,action){
         id: action.id
       };
     case C.CHANGE_USER_ATTENDS:
+      var event = {};
+      console.log(action.key);
+      event[action.key] = action.newEvent;
+      console.log(event);
       return {
         ...currentstate,
-        events: [...currentstate.events, action.newEvent]
+        events: [...currentstate.events, event]
 
       }
     default: return currentstate;

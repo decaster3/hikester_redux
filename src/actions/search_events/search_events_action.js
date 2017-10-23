@@ -12,15 +12,18 @@ export function scheduleEvent(id) {
   return function(dispatch, getState) {
     let user = firebase.auth().currentUser
 
-    firebase.database().ref().child('users').child(user.uid).child('events').push(id).then(() =>{
-      dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id})
-      //TODO
-      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser:  getState().user})
+    var newEventRef = firebase.database().ref().child('users').child(user.uid).child('events').push();
+    var key = newEventRef.key;
+
+    newEventRef.set(id).then(() =>{
+      dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id, key});
+      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser: getState().user});
+      dispatch({type: C.CHANGE_USER_ATTENDANT_STATE, eventId: id, attending: true});
     })
 
     firebase.database().ref().child('users').child(user.uid).once("value", user => {
-      var userFromDB = user.val()
-      userFromDB["uid"] = user.key
+      var userFromDB = user.val();
+      userFromDB["uid"] = user.key;
       firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set(
         userFromDB
       )

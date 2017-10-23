@@ -21,6 +21,18 @@ module.exports = function(currentstate = initialState.new_event, action){
         currently: "LOADED",
         events: action.events
       }
+    case C.CHANGE_USER_ATTENDANT_STATE:
+      var events = currentstate.events.map( event => {
+        event = Object.assign({}, event);
+        if (event.id == action.eventId) {
+          event.attending = action.attending;
+        }
+        return event;
+      });
+      return {
+        ...currentstate,
+        events
+      }
     case C.UPDATE_FIELDS_SEARCH:
       return {
         ...currentstate,
