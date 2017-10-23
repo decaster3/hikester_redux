@@ -52,9 +52,9 @@ module.exports = function(currentstate = initialState.new_event, action){
         currently: "NOT_LOADED",
         start_date: action.fields.start_date,
         end_date: action.fields.end_date,
-        costFrom: action.fields.from,
-        costTo: action.fields.to,
-        name: action.fields.name
+        // costFrom: action.fields.from,
+        // costTo: action.fields.to,
+        // name: action.fields.name
         // cost: action.fields.cost
       }
     default:

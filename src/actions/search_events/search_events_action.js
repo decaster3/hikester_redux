@@ -46,6 +46,7 @@ export function chanageFilters(start_date, end_date){
     start_date: new Date(start_date.toDate().getTime()),
     end_date: new Date(end_date.toDate().getTime())
   }
+  console.log(fields);
   return function(dispatch) {
 
     dispatch({type: C.UPDATE_FIELDS_SEARCH, fields})
@@ -126,15 +127,14 @@ export function startListeningEvents(){
       fireStoreEventsRef = fireStoreEventsRef.where("name", "==", name)
 
     if (start_date)
-      fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">", start_date)
+      fireStoreEventsRef = fireStoreEventsRef.where("start_date", ">=", start_date)
 
     if (end_date)
       fireStoreEventsRef = fireStoreEventsRef.where("start_date", "<", end_date)
 
-
-
     fireStoreEventsRef.onSnapshot(function(querySnapshot) {
       var events = [];
+
       //cost filter
       if(getState().search_events.costFrom != null && getState().search_events.costTo != null) {
         querySnapshot.forEach(function(doc){
@@ -151,6 +151,7 @@ export function startListeningEvents(){
           events.push(event);
         });
       }
+    
       let user = firebase.auth().currentUser;
 
       if (tag)

@@ -11,8 +11,8 @@ export default class EventSearchingFiltersComponent extends Component {
     this.state = {
       name: '',
       cost: '',
-      start_date: moment(),
-      end_date: moment().add(1, 'day'),
+      start_date: moment().set({'hour': 0, 'minute': 0}),
+      end_date: moment().add(1, 'month'),
       costFrom: 0,
       costTo: 1000,
     }
@@ -113,6 +113,7 @@ export default class EventSearchingFiltersComponent extends Component {
                   selected={s.end_date}
                   onChange={this.handleChangeEndDate}
                   className="input-date"
+                  minDate={s.start_date}
                 />
                 <FontAwesome name="calendar" className="input-date-icon" />
               </div>

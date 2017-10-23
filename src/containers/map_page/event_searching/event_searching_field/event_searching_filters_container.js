@@ -9,12 +9,12 @@ import EventSearchingFiltersComponent from '../../../../components/map/event_sea
 
 class EventSearchingFiltersContainer extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       tags: null
     }
-  }//
+  }
 
   componentDidMount(){
     var self = this
