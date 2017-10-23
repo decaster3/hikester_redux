@@ -21,13 +21,29 @@ module.exports = function(currentstate = initialState.new_event, action){
         currently: "LOADED",
         events: action.events
       }
+    case C.UPDATE_COST:
+      return {
+        ...currentstate,
+        currently: "NOT_LOADED",
+        costFrom: action.from,
+        costTo: action.to
+      }
+    case C.UPDATE_NAME:
+      return {
+        ...currentstate,
+        currently: "NOT_LOADED",
+        name: action.name
+      }
     case C.UPDATE_FIELDS_SEARCH:
       return {
         ...currentstate,
         currently: "NOT_LOADED",
         start_date: action.fields.start_date,
         end_date: action.fields.end_date,
-        cost: action.fields.cost
+        costFrom: action.fields.from,
+        costTo: action.fields.to,
+        name: action.fields.name
+        // cost: action.fields.cost
       }
     default:
       return currentstate;

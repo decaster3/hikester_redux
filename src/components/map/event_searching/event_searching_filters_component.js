@@ -9,47 +9,50 @@ export default class EventSearchingFiltersComponent extends Component {
   constructor(props){
     super(props)
     this.state = {
+      name: '',
       cost: '',
       start_date: moment(),
       end_date: moment().add(1, 'day'),
       costFrom: 0,
       costTo: 1000,
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
     this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
     this.handleCostFromChange = this.handleCostFromChange.bind(this);
     this.handleCostToChange = this.handleCostToChange.bind(this);
   }
-
-  handleChange(event){
+////
+  handleChangeName(event){
 
     const target = event.target;
     const name = target.name;
     this.setState({
       [name]: event.target.value
     });
-    this.props.chanageFilters(this.state.cost, this.state.start_date, this.state.end_date)
+    this.props.chanageFilters(this.state.start_date, this.state.end_date)
+    this.props.updateNameFilters(event.target.value)
   }
 
   handleCostFromChange(event) {
-    const costFrom = parseInt(event.target.value);
+
+    const costFrom = parseInt(event.target.value.length == 0 ? 0 : event.target.value);
     var costTo = parseInt(this.state.costTo);
 
     if (costTo <= costFrom) {
       costTo = costFrom + 1000;
     }
-    console.log(costFrom);
-    console.log(costTo);
-    console.log(costTo <= costFrom);
     this.setState({
       costTo,
       costFrom
     });
+    this.props.updateCostFilters(costFrom, costTo)
   }
 
   handleCostToChange(event) {
-    const costTo = parseInt(event.target.value);
+    const costTo = parseInt(event.target.value.length == 0 ? 0 : event.target.value);
+
+
     var costFrom = parseInt(this.state.costFrom);
 
     if (costTo <= costFrom) {
@@ -57,25 +60,24 @@ export default class EventSearchingFiltersComponent extends Component {
       if (costFrom < 0)
         costFrom = 0;
     }
-    console.log(costFrom);
-    console.log(costTo);
     this.setState({
       costTo,
       costFrom
     });
+    this.props.updateCostFilters(costFrom, costTo)
   }
 
   handleChangeStartDate(date){
     this.setState({
       start_date: date
     })
-    this.props.chanageFilters(this.state.cost, date, this.state.end_date)
+    this.props.chanageFilters(date, this.state.end_date)
   }
   handleChangeEndDate(date){
     this.setState({
       end_date: date
     });
-    this.props.chanageFilters(this.state.cost, this.state.start_date, date)
+    this.props.chanageFilters(this.state.start_date, date)
   }
 
   render() {
@@ -86,9 +88,11 @@ export default class EventSearchingFiltersComponent extends Component {
     return(
       <div className="p-3">
           <input
+            name="name"
             type="text"
             className="input-text"
-            placeholder="Event Name.."/>
+            placeholder="Event Name.."
+            onChange={this.handleChangeName}/>
 
           <div className="row mt-3">
             <div className="col">
@@ -116,12 +120,14 @@ export default class EventSearchingFiltersComponent extends Component {
           </div>
 
           <label>
+
             <p>Cost range:</p>
             <p>From</p>
-            <input name="cost" type = "number" value = {s.costFrom} onChange = {this.handleCostFromChange}/>
+            <input name="cost" type = "number"  value = {s.costFrom} onChange = {this.handleCostFromChange}/>
             <p>To</p>
-            <input name="cost" type = "number" value = {s.costTo} onChange = {this.handleCostToChange}/>
-          </label>
+            <input name="cost" type = "number"  value = {s.costTo} onChange = {this.handleCostToChange}/>
+            *The minimum limit is 1000
+        </label>
 
           <div className="divider"></div>
           <div>
