@@ -1,6 +1,7 @@
 let C = require('../../constants/profile/profile')
 import * as firebase from 'firebase';
 import { routerMiddleware, push } from 'react-router-redux'
+import { notification_success } from '../notification_success'
 
 export function setSettingsCategory(category){
   return function(dispatch) {
@@ -122,7 +123,10 @@ export function changeName(name){
             username: name,
           })
       }).then(() =>
-      {dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})})
+      {
+        dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
+        notification_success("Changes were successfully applied")
+      })
 }
 }
 
@@ -278,7 +282,9 @@ export function linkFacebook(){
       }).then( () => {
         dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
       })
+
       console.log("linked facebook");
+      notification_success("Facebook was successfully linked")
       console.log(firebase.auth.FacebookAuthProvider());
     }).catch(function(error) {
       console.log(error.message);
@@ -299,6 +305,7 @@ export function unlinkFacebook(){
       }).then( () => {
         dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
       })
+      notification_success("Facebook was successfully unlinked")
       console.log('unlink facebook was success');
     }).catch(function(error) {
       console.log(error.message);
@@ -318,6 +325,7 @@ export function linkGoogle(){
       }).then( () => {
         dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
       })
+      notification_success("Google was successfully linked")
       console.log("linked google");
     }).catch(function(error) {
       dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
@@ -338,6 +346,7 @@ export function unlinkGoogle(){
       }).then( () => {
         dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
       })
+      notification_success("Google was successfully unlinked")
       console.log('unlink google was success');
     }).catch(function(error) {
       console.log(error.message);
@@ -361,6 +370,7 @@ export function reacthenticateWithSocAddPassword(providerName, password){
         var credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
         user.linkWithCredential(credential).then(function(user) {
           console.log("link with password was success");
+          notification_success("Password was successfully linked")
           let authRef = firebase.database().ref().child('users').child(user.uid)
           authRef.update({
             authProviders: user.providerData
@@ -389,6 +399,7 @@ export function linkPassword(password){
   return function(dispatch){
     dispatch({type: C.FIELD_CHANGING, changing: C.LOADING_LINKING})
     user.linkWithCredential(credential).then(function(user) {
+      notification_success("Password was successfully linked")
       console.log("link with password was success");
       let authRef = firebase.database().ref().child('users').child(user.uid)
       authRef.update({
@@ -414,6 +425,7 @@ export function reacthenticateChangePassword(oldPassword, newPassword){
     user.reauthenticateWithCredential(credentials).then(function() {
       user.updatePassword(newPassword).then(function() {
         console.log("update password was successful");
+        notification_success("Update password was successfully!")
         dispatch({type: C.FIELD_CHANGING, changing: C.NOTHING_CHANGES})
       }).catch(function(error) {
         console.log(error);

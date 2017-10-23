@@ -53,10 +53,8 @@ class MainProfilePageComponent extends Component {
               Please, confirm your email to open the opportunity of creating events.
               <div className="profile-confirm-link-block mt-3">
                 <button onClick = {() => {this.props.verifyEmail();this.changeEmailVerificationView()}}>
-                <a href="#" className="profile-confirm-link">
                   Confirm Email
-                </a>
-              </button>
+                </button>
               </div>
             </div>)
           :

@@ -1,7 +1,9 @@
 let C = require('../../constants/events_creation/events_creation')
 import { routerMiddleware, push } from 'react-router-redux'
 import moment from 'moment';
+import UIkit from 'uikit';
 const firebase = require("firebase");
+import { notification_success } from '../notification_success'
  require("firebase/firestore");
 
 export function updateEventTag(tag){
@@ -65,7 +67,7 @@ export function createNewEvent(address, cost, start_date, end_date, description,
         })
         .then(function() {
             console.log("Document successfully written!");
-            // return function(dispatch){
+              notification_success("Event was successfully created!")
               dispatch(push('/event/' + key))
             // }
         })

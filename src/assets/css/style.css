@@ -156,3 +156,6 @@ input.input-text {
   margin-right: 5px;
   margin-top: 2px;
 }
+.uk-notification-message.uk-notification-message-primary {
+  border: 1px solid #12b591;
+}
