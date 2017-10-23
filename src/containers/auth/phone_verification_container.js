@@ -37,16 +37,34 @@ class PhoneVerificationContainer extends Component {
   render(){
     let p = this.props
     let phone = p.phone
+    let s = this.state
     switch(phone.currently) {
         case P.PHONE_EXIST: return (
-          <PhoneExistComponent phoneNumber = {phone.phoneNumber}/>
+          <div>
+            <div id="invisible-recaptcha"></div>
+            <PhoneExistComponent
+              appVerifier = {s.appVerifier}
+              phoneNumber = {phone.phoneNumber}/>
+          </div>
         )
         case P.WAITING_VERIFICATION_CODE: return (
-          <WaitingVerificationCodeComponent forSettings={p.forSettings} afterSendVerifeingCode = {p.afterSendVerifeingCode}/>
-        )
+          <div>
+            <div id="invisible-recaptcha"></div>
+            <WaitingVerificationCodeComponent
+              appVerifier = {s.appVerifier}
+              forSettings={p.forSettings}
+              afterSendVerifeingCode = {p.afterSendVerifeingCode}/>
+          </div>
+      )
         default: return (
-          <PhoneNotExistComponent forSettings={p.forSettings} sendVerificationCode = {p.sendVerificationCode}/>
-        )
+          <div>
+            <div id="invisible-recaptcha"></div>
+            <PhoneNotExistComponent
+              appVerifier = {s.appVerifier}
+              forSettings={p.forSettings}
+              sendVerificationCode = {p.sendVerificationCode}/>
+          </div>
+      )
       }
   }
 }

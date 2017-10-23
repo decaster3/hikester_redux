@@ -13,9 +13,9 @@ export default class PhoneNotExistComponent extends Component {
   }
 
   componentDidMount(){
-    this.setState({
-      appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
-    })
+    // this.setState({
+    //   appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
+    // })
   }
 
   handleChange(event){
@@ -34,7 +34,7 @@ export default class PhoneNotExistComponent extends Component {
         <div className="input-group">
           <input name="phoneNumber" className="input-text form-control" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
           <span className="input-group-btn">
-            <button className="btn button" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
+            <button className="btn button" onClick = {() => { p.sendVerificationCode(s.phoneNumber, p.appVerifier) }}>
               Send verification code
             </button>
           </span>
@@ -44,12 +44,11 @@ export default class PhoneNotExistComponent extends Component {
       return (
         <div className="container-fluid d-flex align-items-center justify-content-center">
           <div className="panel">
-            <div id="invisible-recaptcha"></div>
             <div className="title">
               Phone number verification
             </div>
             <input name="phoneNumber" className="input-text mt-3" type = "text" defaultValue = {s.phoneNumber} onChange = {this.handleChange} placeholder="Phone"/>
-            <button className="button button-fluid mt-3" onClick = {() => { p.sendVerificationCode(s.phoneNumber, s.appVerifier) }}>
+            <button className="button button-fluid mt-3" onClick = {() => { p.sendVerificationCode(s.phoneNumber, p.appVerifier) }}>
               Send verification code
             </button>
           </div>

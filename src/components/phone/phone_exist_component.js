@@ -4,9 +4,9 @@ import * as firebase from 'firebase';
 
 export default class PhoneExistComponent extends Component {
   componentDidMount(){
-    this.setState({
-      appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
-    })
+    // this.setState({
+    //   appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
+    // })
   }
 
   render(){
@@ -14,7 +14,6 @@ export default class PhoneExistComponent extends Component {
     let s = this.state
     return (
       <div>
-        <div id="invisible-recaptcha"></div>
         {p.phoneNumber}
       </div>
     )

@@ -13,9 +13,9 @@ export default class WaitingVerificationCodeComponent extends Component {
   }
 
   componentDidMount(){
-    this.setState({
-      appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
-    })
+    // this.setState({
+    //   appVerifier: new firebase.auth.RecaptchaVerifier('invisible-recaptcha', {'size': 'invisible'} )
+    // })
   }
 
   handleChange(event){
@@ -34,7 +34,7 @@ export default class WaitingVerificationCodeComponent extends Component {
         <div className="input-group">
           <input name="verificationCode" className="input-text form-control" type = "text" defaultValue = {s.verificationCode} onChange = {this.handleChange} placeholder="Verification Code"/>
           <span className="input-group-btn">
-            <button className="btn button" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, s.appVerifier) }}>
+            <button className="btn button" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, p.appVerifier) }}>
               Confirm verification code
             </button>
           </span>
@@ -44,12 +44,12 @@ export default class WaitingVerificationCodeComponent extends Component {
       return (
         <div className="container-fluid d-flex align-items-center justify-content-center">
           <div className="panel">
-            <div id="invisible-recaptcha"></div>
+
             <div className="title">
               Enter verification code
             </div>
             <input name="verificationCode" className="input-text mt-3" type = "text" defaultValue = {s.verificationCode} onChange = {this.handleChange} placeholder="Verification Code"/>
-            <button className="button button-fluid mt-3" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, s.appVerifier) }}>
+            <button className="button button-fluid mt-3" onClick = {() => { p.afterSendVerifeingCode(s.verificationCode, p.appVerifier) }}>
               Confirm verification code
             </button>
           </div>
