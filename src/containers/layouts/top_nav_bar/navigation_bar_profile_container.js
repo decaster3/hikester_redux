@@ -33,8 +33,6 @@ class NavigationBarProfileContainer extends Component {
                 <Link to = "/profile/notifications">
                   <li className="dropdown-item">Notifications</li>
                 </Link>
-                <li className="dropdown-item">My Events</li>
-                <li className="dropdown-item">Event History</li>
                 <li className="divider"></li>
                 <Link to = "/profile">
                   <li className="dropdown-item">Settings</li>

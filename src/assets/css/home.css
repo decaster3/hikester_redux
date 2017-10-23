@@ -77,18 +77,21 @@
 }
 
 .event-item {
-  margin-top: 10px;
+  margin-top: 20px;
   color: #000;
 }
 
-.event-item:hover {
-  color: #12b591;
-}
-
-.event-item:hover {
-  cursor: pointer;
+.event-item-name {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .event-item-image {
+  width:
+}
+
+.event-item-image img {
   width: 100%;
 }

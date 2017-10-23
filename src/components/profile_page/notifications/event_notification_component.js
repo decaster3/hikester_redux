@@ -11,6 +11,9 @@ export default class EventNotificationComponent extends Component {
             {p.notification.name}
           </div>
         </a>
+        <div className="divider"></div>
+        <img src="/assets/images/questroom.jpg" />
+        <div className="divider"></div>
         <div className="notification-info">
           <span className="notification-info-name">Address:</span>
           {p.notification.address}
@@ -19,8 +22,12 @@ export default class EventNotificationComponent extends Component {
           <span className="notification-info-name">Cost:</span>
           {p.notification.cost}
         </div>
+        <div className="notification-info">
+          <span className="notification-info-name">Decription:</span>
+          {p.notification.description}
+        </div>
         <Link to = {"/event/" + p.notification.id}>
-          <button className="button button-fluid">Detail</button>
+          <button className="button button-fluid mt-3">Details</button>
         </Link>
       </div>
     )

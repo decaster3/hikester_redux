@@ -92,7 +92,7 @@ input.input-text {
   border-color: #868e96;
 }
 .button.disabled:hover {
-  cursor: crosshair;
+  cursor: default;
   background-color: #868e96;
   border-color: #868e96;
 }
@@ -105,6 +105,8 @@ input.input-text {
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
   padding: 10px;
   margin-bottom: 30px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .panel .title {
@@ -142,7 +144,7 @@ input.input-text {
 
 .notification-event {
   padding: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
   border: 1px solid #9f9f9f;
 }
 .notification-name {
@@ -151,7 +153,7 @@ input.input-text {
   text-align: center;
 }
 .notification-info-name {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 14px;
   margin-right: 5px;
   margin-top: 2px;

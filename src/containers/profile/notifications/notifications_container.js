@@ -20,7 +20,9 @@ class NotificationsContainer extends Component {
         switch (p.notifications.currently) {
           case "NO_NOTIFICATIONS_STATE":
             return (
-              <div>Yout havent got notifications yet!</div>
+              <div className="mt-3 mb-0 alert alert-warning" role="alert">
+                Yout have no notifications yet!
+              </div>
             )
           case "LOADING":
           return(
