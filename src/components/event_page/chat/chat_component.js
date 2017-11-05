@@ -33,7 +33,7 @@ class ChatComponent extends Component {
 
     const messages = [...p.messages].reverse().map((message, index) => {
       return (
-        <Message key={index} photoURL={p.photoURL} autor={message.autor} text={message.message} active={message.autor == p.username}/>
+        <Message key={index} photoURL={message.userPhoto} autor={message.autor} text={message.message} active={message.autor == p.username}/>
       )
     })
 

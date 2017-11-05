@@ -54,6 +54,7 @@ export function createNewEvent(address, cost, start_date, end_date, description,
             lng: getState().new_event.location.lng,
             name,
             max_people_count,
+            people_in_event: 1,
             tag: getState().new_event.tag})
         .then( () => {
           let user = firebase.auth().currentUser

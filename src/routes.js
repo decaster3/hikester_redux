@@ -8,7 +8,6 @@ import AuthContainer from './containers/auth/authenticate_container';
 import MainMapContainer from './containers/map_page/main_map_container';
 import EventDetailContainer from './containers/event/event_details_container';
 import MainTopNavigationBarContainer from './containers/layouts/top_nav_bar/main_top_nav_bar_container'
-import Uploader from './components/file_loader/file_uploader_component'
 
 const configureRoutes = () => {
   return (
@@ -16,7 +15,6 @@ const configureRoutes = () => {
       <MainTopNavigationBarContainer />
       <Switch>
         <Route exact path="/" component={MainMapContainer} />
-        <Route path="/uploader" component={Uploader} />
         <Route exact path="/profile" component={MainProfileComponent} />
         <Route path="/auth" component={AuthContainer} />
         <Route path="/map" component={MainMapContainer} />

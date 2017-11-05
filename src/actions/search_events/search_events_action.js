@@ -7,14 +7,11 @@ const firebase = require("firebase");
  require("firebase/firestore");
 
 export function scheduleEvent(id) {
-
-
   return function(dispatch, getState) {
     let user = firebase.auth().currentUser
 
     var newEventRef = firebase.database().ref().child('users').child(user.uid).child('events').push();
     var key = newEventRef.key;
-
     newEventRef.set(id).then(() =>{
       dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id, key});
       dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser: getState().user});
@@ -27,9 +24,50 @@ export function scheduleEvent(id) {
       firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set(
         userFromDB
       )
+      //
+        var people_in_event = 0
+        firebase.firestore().collection("events").doc(id).get().then(function(doc){
+          people_in_event = doc.data().people_in_event
+        }).then( () => {
+          firebase.firestore().collection("events").doc(id).update({
+            people_in_event: people_in_event+1
+          })
+        })
     })
   }
 }
+
+export function unScheduleEvent(id) {
+  return function(dispatch, getState) {
+    let user = firebase.auth().currentUser
+
+    var newEventRef = firebase.database().ref().child('users').child(user.uid).child('events').push();
+    var key = newEventRef.key;
+    newEventRef.set(id).then(() =>{
+      dispatch({type: USER.CHANGE_USER_ATTENDS, newEvent: id, key});
+      dispatch({type: EVENT.ADD_USER_TO_EVENT, currentUser: getState().user});
+      dispatch({type: C.CHANGE_USER_ATTENDANT_STATE, eventId: id, attending: true});
+    })
+
+    firebase.database().ref().child('users').child(user.uid).once("value", user => {
+      var userFromDB = user.val();
+      userFromDB["uid"] = user.key;
+      firebase.firestore().collection("events").doc(id).collection("users").doc(user.uid).set(
+        userFromDB
+      )
+      //
+        var people_in_event = 0
+        firebase.firestore().collection("events").doc(id).get().then(function(doc){
+          people_in_event = doc.data().people_in_event
+        }).then( () => {
+          firebase.firestore().collection("events").doc(id).update({
+            people_in_event: people_in_event+1
+          })
+        })
+    })
+  }
+}
+
 
 export function updateEventTagSearch(tag, state){
   return function(dispatch, getState) {
@@ -137,14 +175,15 @@ export function startListeningEvents(){
 
       //cost filter
       querySnapshot.forEach(function(doc) {
-        var toAdd = true;
-
+        var event = doc.data();
+        var toAddCost = true;
+        var toAddPeopleCount = true;
         if (getState().search_events.costFrom != null && getState().search_events.costTo != null) {
-          toAdd = (parseInt(event.cost) > getState().search_events.costFrom && parseInt(event.cost) < getState().search_events.costTo);
+          toAddCost = (parseInt(event.cost) > getState().search_events.costFrom && parseInt(event.cost) < getState().search_events.costTo);
         }
-
-        if (toAdd) {
-          var event = doc.data();
+        //нужно протестить
+        toAddPeopleCount = (event.max_people_count > event.people_in_event)
+        if (toAddCost && toAddPeopleCount) {
           event['id'] = doc.id;
           event['full'] = event.people_count == event.max_people_count;
           events.push(event);

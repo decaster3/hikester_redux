@@ -62,9 +62,14 @@ export function sendMessage(message) {
 
     var date = new Date()
     var autor = user.username
-
+    if (user.photoUrl) {
+      var userPhoto = user.photoUrl
+    }else {
+      //
+      var userPhoto = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+    }
     firebase.firestore().collection("events").doc(eventId).collection("chat").add({
-        message, date, autor
+        message, date, autor, userPhoto
     })
     .then(function(docRef) {
         console.log("Messagee written with ID: ", docRef.id);
