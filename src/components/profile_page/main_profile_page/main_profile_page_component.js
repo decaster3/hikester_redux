@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MainSettingsComponent from '../settings/main_settings_component'
-import { Link } from 'react-router-dom'
-import ProfileAboutComponent from './profile_about_component'
-import ProfileEventsComponent from './profile_events_component'
+import MainSettingsComponent from '../settings/main_settings_component';
+import { Link } from 'react-router-dom';
+import ProfileAboutComponent from './profile_about_component';
+import ProfileEventsComponent from './profile_events_component';
 import MainSettingsContainer from '../../../containers/profile/main_settings_container'
-import { verifyEmail, setMyEvents } from '../../../actions/profile/profile_settings_action'
+import Uploader from '../../../components/file_loader/file_uploader_component';
+import { verifyEmail, setMyEvents } from '../../../actions/profile/profile_settings_action';
 import FontAwesome from 'react-fontawesome';
 const firebase = require("firebase");
+
 class MainProfilePageComponent extends Component {
   constructor(props){
     super(props);
@@ -86,6 +88,9 @@ class MainProfilePageComponent extends Component {
         <div className="profile-info panel">
           <img src={p.user.photoUrl} className="profile-info-photo" />
           <div className="divider"></div>
+
+          <Uploader storagePath={"/avatar/"} callback={this.props.changeAvatar} filename={p.user.uid}/>
+
           <div className="profile-info-name">
             {p.user.username}
           </div>

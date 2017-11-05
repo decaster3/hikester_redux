@@ -14,6 +14,17 @@ export function afterSave(){
   }
 }
 
+export function changeAvatar(ref, filename){
+  return function(dispatch, getState) {
+    firebase.storage().ref(ref).child(filename).getDownloadURL()
+      .then(photoURL => {
+        var user = firebase.auth().currentUser;
+        firebase.database().ref().child('users').child(user.uid).child("photoUrl").set(photoURL)
+        user.updateProfile({photoURL: photoURL});
+      });
+  }
+}
+
 export function updateVerificationProcent(){
   let authRef = firebase.database().ref().child('users')
     .child(firebase.auth().currentUser.uid)
@@ -142,10 +153,6 @@ export function changeSex(sex){
 }
 
 export function addAvatar(){
-
-}
-
-export function changeAvatar(){
 
 }
 
