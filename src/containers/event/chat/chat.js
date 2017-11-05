@@ -23,7 +23,6 @@ class ChatContainer extends Component {
   render() {
     let C = require("../../../constants/chat/chat.js")
     const Loading = require('react-loading-animation');
-    console.log(this.props.photoURL);
     switch (this.props.state) {
       case C.LOADED:
         return(

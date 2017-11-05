@@ -21,7 +21,7 @@ class NavigationBarProfileContainer extends Component {
           <div className="menu-item dropdown">
             <div className="dropdown-title">
               <Link to = "/profile">
-                <img src={user.photoUrl} className="dropdown-photo" />
+                <img src={user.photoUrl} className="dropdown-photo imgAvatar" />
               </Link>
             </div>
             <div className="dropdown-content">

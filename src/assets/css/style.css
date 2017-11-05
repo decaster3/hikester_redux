@@ -53,6 +53,9 @@ input.input-text {
   border-color: #12b591 !important;
   border-radius: 0 !important;
 }
+.imgAvatar {
+    border-radius: 50%;
+}
 
 .input-date-group {
   position: relative;
