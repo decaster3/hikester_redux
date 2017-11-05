@@ -22,13 +22,12 @@ class EventSearchingFiltersContainer extends Component {
       var tags = []
 
       snapshot.forEach(data => {
-        var tag = {}
-        tag["name"] = data.val()
-        tag["selected"] = false
-        tags.push(tag)
+        var tag = {};
+        tag["name"] = data.val();
+        tags.push(tag);
       })
 
-      self.setState({ tags })
+      self.setState({ tags });
     })
   }
 
@@ -40,7 +39,7 @@ class EventSearchingFiltersContainer extends Component {
     if (!s.tags)
       return <Loading />
 
-    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTagSearch}/>})
+    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTagSearch} selected={p.search_events.tag == tag.name}/>})
 
     return(
       <EventSearchingFiltersComponent
@@ -55,7 +54,7 @@ class EventSearchingFiltersContainer extends Component {
 
 function mapStateToProps(state){
     return {
-
+      search_events: state.search_events
     }
 }
 

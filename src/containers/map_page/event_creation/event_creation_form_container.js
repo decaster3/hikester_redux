@@ -22,7 +22,6 @@ class EventCreationFormContainer extends Component {
       snapshot.forEach(data => {
         var tag = {}
         tag["name"] = data.val()
-        tag["selected"] = false
         tags.push(tag)
       })
       self.setState({ tags })
@@ -36,14 +35,15 @@ class EventCreationFormContainer extends Component {
     const Loading = require('react-loading-animation');
     if (!s.tags)
       return <Loading />
-    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} onclick={p.updateEventTag}/>})
+    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} selected={p.new_event.tag == tag.name} onclick={p.updateEventTag}/>})
     return (<EventCreationFormComponent user = {p.user} createNewEvent={p.createNewEvent} tags={tags}/>)
   }
 }
 
 function mapStateToProps(state) {
     return {
-      user: state.user
+      user: state.user,
+      new_event: state.new_event
     }
 }
 
