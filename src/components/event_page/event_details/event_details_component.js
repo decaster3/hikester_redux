@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import FontAwesome from 'react-fontawesome';
 import EventParticipants from './event_participants'
 import Map from '../../map/map';
-import { Marker } from "react-google-maps"
+import { Marker } from "react-google-maps";
+import moment from 'moment';
 
 class EventDeteailComponent extends Component {
 
@@ -20,7 +21,10 @@ class EventDeteailComponent extends Component {
         photo: user.photoUrl || "/assets/images/default_user_image.png"
       })
     })
-    var datestring = event.start_date.getDate()  + "-" + (event.start_date.getMonth()+1) + "-" + event.start_date.getFullYear() + event.start_time
+    var startDate = moment(event.start_date);
+    var date = startDate.format("Do MMMM YYYY");
+    var time = startDate.format("mm:HH");
+
     var location = {lat: event.lat, lng: event.lng}
     var marker = <Marker position={location}/>
     var map = {
@@ -37,11 +41,11 @@ class EventDeteailComponent extends Component {
           <div className="event-parameter-group event-dates">
             <div className="event-parameter">
               <FontAwesome name="calendar" className="event-date-icon" />
-              <div className="event-date">{datestring}</div>
+              <div className="event-date">{date}</div>
             </div>
             <div className="event-parameter">
               <FontAwesome name="clock-o" className="event-date-icon" />
-              <div className="event-days">4 days</div>
+              <div className="event-days">{time}</div>
             </div>
           </div>
 

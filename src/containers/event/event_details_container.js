@@ -20,7 +20,6 @@ class EventDetailContainer extends Component {
   }
 
   render() {
-    console.log("containe");
     let p = this.props
     let C = require("../../constants/event_details/event_details.js")
     var result = null;

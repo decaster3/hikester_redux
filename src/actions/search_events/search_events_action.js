@@ -136,22 +136,21 @@ export function startListeningEvents(){
       var events = [];
 
       //cost filter
-      if(getState().search_events.costFrom != null && getState().search_events.costTo != null) {
-        querySnapshot.forEach(function(doc){
-          var event = doc.data();
-          if(parseInt(event.cost) > getState().search_events.costFrom && parseInt(event.cost) < getState().search_events.costTo){
-            event['id'] = doc.id;
-            events.push(event);
-          }
-        })
-      }else {
-        querySnapshot.forEach(function(doc) {
+      querySnapshot.forEach(function(doc) {
+        var toAdd = true;
+
+        if (getState().search_events.costFrom != null && getState().search_events.costTo != null) {
+          toAdd = (parseInt(event.cost) > getState().search_events.costFrom && parseInt(event.cost) < getState().search_events.costTo);
+        }
+
+        if (toAdd) {
           var event = doc.data();
           event['id'] = doc.id;
+          event['full'] = event.people_count == event.max_people_count;
           events.push(event);
-        });
-      }
-    
+        }
+      });
+
       let user = firebase.auth().currentUser;
 
       if (tag)
