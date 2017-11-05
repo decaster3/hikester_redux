@@ -6,9 +6,12 @@ const firebase = require("firebase");
 import { notification_success } from '../notification_success'
  require("firebase/firestore");
 
-export function updateEventTag(tag){
+export function updateEventTag(tag, state){
   return function(dispatch) {
-    dispatch({type: C.UPDATE_TAGS, tag: tag})
+    if (!state) {
+      tag = null;
+    }
+    dispatch({type: C.UPDATE_TAGS, tag: tag});
   }
 }
 
