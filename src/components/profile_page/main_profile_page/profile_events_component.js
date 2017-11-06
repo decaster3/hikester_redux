@@ -19,7 +19,6 @@ class ProfileEventsComponent extends React.Component {
     switch (p.profile_settings.myEventsCurrently) {
       case "MY_EVENTS_LOADED":
           if (p.profile_settings.myEvents.length > 0){
-            console.log(1234);
             events = p.profile_settings.myEvents.map(function(event, index) {
             return (
               <div key = {index} className="col-6">

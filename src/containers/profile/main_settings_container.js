@@ -77,7 +77,7 @@ class MainSettingsContainer extends React.Component {
                 Country
               </div>
               <div className="profile-description-item-value col-9 text-left">
-                <input name = "country" type="text" className="input-text" placeholder="Country" value = {s.country} onChange = {this.handleChange}/>
+                <input name = "country" type="text" className="input-text" placeholder="Country" value = {s.country || ''} onChange = {this.handleChange}/>
               </div>
             </div>
             <div className="profile-description-item row d-flex align-items-center">
@@ -85,7 +85,7 @@ class MainSettingsContainer extends React.Component {
                 City
               </div>
               <div className="profile-description-item-value col-9 text-left">
-                <input name = "city" type="text" className="input-text" placeholder="City" value = {s.city} onChange = {this.handleChange}/>
+                <input name = "city" type="text" className="input-text" placeholder="City" value = {s.city || ''} onChange = {this.handleChange}/>
               </div>
             </div>
             <div className="profile-description-item row d-flex align-items-center">
