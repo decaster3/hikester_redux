@@ -86,10 +86,13 @@ class MainProfilePageComponent extends Component {
     <div className="profile-main row">
       <div className="col-3 profile-info-wrapper">
         <div className="profile-info panel">
-          <img src={p.user.photoUrl} className="profile-info-photo" />
+          <div className="profile-info-photo-wrapper">
+            <img src={p.user.photoUrl} className="profile-info-photo" />
+            <div className="avatar-overlay">
+              <Uploader storagePath={"/avatar/"} callback={this.props.changeAvatar} filename={p.user.uid}/>
+            </div>
+          </div>
           <div className="divider"></div>
-
-          <Uploader storagePath={"/avatar/"} callback={this.props.changeAvatar} filename={p.user.uid}/>
 
           <div className="profile-info-name">
             {p.user.username}

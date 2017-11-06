@@ -20,6 +20,8 @@ class ProfileEventsComponent extends React.Component {
       case "MY_EVENTS_LOADED":
           if (p.profile_settings.myEvents.length > 0){
             events = p.profile_settings.myEvents.map(function(event, index) {
+            let image = event.photoUrl || "/assets/images/questroom.jpg";
+            console.log(event);
             return (
               <div key = {index} className="col-6">
                 <div className="profile-event">
@@ -28,6 +30,9 @@ class ProfileEventsComponent extends React.Component {
                       {event.name}
                     </div>
                   </Link>
+                  <div className="event-item-image mb-2">
+                    <img src={image} />
+                  </div>
                   <div className="profile-event-description">
                     <div className="profile-event-info row">
                       <div className="profile-event-info-name col-3">

@@ -35,14 +35,20 @@ class Uploader extends Component {
     let p = this.props;
 
     return (
-      <div>
-        <form>
-          
+      <div style={{width: '100%', height: '100%'}}>
+        <form style={{width: '100%', height: '100%'}} className="d-flex justify-content-center align-items-end">
+
           {this.state.isUploading &&
             <p>Progress: {this.state.progress}</p>
           }
 
+          <label htmlFor="avatar-uploader" id="avatar-uploader-label">
+            <FontAwesome name="picture-o" className="mr-2"/>
+            Change an image
+          </label>
+
           <FileUploader
+            id="avatar-uploader"
             accept="image/*"
             name="photo"
             filename={file => { return p.filename + file.name.split('.')[1];} }

@@ -43,6 +43,10 @@ textarea {
   resize-x: none;
   min-height: 150px;
 }
+input[type="file"] {
+  border: 0;
+  padding: 0;
+}
 
 input:focus,
 textarea:focus {
@@ -163,4 +167,39 @@ input.input-text {
 }
 .uk-notification-message.uk-notification-message-primary {
   border: 1px solid #12b591;
+}
+
+#avatar-uploader {
+  display: none;
+}
+
+.avatar-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 0.5s;
+}
+#avatar-uploader-label {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  color: #000;
+  transition: 0.5s;
+}
+.avatar-overlay:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.avatar-overlay:hover #avatar-uploader-label {
+  color: #fff;
+}
+#avatar-uploader-label:hover {
+  color: #aaa;
+}
+
+.profile-info-photo-wrapper {
+  position: relative;
 }

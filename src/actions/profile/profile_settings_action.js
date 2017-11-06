@@ -108,6 +108,7 @@ export function setMyEvents(){
               cost: doc.data().cost,
               address: doc.data().address,
               date: doc.data().start_datee,
+              photoUrl: doc.data().photoUrl,
               id: doc.id
             }
             eventsAttending.push(eventObj)
