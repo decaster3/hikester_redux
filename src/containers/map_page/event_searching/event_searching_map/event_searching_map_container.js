@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types'
 import Map from '../../../../components/map/map';
-import { Marker } from "react-google-maps"
+import MyMarker from '../../../../components/map/my_marker'
 import { withRouter } from 'react-router-dom'
 class EventSearchingMapContainer extends Component {
 
@@ -13,11 +13,14 @@ class EventSearchingMapContainer extends Component {
   componentDidMount() {
 
   }
+  showInfoWindow(){
+
+  }
 
   render() {
     var markers = this.props.events.map((event, index) => {
       var location = {lat: event.lat, lng: event.lng}
-      return <Marker key = {index} position={location} onClick={() => this.props.history.push('/event/' + event.id)}/>
+      return <MyMarker key = {index} location={location} event={event} history={this.props.history}/>
     })
     var map = {
       defaultCenter: { lat: 55.7529120574368, lng: 48.743462562561035 },

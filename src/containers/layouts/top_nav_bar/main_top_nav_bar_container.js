@@ -2,6 +2,7 @@ import React from 'react';
 import NavigationBarProfileContainer from './navigation_bar_profile_container'
 import { connect } from 'react-redux';
 import NotificationsMenuItem from './notifications_menu_item';
+import { Link } from 'react-router-dom'
 
 class MainTopNavigationBarContainer extends React.Component {
 
@@ -24,15 +25,15 @@ class MainTopNavigationBarContainer extends React.Component {
           id="header">
           <div className="container d-flex align-items-stretch justify-content-end">
             <div className="left mr-auto d-flex align-items-stretch">
-              <a href="/" className="logo">
+              <Link to="/" className="logo">
                 <img src="/assets/images/hikester_logo_white.png" className="logo-image"/>
-              </a>
-              <div className="menu-item">
-                Support
-              </div>
-              <div className="menu-item">
-                About
-              </div>
+              </Link>
+              <Link to = "/support" className="menu-item">
+                  Support
+              </Link>
+              <Link to = "/about" className="menu-item">
+                  About
+              </Link>
             </div>
             <NotificationsMenuItem count={notCount} />
             <NavigationBarProfileContainer />

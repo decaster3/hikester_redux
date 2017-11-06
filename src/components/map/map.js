@@ -5,7 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 export const Map = compose (
   lifecycle({
     componentDidMount() {
-      
+
     },
   }),
   withProps({
