@@ -10,7 +10,7 @@ export function loadEvent(id) {
 
     dispatch({type: C.LOADING_EVENT})
 
-    firebase.firestore().collection("events").doc(id).get().then(function(doc) {
+    firebase.firestore().collection("events").doc(id).onSnapshot(function(doc) {
         var db = firebase.firestore();
         if (doc.exists) {
             var eventUsers = []
@@ -44,9 +44,16 @@ export function loadEvent(id) {
             console.log("No such document!")
             dispatch({ type: C.ERROR })
         }
-    }).catch(function(error) {
-        console.log("Error getting document:", error)
-        dispatch({ type: C.ERROR })
-    });
+    })
+  }
+}
+
+export function loadPhoto(ref, filename) {
+  return function(dispatch, getState){
+    firebase.storage().ref(ref).child(filename).getDownloadURL()
+      .then(photoURL => {
+        var id = getState().event_details.event.id;
+        firebase.firestore().collection('events').doc(id).update({photoUrl: photoURL});
+      });
   }
 }

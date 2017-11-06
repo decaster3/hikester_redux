@@ -3,7 +3,7 @@ import FontAwesome from 'react-fontawesome';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'antd/lib/time-picker';  // for js
+import TimePicker from 'antd/lib/time-picker';
 import 'antd/lib/time-picker/style/index.css';
 import { Link } from 'react-router-dom'
 
@@ -18,6 +18,7 @@ class EventCreationFormComponent extends Component {
       description: '',
       lat: '',
       lng: '',
+      photoUrl: '',
       name: '',
       max_people_count: '',
       start_date: moment().set({'hour': 12, 'minute': 0}),
@@ -151,11 +152,9 @@ class EventCreationFormComponent extends Component {
                 </div>
               </div>
 
-
               <div className="mt-3 mb-0 alert alert-warning" role="alert">
                 Before creating an event choose place on the map
               </div>
-
 
             <button onClick = {() => p.createNewEvent(
                   s.address,

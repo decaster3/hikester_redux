@@ -4,6 +4,8 @@ import EventParticipants from './event_participants'
 import Map from '../../map/map';
 import { Marker } from "react-google-maps";
 import moment from 'moment';
+import Uploader from '../../file_loader/file_uploader_component';
+import * as firebase from 'firebase';
 
 class EventDeteailComponent extends Component {
 
@@ -31,13 +33,26 @@ class EventDeteailComponent extends Component {
       defaultCenter: location,
       defaultZoom: 12
     }
+    var image = event.photoUrl || "/assets/images/questroom.jpg";
+    var edit = firebase.auth().currentUser.uid == event.creator ?
+        (
+          <div>
+            <div className="divider"></div>
+            <Uploader storagePath={"/events/"} callback={this.props.loadPhoto} filename={event.id}/>
+          </div>
+        )
+      :
+        null
     return (
       <div className="px-0" id="event-info">
 
           <div className="event-name">{event.name}</div>
           <div className="event-image-wrapper">
-            <img src="/assets/images/questroom.jpg" className="event-image"></img>
+            <img src={image} className="event-image"></img>
           </div>
+
+          {edit}
+
           <div className="event-parameter-group event-dates">
             <div className="event-parameter">
               <FontAwesome name="calendar" className="event-date-icon" />

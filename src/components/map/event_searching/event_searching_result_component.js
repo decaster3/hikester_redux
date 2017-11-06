@@ -9,13 +9,14 @@ class EventSearchingResultComponent extends Component {
 
   render() {
       var event = this.props.event
+        var image = event.photoUrl || "/assets/images/questroom.jpg";
       return (
         <div className="col-12 event-item">
           <div className="event-item-name text-center">
             <Link to={"/event/" + event.id}>{event.name}</Link>
           </div>
           <div className="event-item-image">
-            <img src="/assets/images/questroom.jpg" />
+            <img src={image} />
           </div>
           <div className="event-item-description col-12 my-3">
             <div className="event-item-description">
