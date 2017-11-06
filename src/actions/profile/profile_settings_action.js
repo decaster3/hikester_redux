@@ -90,32 +90,36 @@ export function setMyEvents(){
       dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADING})
       var eventsAttending = []
       var db = firebase.firestore();
-      var eventObj = {}
+      var promises = [];
       var eventKeys = Object.keys(getState().user.events).map((key) => {
+
           var fireStoreEventRef = db.collection("events").doc(getState().user.events[key])
-          fireStoreEventRef.get().then(function(doc) {
-            if (doc.exists){
-              eventObj = {
-                name: doc.data().name,
-                description: doc.data().description,
-                cost: doc.data().cost,
-                address: doc.data().address,
-                date: doc.data().start_datee,
-                id: doc.id
-              }
-              eventsAttending.push(eventObj)
-              console.log(eventsAttending);
-            }
-            else{
-              console.log(2);
-              console.log("SOMETHING WRONG");
-              dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_NOT_LOADED, myEvents: []})
-            }
-          }).then( () => {
-            console.log(1);
-            dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADED, myEvents: eventsAttending})
-          })
+          var promise = fireStoreEventRef.get();
+
+         promises.push(promise)
       })
+
+      Promise.all(promises).then(eventSnaphots => {
+        eventSnaphots.map(doc => {
+          if (doc.exists) {
+            var eventObj = {
+              name: doc.data().name,
+              description: doc.data().description,
+              cost: doc.data().cost,
+              address: doc.data().address,
+              date: doc.data().start_datee,
+              id: doc.id
+            }
+            eventsAttending.push(eventObj)
+          }
+          else{
+            console.log("SOMETHING WRONG");
+            dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_NOT_LOADED, myEvents: []})
+          }
+        })
+      }).then(() => {
+        dispatch({type: C.MY_EVENTS_CHANGING_STATE, myEventsCurrently: C.MY_EVENTS_LOADED, myEvents: eventsAttending})
+      });
     }
     else {
       console.log(3);

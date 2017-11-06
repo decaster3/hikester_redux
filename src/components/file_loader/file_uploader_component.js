@@ -37,7 +37,7 @@ class Uploader extends Component {
     return (
       <div>
         <form>
-          <label>Photo:</label>
+          
           {this.state.isUploading &&
             <p>Progress: {this.state.progress}</p>
           }
