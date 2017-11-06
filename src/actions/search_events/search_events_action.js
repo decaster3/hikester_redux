@@ -205,7 +205,7 @@ export function startListeningEvents(){
 }
 
 function sendLog(events, user, tag, type) {
-  if (!user)
+  if (!firebase.auth().currentUser)
     return;
 
   var user_id = user.id;
