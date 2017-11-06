@@ -4,7 +4,7 @@ import EventDeteailComponent from '../../components/event_page/event_details/eve
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import { loadEvent } from '../../actions/event_details/event_details_actions'
+import { loadEvent, loadPhoto } from '../../actions/event_details/event_details_actions'
 import EventSearchingResultButtonComponent from '../../components/map/event_searching/event_searching_result_button'
 import { scheduleEvent } from '../../actions/search_events/search_events_action'
 
@@ -33,7 +33,7 @@ class EventDetailContainer extends Component {
         var eventButton = <EventSearchingResultButtonComponent onclick={this.props.scheduleEvent } signedIn={signedIn} joined={event.attending} eventId={event.id}/>
         return (
           <div id="event-section" className="page-section container-fluid d-flex px-0">
-            <EventDeteailComponent event={this.props.event} button={eventButton}/>
+            <EventDeteailComponent loadPhoto={this.props.loadPhoto} event={this.props.event} button={eventButton}/>
             {
               signedIn?
                 ( p.event.attending?
@@ -99,6 +99,7 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(
     {
       loadEvent: loadEvent,
+      loadPhoto: loadPhoto,
       scheduleEvent: scheduleEvent
     },
     dispatch
