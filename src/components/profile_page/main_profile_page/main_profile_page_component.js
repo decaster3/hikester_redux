@@ -78,7 +78,7 @@ class MainProfilePageComponent extends Component {
       if (p.user.phoneVerified){
         phone = <FontAwesome name="phone-square" size="2x"/>
       }
-
+      var image = p.user.photoUrl || "/assets/images/default_user_image.png"
       return (
   <div id="profile-section" className="page-section container justify-content-center">
       {email}
@@ -87,7 +87,7 @@ class MainProfilePageComponent extends Component {
       <div className="col-3 profile-info-wrapper">
         <div className="profile-info panel">
           <div className="profile-info-photo-wrapper">
-            <img src={p.user.photoUrl} className="profile-info-photo" />
+            <img src={image} className="profile-info-photo" />
             <div className="avatar-overlay">
               <Uploader storagePath={"/avatar/"} callback={this.props.changeAvatar} filename={p.user.uid}/>
             </div>
