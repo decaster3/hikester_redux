@@ -33,16 +33,19 @@ class EventDeteailComponent extends Component {
       defaultCenter: location,
       defaultZoom: 12
     }
+    var edit = null
     var image = event.photoUrl || "/assets/images/questroom.jpg";
-    var edit = firebase.auth().currentUser.uid == event.creator ?
-        (
-          <div>
-            <div className="divider"></div>
-            <Uploader storagePath={"/events/"} callback={this.props.loadPhoto} filename={event.id}/>
-          </div>
-        )
-      :
-        null
+    if(firebase.auth().currentUser){
+        edit = firebase.auth().currentUser.uid == event.creator ?
+          (
+            <div>
+              <div className="divider"></div>
+              <Uploader storagePath={"/events/"} callback={this.props.loadPhoto} filename={event.id}/>
+            </div>
+          )
+        :
+          null
+    }
     return (
       <div className="px-0" id="event-info">
 
