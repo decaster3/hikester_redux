@@ -203,3 +203,8 @@ input.input-text {
 .profile-info-photo-wrapper {
   position: relative;
 }
+
+.gm-style .gm-style-iw div:first-child {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
