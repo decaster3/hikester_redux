@@ -95,8 +95,8 @@ export function setMyEvents(){
 
           var fireStoreEventRef = db.collection("events").doc(getState().user.events[key])
           var promise = fireStoreEventRef.get();
-
          promises.push(promise)
+         console.log(promises.length);
       })
 
       Promise.all(promises).then(eventSnaphots => {

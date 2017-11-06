@@ -22,7 +22,7 @@ class EventCreationFormComponent extends Component {
       name: '',
       max_people_count: '',
       start_date: moment().set({'hour': 12, 'minute': 0}),
-      end_date: moment().add(1, 'day').set({'hour': 12, 'minute': 0}),
+      end_date: moment().add(21, 'day').set({'hour': 12, 'minute': 0}),
       type: ''
     }
 
