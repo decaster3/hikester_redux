@@ -6,7 +6,7 @@ import MainEventSearchingContainer from './event_searching/main_event_searching_
 import EventSearchingMapContainer from './event_searching/event_searching_map/event_searching_map_container'
 import EventCreationMapContainer from './event_creation/event_creation_map_container'
 import EventCreationFormContainer from './event_creation/event_creation_form_container'
-
+import { ToastContainer } from 'react-toastify';
 class MainMapContainer extends Component {
   constructor(props){
     super(props);
@@ -30,6 +30,7 @@ class MainMapContainer extends Component {
 
     return(
       <div id="home-section" className="page-section container-fluid d-flex px-0">
+        <ToastContainer />
         <div className="px-0" id="search-create">
 
           <ul className="tabs nav nav-tabs" role="tablist">

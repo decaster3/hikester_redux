@@ -4,6 +4,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import configureRoutes from '../routes'
 import { connect } from 'react-redux'
+
 export default class Root extends Component {
 
   render() {

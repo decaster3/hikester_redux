@@ -7,3 +7,12 @@ export function notification_success(message){
     timeout: 4000
   });
 }
+
+export function notification_error(message){
+  UIkit.notification({
+    message: message,
+    status: 'error',
+    pos: 'top-left',
+    timeout: 4000
+  });
+}

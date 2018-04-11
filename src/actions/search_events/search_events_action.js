@@ -6,6 +6,17 @@ import moment from 'moment';
 const firebase = require("firebase");
  require("firebase/firestore");
 
+export function reportSpam(id) {
+  var spam_counter = 0
+  firebase.firestore().collection("events").doc(id).get().then(function(doc){
+    spam_counter = doc.data().spam_counter ? doc.data().spam_counter : 0;
+  }).then( () => {
+    firebase.firestore().collection("events").doc(id).update({
+      spam_counter: spam_counter+1
+    })
+  })
+}
+
 export function scheduleEvent(id) {
   return function(dispatch, getState) {
     let user = firebase.auth().currentUser

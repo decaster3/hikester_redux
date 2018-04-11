@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Marker, InfoWindow } from "react-google-maps"
-
+import { reportSpam } from '../../actions/search_events/search_events_action';
 
 class MyMarker extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isInfoShown: false
+      isInfoShown: false,
+      isButtonShow: true,
     }
     this.onToggleOpen = this.onToggleOpen.bind(this);
   }
@@ -60,6 +61,14 @@ class MyMarker extends Component {
                   {this.props.event.description}
                 </div>
               </div>
+              {
+                this.state.isButtonShow
+                ? (<div className="profile-event-info row">
+                    <button onClick={() => {reportSpam(this.props.event.id); this.setState({ isButtonShow: false })}}> Report as spam</button>
+                  </div>)
+                : <div />
+              }
+
             </div>
           </div>
         </InfoWindow>
