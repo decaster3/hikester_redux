@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, withProps, withStateHandlers, lifecycle } from "recompose"
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Circle } from "react-google-maps"
 
 export const Map = compose (
   lifecycle({
@@ -24,7 +24,13 @@ export const Map = compose (
     defaultCenter = {props.map.defaultCenter}
   >
     {props.markers}
+    {props.circle}
   </GoogleMap>
 )
 
 export default Map
+
+// <Circle
+//   center={{lat: 55.78874, lng: 49.12214}}
+//   radius={1000}
+// />

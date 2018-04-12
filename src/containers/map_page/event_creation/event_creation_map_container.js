@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateEventLocation } from '../../../actions/events_creation/events_creation';
 import Map from '../../../components/map/map';
-import { Marker } from "react-google-maps"
+import { Marker, Circle } from "react-google-maps"
 
 
 class EventCreationMapContainer extends Component {
@@ -17,8 +17,16 @@ class EventCreationMapContainer extends Component {
   }
 
   render() {
+    // console.log(this.props);
+    const circle =
+      <Circle
+        center={{lat: this.props.map.circle.center.lat, lng: this.props.map.circle.center.lng}}
+        radius={this.props.map.circle.radius}
+        options={this.props.map.circle.options}
+        visible={this.props.map.circle.visible}
+      />
     var marker = <Marker position={this.props.map.location}/>
-    return <Map onclick = {this.props.updateEventLocation} map = {this.props.map} markers = {marker}/>
+    return <Map onclick = {this.props.updateEventLocation} map = {this.props.map} markers = {marker} circle = {circle}/>
   }
 }
 

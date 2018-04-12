@@ -13,6 +13,12 @@ class Tag extends Component {
   clickHandler() {
     var state = !this.state.turnedOn;
     this.props.onclick(this.props.tag.name, state);
+    if (this.props.drawCircle != undefined)
+      this.props.drawCircle(this.props.tag.name);
+    if (this.props.suggestTime != undefined)
+      this.props.suggestTime(this.props.tag.name);
+    if (this.props.suggestDay != undefined)
+      this.props.suggestDay(this.props.tag.name);
     this.setState({turnedOn: state});
   }
 
@@ -20,7 +26,7 @@ class Tag extends Component {
     if (newProps.selected != this.state.turnedOn)
       this.setState({turnedOn: newProps.selected});
   }
-  
+
   render() {
     let p = this.props;
     let tag = p.tag;

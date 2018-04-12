@@ -83,6 +83,7 @@ class EventCreationFormComponent extends Component {
     const timeFormat = 'HH:mm';
     let s = this.state
     let p = this.props
+    console.log("suggestedTime: ", p.suggestedTime);
     return (
       <div className="panel">
         {
@@ -129,6 +130,18 @@ class EventCreationFormComponent extends Component {
                   </div>
                 </div>
               </div>
+              { p.suggestedDay &&
+                <div className="col-12 mt-3">
+                  Suggested day of the week:
+                  <strong className="ml-1">{p.suggestedDay}</strong>
+                </div>
+              }
+              { p.suggestedTime &&
+                <div className="col-12 mt-3">
+                  Suggested time:
+                  <strong className="ml-1">{p.suggestedTime}</strong> - <strong>{p.suggestedTime + 4}</strong>
+                </div>
+              }
 
               <div className="mt-3">
                 <textarea className="input-text" placeholder="Description" name="description" type = "text" defaultValue = {s.description} onChange = {this.handleChange}/>

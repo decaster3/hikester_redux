@@ -39,6 +39,43 @@ function bin2string(array){
  return result;
 }
 
+export function drawCircle(tag) {
+  return function(dispatch) {
+    axios.get("http://localhost:8080/circle?tag=" + tag).then((data) => {
+      console.log(data.data);
+      var center = data.data;
+      var visible = true;
+      if (!center.lat || !center.lng) {
+        visible: false;
+      }
+
+      dispatch({type: C.DRAW_CIRCLE, center: center, visible: visible});
+    });
+  };
+}
+
+export function suggestTime(tag) {
+  return function(dispatch) {
+    axios.get("http://localhost:8080/time?tag=" + tag).then((data) => {
+      console.log(data.data);
+      const suggestedTime = data.data.suggestedTime;
+
+      dispatch({type: C.SUGGEST_TIME, suggestedTime: suggestedTime});
+    });
+  };
+}
+
+export function suggestDay(tag) {
+  return function(dispatch) {
+    axios.get("http://localhost:8080/day?tag=" + tag).then((data) => {
+      console.log(data.data);
+      const suggestedDay = data.data.suggestedDay;
+
+      dispatch({type: C.SUGGEST_DAY, suggestedDay: suggestedDay});
+    });
+  };
+}
+
 export function createNewEvent(address, cost, start_date, end_date, description, lat, lng, name, max_people_count){
   //realtime db
   return function(dispatch,getState) {

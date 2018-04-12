@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Tag from '../../../components/map/tag'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createNewEvent, updateEventTag } from '../../../actions/events_creation/events_creation'
+import { createNewEvent, updateEventTag, drawCircle, suggestTime, suggestDay } from '../../../actions/events_creation/events_creation'
 import EventCreationFormComponent from '../../../components/map/event_creation/event_creation_form_component'
 import * as firebase from 'firebase'
 
@@ -29,14 +29,13 @@ class EventCreationFormContainer extends Component {
   }
 
   render() {
-
     let p = this.props
     let s = this.state
     const Loading = require('react-loading-animation');
     if (!s.tags)
       return <Loading />
-    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} selected={p.new_event.tag == tag.name} onclick={p.updateEventTag}/>})
-    return (<EventCreationFormComponent user = {p.user} createNewEvent={p.createNewEvent} tags={tags}/>)
+    const tags = s.tags.map((tag, index) => { return <Tag key={index} tag={tag} selected={p.new_event.tag == tag.name} onclick={p.updateEventTag} drawCircle={p.drawCircle} suggestTime={p.suggestTime} suggestDay={p.suggestDay}/>})
+    return (<EventCreationFormComponent user = {p.user} createNewEvent={p.createNewEvent} tags={tags} suggestedTime={p.new_event.suggestedTime} suggestedDay={p.new_event.suggestedDay}/>)
   }
 }
 
@@ -51,7 +50,10 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       createNewEvent: createNewEvent,
-      updateEventTag: updateEventTag
+      updateEventTag: updateEventTag,
+      drawCircle: drawCircle,
+      suggestTime: suggestTime,
+      suggestDay: suggestDay
     },
     dispatch
   )
