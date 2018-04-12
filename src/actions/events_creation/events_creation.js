@@ -42,7 +42,7 @@ function bin2string(array){
 export function createNewEvent(address, cost, start_date, end_date, description, lat, lng, name, max_people_count){
   //realtime db
   return function(dispatch,getState) {
-  axios.get(`http://89.223.29.212:8005/spam_check/?${name} ${description}`).then((data) => {
+  axios.get(`https://89.223.29.212:8005/spam_check/?${name} ${description}`).then((data) => {
     if(data.data == "Spam"){
      notifyBadConnection();
      dispatch(push('/'))
