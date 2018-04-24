@@ -33,11 +33,11 @@ class EventDetailContainer extends Component {
         var eventButton = <EventSearchingResultButtonComponent onclick={this.props.scheduleEvent } signedIn={signedIn} joined={event.attending} eventId={event.id}/>
         return (
           <div id="event-section" className="page-section container-fluid d-flex px-0">
-            <EventDeteailComponent loadPhoto={this.props.loadPhoto} event={this.props.event} button={eventButton}/>
+            <EventDeteailComponent user={this.props.user} loadPhoto={this.props.loadPhoto} event={this.props.event} button={eventButton}/>
             {
               signedIn?
                 ( p.event.attending?
-                  <ChatContainer eventId = {this.eventId}/>
+                  <ChatContainer user={this.props.user} eventId = {this.eventId}/>
                 :
                   <div id="chat-section" className="d-flex px-0">
                     <div id="chat-section-cant-see-overlay">

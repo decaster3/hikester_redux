@@ -14,7 +14,7 @@ var config = {
     storageBucket: "hikesterrr.appspot.com",
     messagingSenderId: "681168179245"
   };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 const store = configureStore()
 

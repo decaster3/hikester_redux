@@ -17,6 +17,7 @@ export function loadMessages() {
 
     messagesRef.onSnapshot(docMessages => {
         var messages = []
+        console.log(docMessages)
         docMessages.forEach(function(doc) {
           messages.push(doc.data());
         });
